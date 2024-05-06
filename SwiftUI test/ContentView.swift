@@ -8,6 +8,165 @@
 import SwiftUI
 
 struct ContentView: View {
+    struct QuestionData{
+        //set Ask question
+        let question : String
+        let imageName : String?
+        let buttonLable : [String]
+    }
+    @State private var currentSection = 0 // Start with section 0 (Ask)
+    @State private var currentQuestion = 0
+    @State private var showAlert = false
+    @State private var selectedButtonIndex: Int? = nil
+
+    @State private var answers: [[String]]
+
+    init() {
+        _answers = State(initialValue: Array(repeating: [], count: sections.count))
+    }
+    private func calculateProgress() -> Double {
+        if sections[currentSection] == "Ask" {
+            
+            return Double(currentQuestion + 1) / Double(questions.count)
+        } else {
+            // Add logic for calculating progress within other sections ('Touch', etc.)
+            return 0.0
+        }
+    }
+
+    // Stores user answers
+
+        let sections = ["Ask", "Touch", "Observation"]
+        let questions: [QuestionData] = [
+
+            QuestionData(question: "What kind of shoes is the patient wearing today?", imageName: "imageName1", buttonLable: ["Closed Shoe", "Open shoes"]),
+            QuestionData(question: "Does the patient have pain in their legs when walking?", imageName: nil, buttonLable: ["Yes", "No", "sometime"]),
+            QuestionData(question: "Does the patient have pain in their legs when lying down?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
+            QuestionData(question: "Does the patient have pain get pings and needles?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
+            QuestionData(question: "Does the patient feel sharp pain?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
+            QuestionData(question: "Does the patient feet get numb?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
+            QuestionData(question: "Does the patient toes get numb?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
+            QuestionData(question: "Does the patient make regular podiatrist visit?", imageName: nil, buttonLable: ["Yes", "No"]),
+            QuestionData(question: "Does the patient smoke?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
+            QuestionData(question: "What is the condition of the skin?", imageName: nil, buttonLable: ["Dry","Normal","Sweaty","Shiney"]),
+            QuestionData(question: "what is the temperature of the foot?", imageName: nil, buttonLable:["Cold","Warm","Hot"]),
+            QuestionData(question: "Is there any swelling aroud the feet and ankle?", imageName: nil, buttonLable: ["Yes", "No"]),
+            QuestionData(question: "Has patient shaved?", imageName: nil, buttonLable: ["Yes", "No"]),
+
+            
+        ]
+    struct ProgressBar: View {
+        @Binding var progress: Double
+
+        var body: some View {
+            ProgressView(value: progress)
+                .progressViewStyle(.linear)
+                .tint(.green)
+        }
+    }
+
+    @State private var progress = 0.0
+        var body: some View {
+            VStack {
+                if sections[currentSection] == "Ask" {
+                    Text(sections[currentSection])
+                        .font(.largeTitle)
+                    ProgressBar(progress: $progress)
+                    
+                    // Question & Image area
+                    VStack(spacing: 20) {
+                        Text(questions[currentQuestion].question) // Display the question
+                            .font(.title2)
+                        
+                        if let imageName = questions[currentQuestion].imageName {
+                            Image(imageName) // Load the image if it exists
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                        }
+                    }
+                    
+                    // Dynamic Buttons based on question data
+                    HStack {
+                        ForEach(questions[currentQuestion].buttonLable, id: \.self) { buttonLabel in
+                            Button(buttonLabel) {
+                                // Record the answer
+                                answers[currentSection].append(buttonLabel)
+                                selectedButtonIndex = questions[currentQuestion].buttonLable.firstIndex(of: buttonLabel)
+                            }
+                            .background(selectedButtonIndex == questions[currentQuestion].buttonLable.firstIndex(of: buttonLabel) ? Color.green: Color.white) // Highlight if selected
+                        }
+                        
+                   
+                        
+                        Button("Next") {
+                            if currentQuestion < questions.count - 1  {
+                                currentQuestion += 1
+                            } else {
+                                // User is on the last question in 'Ask' section
+                                showAlert = true
+                            }
+                        }
+                        
+                        //.opacity(currentQuestion == questions.count - 1 ? 0 : 1) // Hide at the end
+                        Spacer(minLength: 20)
+                        
+                        Button("Back") {
+                            if currentQuestion > 0 {
+                                currentQuestion -= 1
+                                progress = calculateProgress()
+                            }
+                        }
+                        .opacity(currentQuestion == 0 ? 0 : 1) // Hide if on the first question
+                    }
+                    .alert("Move to Touch section?", isPresented: $showAlert) {
+                        Button("Yes") {
+                            currentSection = 1 // Update to Touch section index as needed
+                            currentQuestion = 0 // Reset question index
+                        }
+                        Button("Cancel", role: .cancel) {}
+                        
+                    }
+                }
+                    
+                }
+            //Touching Section
+                VStack {
+                    if sections[currentSection] == "Touch" {
+                         //TouchTestView(testState: $touchTest) // Pass test state via binding
+                     }
+                 }
+                 .alert("Please provide an answer", isPresented: $showAlert) { }
+                
+                .toolbar { // Add the toolbar
+                    ToolbarItemGroup(placement: .bottomBar) { // Items at the bottom
+                        Button(sections[max(0, currentSection - 1)]) { // Previous section
+                            if currentSection > 0 {
+                                currentSection -= 1
+                            }
+                        }
+                        Button(sections[currentSection]) {
+                            // No action if tapping the current section
+                        }
+                        .disabled(true) // Make the current section button non-interactive
+                        Button(sections[min(sections.count - 1, currentSection + 1)]) { // Next
+                            if currentSection < sections.count - 1 {
+                                currentSection += 1
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+                
+            
+            }
+
+    
+    /*
+    
+    
     @State private var currentSection = 0 // Start with section 0 (Ask)
     @State private var currentQuestion = 0
     @State private var progress = 0.0
@@ -65,11 +224,11 @@ struct ContentView: View {
                     .opacity(0) // Initially hidden
                 }
                 VStack{
-                    Button("Back"){
-                        //backQuestion()
-                    }
                     Button("Next"){
                         //nextQuestion()
+                    }
+                    Button("Back"){
+                        //backQuestion()
                     }
                 }
                 
@@ -108,7 +267,7 @@ struct ContentView: View {
 
 
     struct ProgressBar: View {
-        @Binding var value: Double
+    @Binding var value: Double
 
         var body: some View {
             ProgressView(value: value)
@@ -192,3 +351,4 @@ struct ContentView: View {
                 }
             }
         }
+*/
