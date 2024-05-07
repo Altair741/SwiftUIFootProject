@@ -11,14 +11,21 @@
 		AAC029F02BE79E0600DA9F3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC029EF2BE79E0600DA9F3D /* ContentView.swift */; };
 		AAC029F22BE79E0800DA9F3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC029F12BE79E0800DA9F3D /* Assets.xcassets */; };
 		AAC029F52BE79E0800DA9F3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC029F42BE79E0800DA9F3D /* Preview Assets.xcassets */; };
+		AAE8B7A62BE9FFBC00DA6694 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */; };
+		AAE8B7A92BEA026100DA6694 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7A82BEA026100DA6694 /* LocationManager.swift */; };
+		AAE8B7AB2BEA032B00DA6694 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7AA2BEA032B00DA6694 /* LoginPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AAC029EA2BE79E0600DA9F3D /* SwiftUI test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAC029EA2BE79E0600DA9F3D /* FootTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC029ED2BE79E0600DA9F3D /* SwiftUI_testApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_testApp.swift; sourceTree = "<group>"; };
 		AAC029EF2BE79E0600DA9F3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		AAC029F12BE79E0800DA9F3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAC029F42BE79E0800DA9F3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		AAE8B7A72BEA014F00DA6694 /* FootTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FootTest-Info.plist"; sourceTree = "<group>"; };
+		AAE8B7A82BEA026100DA6694 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		AAE8B7AA2BEA032B00DA6694 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +42,7 @@
 		AAC029E12BE79E0600DA9F3D = {
 			isa = PBXGroup;
 			children = (
+				AAE8B7A72BEA014F00DA6694 /* FootTest-Info.plist */,
 				AAC029EC2BE79E0600DA9F3D /* SwiftUI test */,
 				AAC029EB2BE79E0600DA9F3D /* Products */,
 			);
@@ -43,7 +51,7 @@
 		AAC029EB2BE79E0600DA9F3D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AAC029EA2BE79E0600DA9F3D /* SwiftUI test.app */,
+				AAC029EA2BE79E0600DA9F3D /* FootTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,8 +61,11 @@
 			children = (
 				AAC029ED2BE79E0600DA9F3D /* SwiftUI_testApp.swift */,
 				AAC029EF2BE79E0600DA9F3D /* ContentView.swift */,
+				AAE8B7AA2BEA032B00DA6694 /* LoginPage.swift */,
+				AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */,
 				AAC029F12BE79E0800DA9F3D /* Assets.xcassets */,
 				AAC029F32BE79E0800DA9F3D /* Preview Content */,
+				AAE8B7A82BEA026100DA6694 /* LocationManager.swift */,
 			);
 			path = "SwiftUI test";
 			sourceTree = "<group>";
@@ -70,9 +81,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AAC029E92BE79E0600DA9F3D /* SwiftUI test */ = {
+		AAC029E92BE79E0600DA9F3D /* FootTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAC029F82BE79E0800DA9F3D /* Build configuration list for PBXNativeTarget "SwiftUI test" */;
+			buildConfigurationList = AAC029F82BE79E0800DA9F3D /* Build configuration list for PBXNativeTarget "FootTest" */;
 			buildPhases = (
 				AAC029E62BE79E0600DA9F3D /* Sources */,
 				AAC029E72BE79E0600DA9F3D /* Frameworks */,
@@ -82,9 +93,9 @@
 			);
 			dependencies = (
 			);
-			name = "SwiftUI test";
+			name = FootTest;
 			productName = "SwiftUI test";
-			productReference = AAC029EA2BE79E0600DA9F3D /* SwiftUI test.app */;
+			productReference = AAC029EA2BE79E0600DA9F3D /* FootTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +113,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AAC029E52BE79E0600DA9F3D /* Build configuration list for PBXProject "SwiftUI test" */;
+			buildConfigurationList = AAC029E52BE79E0600DA9F3D /* Build configuration list for PBXProject "FootTest" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +126,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AAC029E92BE79E0600DA9F3D /* SwiftUI test */,
+				AAC029E92BE79E0600DA9F3D /* FootTest */,
 			);
 		};
 /* End PBXProject section */
@@ -137,8 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE8B7A92BEA026100DA6694 /* LocationManager.swift in Sources */,
 				AAC029F02BE79E0600DA9F3D /* ContentView.swift in Sources */,
 				AAC029EE2BE79E0600DA9F3D /* SwiftUI_testApp.swift in Sources */,
+				AAE8B7AB2BEA032B00DA6694 /* LoginPage.swift in Sources */,
+				AAE8B7A62BE9FFBC00DA6694 /* Quiz.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +283,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI test/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FootTest-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -297,6 +312,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI test/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FootTest-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -318,7 +334,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AAC029E52BE79E0600DA9F3D /* Build configuration list for PBXProject "SwiftUI test" */ = {
+		AAC029E52BE79E0600DA9F3D /* Build configuration list for PBXProject "FootTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAC029F62BE79E0800DA9F3D /* Debug */,
@@ -327,7 +343,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAC029F82BE79E0800DA9F3D /* Build configuration list for PBXNativeTarget "SwiftUI test" */ = {
+		AAC029F82BE79E0800DA9F3D /* Build configuration list for PBXNativeTarget "FootTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAC029F92BE79E0800DA9F3D /* Debug */,
