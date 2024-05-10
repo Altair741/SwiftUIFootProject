@@ -17,7 +17,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         let adelaideCoordinate = CLLocationCoordinate2D(latitude: -34.9285, longitude: 138.6007)
-        let span = MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0) // Adjust zoom level as needed
+        let span = MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0) //scale map size
                 region = MKCoordinateRegion(center: adelaideCoordinate, span: span) 
     }
 

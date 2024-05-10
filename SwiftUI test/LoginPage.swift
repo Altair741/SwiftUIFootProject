@@ -66,7 +66,7 @@ struct ClinicMapView: View {
     
     var body: some View {
         VStack {
-            TextField("Search clinics", text: $searchQuery)
+            TextField("Search health clinics", text: $searchQuery)
                 .padding()
                 .onSubmit { // Call search when Enter/Return is pressed
                     searchClinics()

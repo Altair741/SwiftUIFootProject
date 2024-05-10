@@ -26,7 +26,7 @@ struct Quiz: View {
     }
     private func calculateProgress() -> Double {
         let questionsInSection = questions.count
-        let totalQuestions = sections.reduce(0) { (accumulatedQuestions, sectionName) in // Adjust parameter names
+        let totalQuestions = sections.reduce(0) { (accumulatedQuestions, sectionName) in
             accumulatedQuestions + questionsInSection
         }
         
@@ -40,7 +40,7 @@ struct Quiz: View {
     let sections = ["Ask", "Touch", "Observation"]
     let questions: [QuestionData] = [
         
-        QuestionData(question: "What kind of shoes is the patient wearing today?", imageName: "imageName1", buttonLable: ["Closed Shoe", "Open shoes"]),
+        QuestionData(question: "What kind of shoes is the patient wearing today?", imageName: "Shoes.jpg", buttonLable: ["Closed Shoe", "Open shoes"]),
         QuestionData(question: "Does the patient have pain in their legs when walking?", imageName: nil, buttonLable: ["Yes", "No", "sometime"]),
         QuestionData(question: "Does the patient have pain in their legs when lying down?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
         QuestionData(question: "Does the patient have pain get pings and needles?", imageName: nil, buttonLable: ["Yes", "No", "Maybe"]),
@@ -71,7 +71,7 @@ struct Quiz: View {
     var body: some View {
         NavigationView{
             VStack {
-                if sections[currentSection] == "Ask" {
+                if sections[currentSection] == "Ask" {//Ask section
                     Text(sections[currentSection])
                         .font(.largeTitle)
                     ProgressBar(progress: $progress)
@@ -99,27 +99,43 @@ struct Quiz: View {
                             }
                             .background(selectedButtonIndex == questions[currentQuestion].buttonLable.firstIndex(of: buttonLabel) ? Color.green: Color.white) // Highlight if selected
                         }
+                    }
+                    HStack{
+                        
                         
                         
                         
                         Button("Next") {
-                            if currentQuestion < questions.count - 1  {
-                                currentQuestion += 1
-                                progress = calculateProgress()
-                                
+                            if selectedButtonIndex != nil { // Check if an answer is selected
+                                if currentQuestion < questions.count - 1 {
+                                    currentQuestion += 1
+                                    progress = calculateProgress()
+                                    selectedButtonIndex = nil // Reset for the next question
+                                } else {
+                                    showAlert = true
+                                }
                             } else {
-                                // User is on the last question in 'Ask' section
+                                // User didn't select an answer
                                 showAlert = true
                             }
                         }
                         
+                        
+                        .alert("Please provide an answer", isPresented: $showAlert) {
+                            Button("OK", role: .cancel) {}
+                        }
+                        
+                        
                         //.opacity(currentQuestion == questions.count - 1 ? 0 : 1) // Hide at the end
-                        Spacer(minLength: 20)
+                        //Spacer(minLength: 20)
                         
                         Button("Back") {
                             if currentQuestion > 0 {
                                 currentQuestion -= 1
                                 progress = calculateProgress()
+                            }
+                            else if currentQuestion == 0{
+                                showAlert = true
                             }
                         }
                         .opacity(currentQuestion == 0 ? 0 : 1) // Hide if on the first question
@@ -136,8 +152,9 @@ struct Quiz: View {
                             
                         }
                     }
-                    
                 }
+                
+                
                 //Touching Section
                 VStack {
                     if sections[currentSection] == "Touch" {
@@ -146,9 +163,9 @@ struct Quiz: View {
                         }
                     }
                 }
-                .alert("Please provide an answer", isPresented: $showAlert) { }
-                
-              
+                .alert("Please provide an answer", isPresented: $showAlert) {
+                    
+                }
                 .toolbar { // Add the toolbar
                     ToolbarItemGroup(placement: .bottomBar) { // Items at the bottom
                         Button(sections[max(0, currentSection - 1)]) { // Previous section
@@ -176,6 +193,7 @@ struct Quiz: View {
         
         
     }
+    
 }
     
     /*
