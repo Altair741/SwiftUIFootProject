@@ -10,5 +10,5 @@ import Combine
 
 class UserAnswer : ObservableObject
 {
-    @Published var answerRecord: [String] = Array(repeating: "Not Answered", count: 12)
+    @Published var answerRecord: [String] = Array(repeating: "Not Answered", count: 20)
 }
