@@ -104,6 +104,14 @@ struct EndPage: View {
                 
                 Has the patient had any amputations? \(answer.answerRecord[11])
                 
+                Can you feel the pulse in the dorsalis pedis (DP)
+                  - Right foot :  \(answer.answerRecord[12])
+                  - Left foot  :  \(answer.answerRecord[13])
+                
+                Can you feel the pulse in the posterior tibial (TP)
+                  - Right foot :  \(answer.answerRecord[14])
+                  - Left foot  :  \(answer.answerRecord[15])
+                
                 """,x: 0, y: 200, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
  
         }
