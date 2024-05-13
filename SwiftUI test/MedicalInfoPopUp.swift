@@ -130,6 +130,36 @@ struct MedicalInfoPopUp: View {
                             .cornerRadius(25)
                     }.simultaneousGesture(TapGesture())
                 }
+                else if task == "DP_test"
+                {
+                    NavigationLink(destination: DP_test()) {
+                        Text("Back")
+                            .frame(width: 120, height: 50)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(25)
+                    }.simultaneousGesture(TapGesture())
+                }
+                else if task == "PT_test"
+                {
+                    NavigationLink(destination: PT_test()) {
+                        Text("Back")
+                            .frame(width: 120, height: 50)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(25)
+                    }.simultaneousGesture(TapGesture())
+                }
+                else if task == "Monofilament_test"
+                {
+                    NavigationLink(destination: Monofilament_test()) {
+                        Text("Back")
+                            .frame(width: 120, height: 50)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(25)
+                    }.simultaneousGesture(TapGesture())
+                }
                 
             }
         }
