@@ -9,14 +9,18 @@ import SwiftUI
 
 struct MyModal: View {
     @State private var showModal: Bool = true // Show the modal by default
+    @EnvironmentObject var answer : UserAnswer
+    @State private var isSelected = false
+    @State private var isSelected2 = false
+    @State private var moveToTouchTest = false
+    @State private var moveToMonoTest = false
+    
     
     var body: some View {
         VStack {
             Spacer()
-            
             // Show the modal
                 .fullScreenCover(isPresented: $showModal) {
-                    NavigationView {
                         ZStack {
                             Color.yellow.ignoresSafeArea()
                             VStack {
@@ -29,27 +33,36 @@ struct MyModal: View {
                                     .padding(.top, 30)
                                     .padding(.bottom, 20)
                                 
-                                NavigationLink(destination: Monofilament_test()) {
-                                    Text("PROCEED")
-                                        .padding()
-                                        .frame(width: 120, height: 50)
-                                        .background(Color.green)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(25)
-                                    
-                                    NavigationLink(destination: EndPage()) {
-                                        Text("SKIP")
-                                            .padding()
-                                            .frame(width: 120, height: 50)
-                                            .background(Color.green)
-                                            .foregroundColor(.white)
-                                            .cornerRadius(25)
+                                HStack {
+                                    Button("PROCEED") {
+                                        isSelected = true
+                                        isSelected2 = false
+                                        moveToMonoTest = true
                                     }
+                                    .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
+                                    
+                                    Button("SKIP") {
+                                        isSelected2 = true
+                                        isSelected = false
+                                        moveToTouchTest = true
+                                        answer.answerRecord[16] = "Test has been skipped"
+                                    }
+                                    .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
+                                    
                                 }
                             }
+                            .fullScreenCover(isPresented: $moveToTouchTest)
+                            {
+                                // should be modified to touch test
+                                EndPage()
+                            }
+                            .fullScreenCover(isPresented: $moveToMonoTest)
+                            {
+                                Monofilament_test()
+                            }
                         }
-                    }
                 }
-        }
+        }//Vstack
+        
     }
 }
