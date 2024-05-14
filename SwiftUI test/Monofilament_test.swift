@@ -20,6 +20,11 @@ struct Monofilament_test: View {
     @State private var showMedicalInfo = false
     @State private var nextQuesion = false
     @EnvironmentObject var answer : UserAnswer
+    // score value to Right foot
+    @State private var score_rf: Int = 0
+    @State private var score_lf: Int = 0
+
+    // 16 user answer.
     
     var body: some View {
         NavigationView {
@@ -36,7 +41,7 @@ struct Monofilament_test: View {
                     
                     Text("press the monofilament against the points indicated in the picture ")
                     
-                    ProgressBar(progess: 16)
+                    ProgressBar2(progess: 16)
                     
                     Text("Right foot").padding(10).font(.title)
                     Text("Spot 1: Big Toe").padding(.leading, -140).padding(-30)
@@ -44,6 +49,7 @@ struct Monofilament_test: View {
                         Button("Yes") {
                             isSelected_R_1 = true
                             isSelected_R_1_No = false
+                            score_rf += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1))
                         Button("No") {
@@ -59,6 +65,7 @@ struct Monofilament_test: View {
                         Button("Yes") {
                             isSelected_R_2 = true
                             isSelected_R_2_No = false
+                            score_rf += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2))
                         Button("No") {
@@ -75,12 +82,12 @@ struct Monofilament_test: View {
                         Button("Yes") {
                             isSelected_R_3 = true
                             isSelected_R_3_No = false
-
+                            score_rf += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3))
                         Button("No") {
                             isSelected_R_3 = false
-                            isSelected_R_2_No = true
+                            isSelected_R_3_No = true
 
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3_No))
@@ -96,6 +103,8 @@ struct Monofilament_test: View {
                         Button("Yes") {
                             isSelected_L_1 = true
                             isSelected_L_1_No = false
+                            score_lf += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1))
                         Button("No") {
@@ -111,6 +120,7 @@ struct Monofilament_test: View {
                         Button("Yes") {
                             isSelected_L_2 = true
                             isSelected_L_2_No = false
+                            score_lf += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2))
                         Button("No") {
@@ -126,6 +136,8 @@ struct Monofilament_test: View {
                         Button("Yes") {
                             isSelected_L_3 = true
                             isSelected_L_3_No = false
+                            score_lf += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3))
                         Button("No") {
@@ -141,7 +153,16 @@ struct Monofilament_test: View {
                 // Button to save answer and link to next question
                 Button("Save Anwser"){
                     nextQuesion = true
-                }.padding(10)
+                    let r_result = String(score_rf)
+                    let l_result = String(score_lf)
+                    answer.answerRecord[16] =
+                    """
+                    Final Score:
+                    Right foot \(score_rf)/3
+                    Left Foot \(score_rf)/3
+                    """
+                }
+                .padding(10)
             }
             
             
@@ -174,6 +195,10 @@ struct Monofilament_test: View {
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .fullScreenCover(isPresented: $nextQuesion)
+            {
+                EndPage()
+            }
 
             .fullScreenCover(isPresented: $showMedicalInfo)
             {
