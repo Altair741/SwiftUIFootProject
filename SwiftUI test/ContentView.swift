@@ -17,7 +17,7 @@ struct ContentView: View {
                         .fontWeight(.bold)
                         .padding()
 
-                    NavigationLink(destination: Quiz()) {
+                    NavigationLink(destination: Quizinerfaces()) {
                         Text("Start")
                             .padding()
                             .background(Color.blue)

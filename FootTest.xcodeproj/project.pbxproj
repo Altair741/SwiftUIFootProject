@@ -11,6 +11,7 @@
 		AAC029F02BE79E0600DA9F3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC029EF2BE79E0600DA9F3D /* ContentView.swift */; };
 		AAC029F22BE79E0800DA9F3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC029F12BE79E0800DA9F3D /* Assets.xcassets */; };
 		AAC029F52BE79E0800DA9F3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC029F42BE79E0800DA9F3D /* Preview Assets.xcassets */; };
+		AACE4B9B2BF3871000E6D1A3 /* QuizInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACE4B9A2BF3871000E6D1A3 /* QuizInterfaces.swift */; };
 		AAE8B7A62BE9FFBC00DA6694 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */; };
 		AAE8B7A92BEA026100DA6694 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7A82BEA026100DA6694 /* LocationManager.swift */; };
 		AAE8B7AB2BEA032B00DA6694 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7AA2BEA032B00DA6694 /* LoginPage.swift */; };
@@ -23,6 +24,8 @@
 		AAC029EF2BE79E0600DA9F3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		AAC029F12BE79E0800DA9F3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAC029F42BE79E0800DA9F3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AACE4B992BF374C500E6D1A3 /* rightBigToe.avif */ = {isa = PBXFileReference; lastKnownFileType = file; name = rightBigToe.avif; path = "SwiftUI test/Assets.xcassets/rightBigToe.avif"; sourceTree = SOURCE_ROOT; };
+		AACE4B9A2BF3871000E6D1A3 /* QuizInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizInterfaces.swift; sourceTree = "<group>"; };
 		AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		AAE8B7A72BEA014F00DA6694 /* FootTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FootTest-Info.plist"; sourceTree = "<group>"; };
 		AAE8B7A82BEA026100DA6694 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 				AAE8B7AA2BEA032B00DA6694 /* LoginPage.swift */,
 				AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */,
 				AAE8B7A82BEA026100DA6694 /* LocationManager.swift */,
+				AACE4B9A2BF3871000E6D1A3 /* QuizInterfaces.swift */,
 				AAC029F12BE79E0800DA9F3D /* Assets.xcassets */,
 				AAC029F32BE79E0800DA9F3D /* Preview Content */,
 			);
@@ -77,6 +81,7 @@
 			children = (
 				AAC029F42BE79E0800DA9F3D /* Preview Assets.xcassets */,
 				AAE8B7AC2BEB16C900DA6694 /* Shoes.jpg */,
+				AACE4B992BF374C500E6D1A3 /* rightBigToe.avif */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACE4B9B2BF3871000E6D1A3 /* QuizInterfaces.swift in Sources */,
 				AAE8B7A92BEA026100DA6694 /* LocationManager.swift in Sources */,
 				AAC029F02BE79E0600DA9F3D /* ContentView.swift in Sources */,
 				AAC029EE2BE79E0600DA9F3D /* SwiftUI_testApp.swift in Sources */,
