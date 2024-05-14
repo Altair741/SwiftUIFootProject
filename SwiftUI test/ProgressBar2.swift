@@ -7,16 +7,14 @@
 
 import SwiftUI
 
-struct ProgressBar: View {
+struct ProgressBar2: View {
     
     @State var progess: Double = 0
     
     var body: some View {
-        ProgressView("Progress...", value: progess, total: 12 )
+        ProgressView("Progress...", value: progess, total: 20 )
             .padding()
     }
 }
-#Preview {
-    ProgressBar()
-}
+
 

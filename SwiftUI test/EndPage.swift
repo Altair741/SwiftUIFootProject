@@ -51,7 +51,7 @@ struct EndPage: View {
         
         let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(
             // A4 size
-        x: 0, y: 0, width: 595, height: 1200
+        x: 0, y: 0, width: 595, height: 2000
         ))
         
         let data = pdfRenderer.pdfData{ context in context.beginPage()
@@ -75,9 +75,42 @@ struct EndPage: View {
             
             alignTexst(value:
             """
-                Skin conditions
+                Assessment Task
                 
                 """,x: 0, y: 170, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
+            alignTexst(value:
+            """
+                Does/did the patient have callus? \(answer.assessmentRecord[0])
+                
+                Does/did the patient have corns?  \(answer.assessmentRecord[1])
+                
+                Does/did the patient have tinea? \(answer.assessmentRecord[2])
+                
+                Does/did the patient have ulcer? \(answer.assessmentRecord[3])
+                
+                Does/did the patient have thickened toenails? \(answer.assessmentRecord[4])
+                
+                Does/did the patient have ingrown toenails? \(answer.assessmentRecord[5])
+                
+                Does/did the patient have bunions? \(answer.assessmentRecord[6])
+                
+                Does/did the patient have hammer and clawed toes? \(answer.assessmentRecord[7])
+                
+                Does/did the patient have flat feet? \(answer.assessmentRecord[8])
+                
+                Does/did the patient have high arched feet? \(answer.assessmentRecord[9])
+                
+                Does/did the patient have Charcot foot? \(answer.assessmentRecord[10])
+                
+                Has the patient had any amputations? \(answer.assessmentRecord[11])
+
+                """,x: 0, y: 200, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
+            
+            alignTexst(value:
+            """
+                Skin conditions
+                
+                """,x: 0, y: 580, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
             """
                 Does/did the patient have callus? \(answer.answerRecord[0])
@@ -112,7 +145,9 @@ struct EndPage: View {
                   - Right foot :  \(answer.answerRecord[14])
                   - Left foot  :  \(answer.answerRecord[15])
                 
-                """,x: 0, y: 200, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
+                MonoFilamentTest: \(answer.answerRecord[16])
+                
+                """,x: 0, y: 610, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
  
         }
         return data
