@@ -80,29 +80,31 @@ struct EndPage: View {
                 """,x: 0, y: 170, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
             """
-                Does/did the patient have callus? \(answer.assessmentRecord[0])
+                What kind of shoes is the patient wearing today?  \(answer.assessmentRecord[0])
                 
-                Does/did the patient have corns?  \(answer.assessmentRecord[1])
+                Does the patient have pain in their legs when walking?   \(answer.assessmentRecord[1])
                 
-                Does/did the patient have tinea? \(answer.assessmentRecord[2])
+                Does the patient have pain in their legs when lying down? \(answer.assessmentRecord[2])
                 
-                Does/did the patient have ulcer? \(answer.assessmentRecord[3])
+                Does the patient get pins and needles? \(answer.assessmentRecord[3])
                 
-                Does/did the patient have thickened toenails? \(answer.assessmentRecord[4])
+                Does the patient feel sharp pain? \(answer.assessmentRecord[4])
                 
-                Does/did the patient have ingrown toenails? \(answer.assessmentRecord[5])
+                Do the patient's feet get numb? \(answer.assessmentRecord[5])
                 
-                Does/did the patient have bunions? \(answer.assessmentRecord[6])
+                Do the patient’s toes get numb?  \(answer.assessmentRecord[6])
                 
-                Does/did the patient have hammer and clawed toes? \(answer.assessmentRecord[7])
+                Does the patient make regular podiatrist visits?  \(answer.assessmentRecord[7])
                 
-                Does/did the patient have flat feet? \(answer.assessmentRecord[8])
+                Does the patient smoke?  \(answer.assessmentRecord[8])
                 
-                Does/did the patient have high arched feet? \(answer.assessmentRecord[9])
+                What is the current condition of the patient’s skin?  \(answer.assessmentRecord[9])
                 
-                Does/did the patient have Charcot foot? \(answer.assessmentRecord[10])
+                Is there any swelling around the feet and ankle?  \(answer.assessmentRecord[10])
                 
-                Has the patient had any amputations? \(answer.assessmentRecord[11])
+                What is the temperature of the foot?  \(answer.assessmentRecord[11])
+                
+                
 
                 """,x: 0, y: 200, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
             
@@ -113,27 +115,27 @@ struct EndPage: View {
                 """,x: 0, y: 580, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
             """
-                Does/did the patient have callus? \(answer.answerRecord[0])
+                Does the patient have callus? \(answer.answerRecord[0])
                 
-                Does/did the patient have corns?  \(answer.answerRecord[1])
+                Does the patient have corns?  \(answer.answerRecord[1])
                 
-                Does/did the patient have tinea? \(answer.answerRecord[2])
+                Does the patient have tinea? \(answer.answerRecord[2])
                 
-                Does/did the patient have ulcer? \(answer.answerRecord[3])
+                Has the patient had a previous or current ulcer? \(answer.answerRecord[3])
                 
-                Does/did the patient have thickened toenails? \(answer.answerRecord[4])
+                Does the patient have thickened toenails? \(answer.answerRecord[4])
                 
-                Does/did the patient have ingrown toenails? \(answer.answerRecord[5])
+                Does the patient have ingrown toenails? \(answer.answerRecord[5])
                 
-                Does/did the patient have bunions? \(answer.answerRecord[6])
+                Does the patient have bunions? \(answer.answerRecord[6])
                 
-                Does/did the patient have hammer and clawed toes? \(answer.answerRecord[7])
+                Does the patient have hammer and clawed toes? \(answer.answerRecord[7])
                 
-                Does/did the patient have flat feet? \(answer.answerRecord[8])
+                Does the patient have flat feet? \(answer.answerRecord[8])
                 
-                Does/did the patient have high arched feet? \(answer.answerRecord[9])
+                Does the patient have high arched feet? \(answer.answerRecord[9])
                 
-                Does/did the patient have Charcot foot? \(answer.answerRecord[10])
+                Does the patient have Charcot foot? \(answer.answerRecord[10])
                 
                 Has the patient had any amputations? \(answer.answerRecord[11])
                 
