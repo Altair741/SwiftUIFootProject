@@ -22,7 +22,6 @@ struct IpswichTouchTest {
     var userResponses: [[Bool]] = [[], []]
 }
 
-
 // 3. ProgressBar Struct
 struct ProgressBar: View {
     @Binding var progress: Double
@@ -35,7 +34,6 @@ struct ProgressBar: View {
 }
 
 let questions: [QuestionData] = [
-    
     QuestionData(question: "What kind of shoes is the patient wearing today?", imageName: "Shoes.jpg", buttonLabels: ["Closed Shoe", "Open shoes"]),
     QuestionData(question: "Does the patient have pain in their legs when walking?", imageName: nil, buttonLabels: ["Yes", "No", "sometime"]),
     QuestionData(question: "Does the patient have pain in their legs when lying down?", imageName: nil, buttonLabels: ["Yes", "No", "Maybe"]),
@@ -48,9 +46,6 @@ let questions: [QuestionData] = [
     QuestionData(question: "What is the condition of the skin?", imageName: nil, buttonLabels: ["Dry","Normal","Sweaty","Shiney"]),
     QuestionData(question: "what is the temperature of the foot?", imageName: nil, buttonLabels:["Cold","Warm","Hot"]),
     QuestionData(question: "Is there any swelling aroud the feet and ankle?", imageName: nil, buttonLabels: ["Yes", "No"])
-    
-    
-    
 ]
 let toesOrder = [
     (side: "Right", toe: "Big Toe", imageName: "rightBigToe.avif"),
@@ -84,9 +79,7 @@ struct Quizinerfaces: View {
         return Double(questionsAnswered) / Double(totalQuestions)
         
     }
-    
 
-    
     @State private var progress = 0.0
 
     var body: some View {
@@ -124,11 +117,20 @@ struct Quizinerfaces: View {
 }
 struct AskSectionView: View{
     @State private var currentQuestionIndex = 0 // Track current question
-       @State private var selectedAnswers: [String] = [] // Store selected answers
+    // Mingu : it has to be global scale variable to record this value.
+    @State private var selectedAnswers: [String] = [] // Store selected answers
+    // Mingu : Add global variable to store answers in selectedAnswers
+    @EnvironmentObject var answer : UserAnswer
+    // Mingu : var moveToSkinconditionCheck is to navigate skin condition assessment part
+    @State private var moveToSkinconditionCheck = false
+    
        let questions: [QuestionData]
 
        var body: some View {
            VStack {
+               // Mingu: Test if selectedAnswers can capture the answer.
+               //Text(selectedAnswers.indices.contains(1) ? selectedAnswers[1] : "")
+               
                // Progress Bar
                ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
                    .padding()
@@ -176,12 +178,28 @@ struct AskSectionView: View{
                }
                .padding()
            }
+           // Mingu : navigate to skin condition question
+           .fullScreenCover(isPresented: $moveToSkinconditionCheck)
+           {
+               
+               EndPage()
+           }
        }
       
 
        func nextQuestion() {
+           // Mingu : Find some error that it can capture the sting value stored in label only upto question number 2.
+           answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
+           // Mingu : Test to see value in console.
+           print(answer.assessmentRecord[currentQuestionIndex])
+           
            if currentQuestionIndex < questions.count - 1 {
                currentQuestionIndex += 1
+           }
+           // Mingu modified, if it hit the last question..
+           else{
+               moveToSkinconditionCheck = true
+               // Mingu: If it hit the last questions store all of the answers to global variable
            }
        }
 
@@ -190,7 +208,13 @@ struct AskSectionView: View{
                currentQuestionIndex -= 1
            }
        }
-   }
+       // Mingu : method to capture the answer and store them to global scale variable
+       func updateAnswer(_ answer: UserAnswer) {
+           for e in selectedAnswers {
+               answer.assessmentRecord.append(e)
+        }
+    }
+}
 
 struct TouchTestView: View{
     @Binding var touchTest: IpswichTouchTest
