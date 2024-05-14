@@ -25,43 +25,25 @@ struct Q10: View {
         NavigationView {
             ZStack {
                 VStack(spacing: 30) {
-                    Text("Does/did the patient have high arched feet?")
-                    ProgressBar(progess: 10)
+                    Text("Does the patient have high arched feet?")
+                    ProgressBar2(progess: 10)
 
                     HStack {
-                        NavigationLink(destination: Q11()) {
-                            Text("Yes")
-                                .padding()
-                                .frame(width: 120, height: 50)
-                                .background(isSelected ? Color.green : Color.gray) // Change color based on isSelected state
-                                .foregroundColor(.white)
-                                .cornerRadius(25)
-                        }
-                        .simultaneousGesture(TapGesture().onEnded {
+                        Button("Yes") {
                             isSelected = true
                             isSelected2 = false
                             nq = true
                             answer.answerRecord[9] = "Yes"
-
                         }
-                        )
+                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
                         
-                        NavigationLink(destination: Q11()) {
-                            Text("No")
-                                .padding()
-                                .frame(width: 120, height: 50)
-                                .background(isSelected2 ? Color.red : Color.gray) // Change color based on isSelected2 state
-                                .foregroundColor(.white)
-                                .cornerRadius(25)
-                        }
-                        .simultaneousGesture(TapGesture().onEnded {
+                        Button("No") {
                             isSelected2 = true
                             isSelected = false
                             nq = true
                             answer.answerRecord[9] = "No"
-
-
-                        })
+                        }
+                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
                     }
                 }
                 .padding()

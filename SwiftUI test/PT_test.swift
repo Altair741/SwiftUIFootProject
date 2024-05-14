@@ -38,7 +38,7 @@ struct PT_test: View {
                 }
                 
                 Text("Can you feel the pulse in the posterior tibial")
-                ProgressBar(progess: 3)
+                ProgressBar2(progess: 3)
                 Text("Right Foot")
                 
                 HStack {
@@ -114,7 +114,7 @@ struct PT_test: View {
                     }
                     .fullScreenCover(isPresented: $nextQuesion)
                     {
-                        EndPage()
+                        Monofilament_test()
                     }
                 }
             }

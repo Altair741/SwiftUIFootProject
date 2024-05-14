@@ -40,7 +40,7 @@ struct DP_test: View {
                 }
 
                 Text("Can you feel the pulse in the dorsalis pedis")
-                ProgressBar(progess: 3)
+                ProgressBar2(progess: 3)
                 Text("Right Foot")
                 
                 HStack {

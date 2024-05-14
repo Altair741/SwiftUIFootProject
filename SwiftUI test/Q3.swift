@@ -3,9 +3,6 @@ struct Q3: View {
     
     @State private var isSelected = false
     @State private var isSelected2 = false
-    @State private var isSelected3 = false
-    @State private var isSelected4 = false
-    @State private var navigateToQ2 = false
     @State private var medicalInfoScript = "If tinea does not go away, after the initial treatment, the patient would need to be referred to a GP or podiatrist."
     private var task = "Q3"
     @State private var showMedicalInfo = false
@@ -20,57 +17,25 @@ struct Q3: View {
         NavigationView {
             
             VStack(spacing: 30) {
-                Text("Does/did the patient have tinea?")
-                ProgressBar(progess: 3)
+                Text("Does the patient have tinea?")
+                ProgressBar2(progess: 3)
 
                 HStack {
-                    Button("Dry") {
+                    Button("Yes") {
                         isSelected = true
                         isSelected2 = false
-                        isSelected3 = false
-                        isSelected4 = false
-                        navigateToQ2 = true
                         nextQuesion = true
-                        answer.answerRecord[2] = "Dry"
+                        answer.answerRecord[2] = "Yes"
                     }
                     .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
-                    
-                    Button("Normal") {
+        
+                    Button("No") {
                         isSelected2 = true
                         isSelected = false
-                        isSelected3 = false
-                        isSelected4 = false
-                        navigateToQ2 = true
                         nextQuesion = true
-                        answer.answerRecord[2] = "Normal"
-
+                        answer.answerRecord[2] = "No"
                     }
                     .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
-                }
-                .padding(.leading, 10)
-
-
-                HStack {
-                    Button("Sweaty") {
-                        isSelected3 = true
-                        isSelected = false
-                        isSelected2 = false
-                        isSelected4 = false
-                        navigateToQ2 = true
-                        answer.answerRecord[2] = "Sweaty"
-                    }
-                    .buttonStyle(SelectedButtonStyle(isSelected: isSelected3))
-                    
-                    Button("Shiney") {
-                        isSelected4 = true
-                        isSelected = false
-                        isSelected2 = false
-                        isSelected3 = false
-                        navigateToQ2 = true
-                        answer.answerRecord[2] = "Shiney"
-
-                    }
-                    .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
                 }
                 .padding(.leading, 10)
                 .navigationBarBackButtonHidden(true)

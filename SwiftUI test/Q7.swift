@@ -15,7 +15,7 @@ struct Q7: View {
     @State private var showMedicalInfo = false
     private var task = "Q7"
     @EnvironmentObject var answer : UserAnswer
-    @State private var nq = false
+    @State private var nextQuesion = false
 
 
     
@@ -27,41 +27,25 @@ struct Q7: View {
         NavigationView {
             ZStack {
                 VStack(spacing: 30) {
-                    Text("Does/did the patient have bunions?")
-                    ProgressBar(progess: 7)
+                    Text("Does the patient have bunions?")
+                    ProgressBar2(progess: 7)
 
                     HStack {
-                        NavigationLink(destination: Q8()) {
-                            Text("Yes")
-                                .padding()
-                                .frame(width: 120, height: 50)
-                                .background(isSelected ? Color.green : Color.gray) // Change color based on isSelected state
-                                .foregroundColor(.white)
-                                .cornerRadius(25)
-                        }
-                        .simultaneousGesture(TapGesture().onEnded {
+                        Button("Yes") {
                             isSelected = true
                             isSelected2 = false
-                            nq = true
+                            nextQuesion = true
                             answer.answerRecord[6] = "Yes"
-
                         }
-                        )
+                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
                         
-                        NavigationLink(destination: Q8()) {
-                            Text("No")
-                                .padding()
-                                .frame(width: 120, height: 50)
-                                .background(isSelected2 ? Color.red : Color.gray) // Change color based on isSelected2 state
-                                .foregroundColor(.white)
-                                .cornerRadius(25)
-                        }
-                        .simultaneousGesture(TapGesture().onEnded {
+                        Button("No") {
                             isSelected2 = true
                             isSelected = false
-                            nq = true
+                            nextQuesion = true
                             answer.answerRecord[6] = "No"
-                        })
+                        }
+                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
                     }
                 }
                 .padding()
@@ -88,7 +72,7 @@ struct Q7: View {
                 {
                     MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
                 }
-                .fullScreenCover(isPresented: $nq)
+                .fullScreenCover(isPresented: $nextQuesion)
                 {
                     Q8()
                 }

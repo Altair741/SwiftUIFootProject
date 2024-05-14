@@ -19,40 +19,25 @@ struct Q2: View {
         NavigationView {
             ZStack {
                 VStack(spacing: 30) {
-                    Text("Does/did the patient have an corns?")
-                    ProgressBar(progess: 2)
+                    Text("Does the patient have corns?")
+                    ProgressBar2(progess: 2)
 
                     HStack {
-                        NavigationLink(destination: MyModal()) {
-                            Text("Yes")
-                                .padding()
-                                .frame(width: 120, height: 50)
-                                .background(isSelected ? Color.green : Color.gray) // Change color based on isSelected state
-                                .foregroundColor(.white)
-                                .cornerRadius(25)
-                        }
-                        .simultaneousGesture(TapGesture().onEnded {
+                        Button("Yes") {
                             isSelected = true
                             isSelected2 = false
-                            answer.answerRecord[1] = "Yes"
+                            nextQuesion = true
+                            answer.answerRecord[3] = "Yes"
                         }
-                        )
-                        NavigationLink(destination: Q3()) {
-                            Text("No")
-                                .padding()
-                                .frame(width: 120, height: 50)
-                                .background(isSelected2 ? Color.red : Color.gray) // Change color based on isSelected2 state
-                                .foregroundColor(.white)
-                                .cornerRadius(25)
-                        }
-                        .simultaneousGesture(TapGesture().onEnded {
+                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
+            
+                        Button("No") {
                             isSelected2 = true
                             isSelected = false
                             nextQuesion = true
                             answer.answerRecord[1] = "No"
-
-                            
-                        })
+                        }
+                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
                     }
                 }
                 .padding()

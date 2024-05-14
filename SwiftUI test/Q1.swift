@@ -32,8 +32,8 @@ struct Q1: View {
                 // Add aboriginal image here.
                 
                     VStack(spacing: 30) {
-                        Text("Does/did the patient have an callus?")
-                        ProgressBar(progess: 1)
+                        Text("Does the patient have callus?")
+                        ProgressBar2(progess: 1)
                         HStack {
                             Button("Yes") {
                                 isSelected = true

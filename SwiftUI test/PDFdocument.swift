@@ -15,8 +15,6 @@ struct PDFdocument: UIViewRepresentable {
     init(pdfDoc: PDFDocument) {
         self.pdfDoc = pdfDoc
     }
-    
-    
     func makeUIView(context: Context) -> PDFView
     {
         let pdfView = PDFView()
