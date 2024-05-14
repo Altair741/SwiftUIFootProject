@@ -12,11 +12,11 @@ struct ContentView: View {
         var body: some View {
             NavigationView { // Use NavigationView for navigation structure
                 VStack(alignment: .center) {
-                    Text("Foot Diagons")
+                    Text("Foot Test")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding()
-
+                    //Start ASk section and IPWich test
                     NavigationLink(destination: Quizinerfaces()) {
                         Text("Start")
                             .padding()
@@ -24,7 +24,7 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-
+                    //Start uer log in page
                     NavigationLink(destination: SignInView()) {
                         Text("FirstSign In page")
                             .padding()
@@ -32,6 +32,7 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
+                    //ink to your file copy here
                 }
                 .navigationTitle("") // Hide default title
                 .navigationBarHidden(true) // Hide navigation bar
