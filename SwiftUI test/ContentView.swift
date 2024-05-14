@@ -32,7 +32,15 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-                    //ink to your file copy here
+                    //Mingu : i'm gonna use this link to test my part of code!
+                    NavigationLink(destination: MyModal())
+                    {
+                        Text("Mingu Test")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
                 }
                 .navigationTitle("") // Hide default title
                 .navigationBarHidden(true) // Hide navigation bar
