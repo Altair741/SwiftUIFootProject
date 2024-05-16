@@ -187,6 +187,3 @@ struct EndPage: View {
         }
     }
 }
-#Preview {
-    EndPage()
-}
