@@ -31,7 +31,7 @@ let clinics: [Clinic] = [ // Sample clinic data (replace with your own)
     Clinic(name: "Fregon Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.7634704, longitude: 132.0276193)),
     Clinic(name: "Iwantja Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.9650009, longitude: 132.1561362)),
     Clinic(name: "Mimili Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -32.0576, longitude: 138.5965)),
-    Clinic(name: "Nyapari Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -32.0576, longitude: 138.5965)),
+    //Clinic(name: "Nyapari Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -32.0576, longitude: 138.5965)),
     Clinic(name: "Pipalyatjara Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.9996753, longitude: 132.6748486)),
     Clinic(name: "Pukatja Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.6444829, longitude:132.0092038 )),
     Clinic(name: "Port Lincoln Aboriginal Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -34.726876, longitude: 135.8495284)),
@@ -98,19 +98,38 @@ struct ClinicMapView: View {
         }
     }
 }
-
-// SignInView.swift (Updated)
+//update signInview this is the view design
 struct SignInView: View {
     @State private var name: String = ""
     @State private var workEmail: String = ""
     @State private var isListExpanded = false
     @State private var selectedClinic: Clinic?
     
+    // Optional - add an alert to notify when submit is tapped.
+    @State private var showAlert = false
+
     var body: some View {
         NavigationView {
             VStack {
-                
-                
+                // Text fields for name and email
+                TextField("Name", text: $name)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 1)
+                    )
+                    .padding(.horizontal)
+
+                TextField("Work Email", text: $workEmail)
+                    .padding()
+                    .keyboardType(.emailAddress) // Set keyboard type for email
+                    .autocapitalization(.none) // Disable auto-capitalization
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 1)
+                    )
+                    .padding(.horizontal)
+                // Foldable Clinic List
                 DisclosureGroup(isExpanded: $isListExpanded) {
                     ClinicListView(selectedClinic: $selectedClinic)
                         .frame(height: isListExpanded ? 200 : 0)
@@ -118,17 +137,34 @@ struct SignInView: View {
                 } label: {
                     HStack {
                         Text("Select Clinic")
-                        //Image(systemName: isListExpanded ? "chevron.up" : "chevron.down")
+                        
                     }
                 }
                 .padding()
-                
+
+                // Map View
                 ClinicMapView(selectedClinic: $selectedClinic)
                     .frame(height: 400)
-                
-                
-                
+                // Submit button
+                Button("Submit") {
+                    
+                    // For now, let's just show an alert
+                    showAlert = true
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
             }
+            // Add an alert that shows after submitting
+            .alert("Submitted!", isPresented: $showAlert) {
+                Button("OK") { }
+            } message: {
+                Text("Name: \(name)\nEmail: \(workEmail)\nClinic: \(selectedClinic?.name ?? "None")")
+            }
+            
+            // ... (Navigation setup if needed)
         }
     }
 }
