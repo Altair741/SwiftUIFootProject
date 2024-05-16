@@ -25,15 +25,17 @@ struct ContentView: View {
                             .cornerRadius(10)
                     }
                     //Start uer log in page
-                    NavigationLink(destination: SignInView()) {
+                    NavigationLink(destination: SignInView()) { // Use SignInView as the destination
                         Text("FirstSign In page")
                             .padding()
                             .background(Color.blue)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
+
+                    /*
                     //Mingu : i'm gonna use this link to test my part of code!
-                    NavigationLink(destination: MyModal())
+                    NavigationLink(destination: Monofilament_test())
                     {
                         Text("Mingu Test")
                             .padding()
@@ -41,6 +43,7 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
+                     */
                 }
                 .navigationTitle("") // Hide default title
                 .navigationBarHidden(true) // Hide navigation bar

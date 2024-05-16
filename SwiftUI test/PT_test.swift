@@ -114,7 +114,7 @@ struct PT_test: View {
                     }
                     .fullScreenCover(isPresented: $nextQuesion)
                     {
-                        Monofilament_test()
+//                        Monofilament_test()
                     }
                 }
             }

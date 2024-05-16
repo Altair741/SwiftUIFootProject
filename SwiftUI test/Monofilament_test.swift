@@ -1,5 +1,5 @@
 import SwiftUI
-
+/*
 struct Monofilament_test: View {
     
     @State private var isSelected_R_1 = false
@@ -8,7 +8,6 @@ struct Monofilament_test: View {
     @State private var isSelected_L_1 = false
     @State private var isSelected_L_2 = false
     @State private var isSelected_L_3 = false
-    
     @State private var isSelected_R_1_No = false
     @State private var isSelected_R_2_No = false
     @State private var isSelected_R_3_No = false
@@ -30,6 +29,7 @@ struct Monofilament_test: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 30) {
+                    
                     Text("Monofilament Test").fontWeight(.semibold)
                         .font(.title)
                     
@@ -208,7 +208,4 @@ struct Monofilament_test: View {
         }
     }
 }
-
-#Preview {
-    Monofilament_test()
-}
+*/

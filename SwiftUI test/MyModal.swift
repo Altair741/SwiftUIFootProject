@@ -58,7 +58,7 @@ struct MyModal: View {
                             }
                             .fullScreenCover(isPresented: $moveToMonoTest)
                             {
-                                Monofilament_test()
+//                                Monofilament_test()
                             }
                         }
                 }
