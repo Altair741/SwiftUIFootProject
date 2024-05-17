@@ -205,6 +205,7 @@ struct Monofilament_test: View {
                 MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
             }
             
+            
         }
     }
 }

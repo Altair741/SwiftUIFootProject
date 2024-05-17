@@ -8,6 +8,7 @@
 import SwiftUI
 let sections = ["Ask", "Touch", "Observation"]
 // 1. QuestionData Struct
+
 struct QuestionData: Identifiable { // Make QuestionData Identifiable for use in List
     let id = UUID()
     let question: String
@@ -115,6 +116,8 @@ struct Quizinerfaces: View {
 }
 struct AskSectionView: View{
     @State private var currentQuestionIndex = 0 // Track current question
+    
+    
     // Mingu : it has to be global scale variable to record this value.
     @State private var selectedAnswers: [String] = [] // Store selected answers
     // Mingu : Add global variable to store answers in selectedAnswers
@@ -179,17 +182,14 @@ struct AskSectionView: View{
            // Mingu : navigate to skin condition question
            .fullScreenCover(isPresented: $moveToSkinconditionCheck)
            {
-               
                Q1()
            }
        }
-      
-
+    
        func nextQuestion() {
-           // Mingu : Find some error that it can capture the sting value stored in label only upto question number 2.
            answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
            // Mingu : Test to see value in console.
-           print(answer.assessmentRecord[currentQuestionIndex])
+//           print(answer.assessmentRecord[currentQuestionIndex])
            
            if currentQuestionIndex < questions.count - 1 {
                currentQuestionIndex += 1

@@ -50,17 +50,16 @@ struct Q2: View {
                                 Label("MediInfo", systemImage: "cross.circle.fill")
                             }
                         
+                            NavigationLink(destination: Q1()){
+                                Button {
+                                    
+                                } label: {
+                                    Label("ContentView", systemImage: "arrow.left")
+                                }
+                                
+                            }
+                        
                         }
-//                    ToolbarItem(placement: .navigationBarLeading) {
-//                        NavigationLink(destination: ContentView()){
-//                            Button {
-//                                
-//                            } label: {
-//                                Label("ContentView", systemImage: "arrow.left")
-//                            }
-//                            
-//                        }
-//                    }
                     
                     }
                 .fullScreenCover(isPresented: $showMedicalInfo)

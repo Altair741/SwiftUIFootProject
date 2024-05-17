@@ -60,7 +60,9 @@ struct Q1: View {
                             } label: {
                                 Label("MediInfo", systemImage: "cross.circle.fill")
                             }
+                            
                         }
+                        
                     }
                 }
                 .fullScreenCover(isPresented: $showMedicalInfo)
