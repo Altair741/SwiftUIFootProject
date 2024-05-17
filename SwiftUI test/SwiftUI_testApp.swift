@@ -14,7 +14,7 @@ struct SwiftUI_testApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LaunchScreen()
                 .environmentObject(userAnswer)
                 .environmentObject(locationManager)
         }

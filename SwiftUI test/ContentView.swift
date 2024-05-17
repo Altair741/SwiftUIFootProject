@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-  
+    
         var body: some View {
             NavigationView { // Use NavigationView for navigation structure
                 VStack(alignment: .center) {
@@ -33,7 +33,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                     }
                     //Mingu : i'm gonna use this link to test my part of code!
-                    NavigationLink(destination: MyModal())
+                    NavigationLink(destination: LaunchScreen())
                     {
                         Text("Mingu Test")
                             .padding()
