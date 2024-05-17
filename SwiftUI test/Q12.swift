@@ -25,8 +25,15 @@ struct Q12: View {
         NavigationView {
             ZStack {
                 VStack(spacing: 30) {
+                    
+                    Image("ampuation")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 240, height: 200)
+                        .clipped()
+                    
                     Text("Has the patient had any amputations?")
-                    ProgressBar2(progess: 12)
+                    ProgressBar2(progess: 0)
 
                     HStack {
                         Button("Yes") {
@@ -72,8 +79,8 @@ struct Q12: View {
                 }
                 .fullScreenCover(isPresented: $nextQuesion)
                 {
-                    //DP_test()
-                    MyModal()
+                    DP_test()
+                    
                 }
                 
             }

@@ -19,7 +19,7 @@ struct DP_test: View {
     private var task = "DP_test"
     
     @State private var videoTOplay = true
-    
+    @State private var showPictorialResources = false
     @State private var showMedicalInfo = false
     @State private var nextQuesion = false
     @EnvironmentObject var answer : UserAnswer
@@ -34,11 +34,12 @@ struct DP_test: View {
              
             VStack(spacing: 30) {
                 
-                HStack{
-                    VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "DP_test", withExtension:"mp4")!))
-                        .edgesIgnoringSafeArea(.all)
-                }
-
+                Image("DP_test_spot")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 240, height: 200)
+                    .clipped()
+                
                 Text("Can you feel the pulse in the dorsalis pedis")
                 ProgressBar2(progess: 3)
                 Text("Right Foot")
@@ -92,7 +93,7 @@ struct DP_test: View {
                             Button {
                                 showMedicalInfo.toggle();
                             } label: {
-                                Label("MediInfo", systemImage: "cross.circle.fill")
+                                Label("MediInfo", systemImage: "info.circle")
                             }
                         }
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -105,6 +106,13 @@ struct DP_test: View {
                             
                         }
                     }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                showPictorialResources.toggle();
+                            } label: {
+                                Label("PictorialVideo", systemImage: "play.circle.fill")
+                            }
+                        }
                 }
                 
             }
@@ -115,6 +123,20 @@ struct DP_test: View {
             .fullScreenCover(isPresented: $nextQuesion)
             {
                 PT_test()
+            }
+            .fullScreenCover(isPresented: $showPictorialResources)
+            {
+               NavigationView {
+                    WithPictorial(videoName: "DP_test")
+                    .navigationBarItems(leading: Button(action: {
+                        showPictorialResources = false
+                    })
+                    {
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                    }
+                    )
+                }
             }
         }
         .onReceive([nextQuesion].publisher.first()) { _ in

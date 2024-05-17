@@ -10,6 +10,7 @@ import Combine
 
 class UserAnswer : ObservableObject
 {
+    @Published var userDetails: [String] = Array(repeating: "Not given", count: 4)
     @Published var answerRecord: [String] = Array(repeating: "Not Answered", count: 20)
     @Published var assessmentRecord : [String] = Array(repeating: "Not Answered", count: 12)
 }

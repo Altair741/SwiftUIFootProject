@@ -208,7 +208,3 @@ struct Monofilament_test: View {
         }
     }
 }
-
-#Preview {
-    Monofilament_test()
-}

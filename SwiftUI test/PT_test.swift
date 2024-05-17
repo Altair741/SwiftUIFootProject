@@ -16,9 +16,10 @@ struct PT_test: View {
     @State private var isSelected4 = false
     @State private var medicalInfoScript = "For the following check you may not be able to find the pulse if there is a lot of swelling around the ankle and if the arteries are deep, if you cannot feel a pulse and you think the patient may have circulation problems refer them to the local doctor. Check right foot first. "
     
-    private var task = "DP_test"
+    private var task = "PT_test"
     
     @State private var showMedicalInfo = false
+    @State private var showPictorialResources = false
     @State private var nextQuesion = false
     @EnvironmentObject var answer : UserAnswer
     @State private var player = AVPlayer()
@@ -31,11 +32,17 @@ struct PT_test: View {
         NavigationView {
             
             VStack(spacing: 30) {
-                
-                HStack{
-                    VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "PT_test", withExtension:"mp4")!))
-                        .edgesIgnoringSafeArea(.all)
-                }
+//
+//                HStack{
+//                    VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "PT_test", withExtension:"mp4")!))
+//                        .edgesIgnoringSafeArea(.all)
+//                }
+//
+                Image("PT_test_spot")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 240, height: 200)
+                    .clipped()
                 
                 Text("Can you feel the pulse in the posterior tibial")
                 ProgressBar2(progess: 3)
@@ -92,7 +99,7 @@ struct PT_test: View {
                             Button {
                                 showMedicalInfo.toggle();
                             } label: {
-                                Label("MediInfo", systemImage: "cross.circle.fill")
+                                Label("MediInfo", systemImage: "info.circle")
                             }
                         }
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -106,6 +113,14 @@ struct PT_test: View {
                             }
                         }
                         
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                                Button {
+                                    showPictorialResources.toggle();
+                                } label: {
+                                    Label("PictorialVideo", systemImage: "play.circle.fill")
+                                }
+                            }
+                        
                         
                     }
                     .fullScreenCover(isPresented: $showMedicalInfo)
@@ -114,7 +129,21 @@ struct PT_test: View {
                     }
                     .fullScreenCover(isPresented: $nextQuesion)
                     {
-                        Monofilament_test()
+                        MyModal()
+                    }
+                    .fullScreenCover(isPresented: $showPictorialResources)
+                    {
+                       NavigationView {
+                            WithPictorial(videoName: "PT_test")
+                            .navigationBarItems(leading: Button(action: {
+                                showPictorialResources = false
+                            })
+                            {
+                                Image(systemName: "chevron.left")
+                                Text("Back")
+                            }
+                            )
+                        }
                     }
                 }
             }

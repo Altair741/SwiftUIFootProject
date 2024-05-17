@@ -73,9 +73,7 @@ struct Quizinerfaces: View {
     private func calculateProgress() -> Double {
         let questionsInSection = questions.count / sections.count  // Assuming equal questions per section
         let totalQuestions = sections.count * questionsInSection
-        
         let questionsAnswered = answers.reduce(0, { $0 + $1.count })
-        
         return Double(questionsAnswered) / Double(totalQuestions)
         
     }
@@ -182,7 +180,7 @@ struct AskSectionView: View{
            .fullScreenCover(isPresented: $moveToSkinconditionCheck)
            {
                
-               EndPage()
+               Q1()
            }
        }
       
