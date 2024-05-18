@@ -19,34 +19,51 @@ struct Q11: View {
 
     
     var body: some View {
-        Spacer()
-        .navigationBarBackButtonHidden(true)
-        Spacer()
-        NavigationView {
+
+        VStack {
             ZStack {
-                VStack(spacing: 30) {
+                VStack() {
                     Text("Does the patient have Charcot foot?")
                     ProgressBar2(progess: 11)
 
                     HStack {
-                        Button("Yes") {
+                        NavigationLink(destination: Q12()) {
+                            Text("Yes")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected ? Color.green : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
                             nq = true
                             answer.answerRecord[10] = "Yes"
+
                         }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
+                        )
                         
-                        Button("No") {
-                            isSelected2 = true
+                        NavigationLink(destination: Q12()) {
+                            Text("No")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected2 ? Color.red : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
+                            isSelected2 = true
                             nq = true
                             answer.answerRecord[10] = "No"
-                        }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
+
+                        })
                     }
                 }
                 .padding()
+                .offset(y:-60)
+                .navigationTitle("Skin Q.11")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
@@ -55,26 +72,19 @@ struct Q11: View {
                                 Label("MediInfo", systemImage: "cross.circle.fill")
                             }
                         }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: Q10()){
-                            Button {
-                                
-                            } label: {
-                                Label("", systemImage: "arrow.left")
-                            }
-                            
-                        }
-                    }
-                    }
+                }
                 .fullScreenCover(isPresented: $showMedicalInfo)
                 {
                     MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
                 }
-                .fullScreenCover(isPresented: $nq)
-                {
-                    Q12()
-                }
             }
         }
+        .onDisappear {
+                // back to origin status setting
+                isSelected = false
+                isSelected2 = false
+                showMedicalInfo = false
+                nq = false
+            }
     }
 }

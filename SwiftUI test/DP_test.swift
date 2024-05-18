@@ -14,11 +14,11 @@ struct DP_test: View {
     @State private var isSelected2 = false
     @State private var isSelected3 = false
     @State private var isSelected4 = false
+    @State private var isSaved = false
+
     @State private var medicalInfoScript = "For the following check you may not be able to find the pulse if there is a lot of swelling around the ankle and if the arteries are deep, if you cannot feel a pulse and you think the patient may have circulation problems refer them to the local doctor. Check right foot first."
     
     private var task = "DP_test"
-    
-    @State private var videoTOplay = true
     @State private var showPictorialResources = false
     @State private var showMedicalInfo = false
     @State private var nextQuesion = false
@@ -27,10 +27,8 @@ struct DP_test: View {
 
     
     var body: some View {
-        Spacer()
-        .navigationBarBackButtonHidden(true)
-        Spacer()
-        NavigationView {
+
+        VStack {
              
             VStack(spacing: 30) {
                 
@@ -75,19 +73,21 @@ struct DP_test: View {
                     .buttonStyle(SelectedButtonStyle(isSelected: isSelected3))
                     
                     Button("No") {
-                        isSelected = false
-                        isSelected2 = false
+                        isSelected3 = false
+                        isSelected4 = true
                         answer.answerRecord[13] = "No"
                         player.pause()
                     }
                     .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
                 }
                 
-                Button("Save Anwser"){
-                    nextQuesion = true
+                NavigationLink(destination: PT_test()) {
+                    Text("Save Anwser")
                 }
+                
+                
                 .padding(.leading, 10)
-                .navigationBarBackButtonHidden(true)
+                .navigationTitle("DP Test")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
@@ -96,16 +96,6 @@ struct DP_test: View {
                                 Label("MediInfo", systemImage: "info.circle")
                             }
                         }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: Q12()){
-                            Button {
-                                
-                            } label: {
-                                Label("", systemImage: "arrow.left")
-                            }
-                            
-                        }
-                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
                                 showPictorialResources.toggle();
@@ -119,10 +109,6 @@ struct DP_test: View {
             .fullScreenCover(isPresented: $showMedicalInfo)
             {
                 MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
-            .fullScreenCover(isPresented: $nextQuesion)
-            {
-                PT_test()
             }
             .fullScreenCover(isPresented: $showPictorialResources)
             {
@@ -147,6 +133,6 @@ struct DP_test: View {
                 }
                 .onAppear {
                     player.play()
-                }
+                }        
     }
 }

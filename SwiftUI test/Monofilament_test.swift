@@ -27,7 +27,7 @@ struct Monofilament_test: View {
     // 16 user answer.
     
     var body: some View {
-        NavigationView {
+        VStack {
             ScrollView {
                 VStack(spacing: 30) {
                     Text("Monofilament Test").fontWeight(.semibold)
@@ -145,29 +145,29 @@ struct Monofilament_test: View {
                             isSelected_L_3_No = true
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3_No))
-                    }.padding(-20)
-                        .padding(.leading, 10)
-            
+                    }
+                    .padding(-20)
+                    .padding(.leading, 10)
                 }
                 .padding()
-                // Button to save answer and link to next question
-                Button("Save Anwser"){
-                    nextQuesion = true
-                    let r_result = String(score_rf)
-                    let l_result = String(score_lf)
+                //save answer and link to next question
+                Spacer().padding(7)
+                NavigationLink(destination: EndPage()){
+                    Text("Save Answer")
+                }
+                .simultaneousGesture(TapGesture().onEnded {
                     answer.answerRecord[16] =
                     """
                     Final Score:
                     Right foot \(score_rf)/3
                     Left Foot \(score_rf)/3
                     """
-                }
-                .padding(10)
+                })
+                Spacer()
+                    .padding(20)
             }
-            
-            
-            .navigationBarBackButtonHidden(true)
-            
+            .offset(y:60)
+            .navigationTitle("Monofilament Test")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
@@ -184,28 +184,13 @@ struct Monofilament_test: View {
                             Label("PictorialVideo", systemImage: "play.circle.fill")
                         }
                     }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink(destination: PT_test()){
-                        Button {
-                            
-                        } label: {
-                            Label("", systemImage: "arrow.left")
-                        }
-                    }
-                }
             }
-            .navigationBarBackButtonHidden(true)
-            .fullScreenCover(isPresented: $nextQuesion)
-            {
-                EndPage()
-            }
-
             .fullScreenCover(isPresented: $showMedicalInfo)
             {
                 MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
             }
             
-            
         }
+
     }
 }

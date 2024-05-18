@@ -18,63 +18,66 @@ struct Q4: View {
 
     
     var body: some View {
-        Spacer()
-        .navigationBarBackButtonHidden(true)
-        Spacer()
-        NavigationView {
+        VStack {
             ZStack {
-                VStack(spacing: 30) {
+                VStack() {
                     Text("Has the patient had a previous or current ulcer?")
                     ProgressBar2(progess: 4)
 
                     HStack {
-                        Button("Yes") {
+                        NavigationLink(destination: Q5()) {
+                            Text("Yes")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected ? Color.green : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
                             nextQuesion = true
                             answer.answerRecord[3] = "Yes"
+
                         }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
+                        )
                         
-                        Button("No") {
-                            isSelected2 = true
+                        NavigationLink(destination: Q5()) {
+                            Text("No")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected2 ? Color.red : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
+                            isSelected2 = true
                             nextQuesion = true
                             answer.answerRecord[3] = "No"
-                        }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
-                    }
-                }
-                .padding()
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                showMedicalInfo.toggle();
-                            } label: {
-                                Label("MediInfo", systemImage: "cross.circle.fill")
-                            }
-                        }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: Q3()){
-                            Button {
-                                
-                            } label: {
-                                Label("", systemImage: "arrow.left")
-                            }
-                            
-                        }
-                    }
-                    }
-                
-                .fullScreenCover(isPresented: $showMedicalInfo)
-                {
-                    MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-                }
-                .fullScreenCover(isPresented: $nextQuesion)
-                {
-                    Q5()
-                }
 
+                        })
+                    }
+                }
+                
+            }
+            .padding()
+            .offset(y:60)
+            .navigationTitle("Skin Q.4")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            showMedicalInfo.toggle();
+                        } label: {
+                            Label("MediInfo", systemImage: "cross.circle.fill")
+                        }
+                    }
+            }
+            .offset(y:-60)
+
+            .fullScreenCover(isPresented: $showMedicalInfo)
+            {
+                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
             }
         }
     }

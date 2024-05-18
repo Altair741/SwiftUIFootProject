@@ -167,10 +167,7 @@ struct MedicalInfoPopUp: View {
                             .cornerRadius(25)
                     }
                     .simultaneousGesture(TapGesture())
-                    
-
                 }
-                
             }
 
         }

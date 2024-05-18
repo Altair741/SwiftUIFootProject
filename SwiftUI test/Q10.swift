@@ -16,65 +16,69 @@ struct Q10: View {
     private var task = "Q10"
     @EnvironmentObject var answer : UserAnswer
     @State private var nq = false
-
+    
     
     var body: some View {
-        Spacer()
-        .navigationBarBackButtonHidden(true)
-        Spacer()
-        NavigationView {
+        VStack {
             ZStack {
                 VStack(spacing: 30) {
                     Text("Does the patient have high arched feet?")
                     ProgressBar2(progess: 10)
-
+                    
                     HStack {
-                        Button("Yes") {
+                        NavigationLink(destination: Q11()) {
+                            Text("Yes")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected ? Color.green : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
                             nq = true
                             answer.answerRecord[9] = "Yes"
-                        }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
-                        
-                        Button("No") {
-                            isSelected2 = true
-                            isSelected = false
-                            nq = true
-                            answer.answerRecord[9] = "No"
-                        }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
-                    }
-                }
-                .padding()
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                showMedicalInfo.toggle();
-                            } label: {
-                                Label("MediInfo", systemImage: "cross.circle.fill")
-                            }
-                        }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: Q9()){
-                            Button {
-                                
-                            } label: {
-                                Label("", systemImage: "arrow.left")
-                            }
                             
                         }
+                        )
+                        
+                        NavigationLink(destination: Q11()) {
+                            Text("No")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected2 ? Color.red : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            isSelected = false
+                            isSelected2 = true
+                            nq = true
+                            answer.answerRecord[9] = "No"
+                            
+                        })
                     }
-                    }
-                .fullScreenCover(isPresented: $showMedicalInfo)
-                {
-                    MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
                 }
-                .fullScreenCover(isPresented: $nq)
-                {
-                    Q11()
+                
+            }
+            .padding()
+            .offset(y:-60)
+            .navigationTitle("Skin Q.10")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showMedicalInfo.toggle();
+                    } label: {
+                        Label("MediInfo", systemImage: "cross.circle.fill")
+                    }
                 }
             }
+            .fullScreenCover(isPresented: $showMedicalInfo)
+            {
+                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+            }
         }
+        
     }
 }

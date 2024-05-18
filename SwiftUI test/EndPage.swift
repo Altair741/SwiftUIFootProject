@@ -7,6 +7,7 @@
 import SwiftUI
 import PDFKit
 import UIKit
+import MessageUI // email..
 
 struct EndPage: View {
     @EnvironmentObject var answer: UserAnswer
@@ -30,8 +31,7 @@ struct EndPage: View {
         }
 
     var body: some View {
-        Spacer()
-        .navigationBarBackButtonHidden(true)
+
         VStack
         {
             PDFdocument(pdfDoc: PDFDocument(data: createPDF())!)
@@ -169,6 +169,9 @@ struct EndPage: View {
         
         value.draw(in: textRect, withAttributes: attributes)
     }
+    
+    
+    
     @MainActor
     func savePDF(){
         let fileName = "FootAssessmentResult.pdf"

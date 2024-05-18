@@ -26,18 +26,16 @@ struct PT_test: View {
     
     
     var body: some View {
-        Spacer()
-            .navigationBarBackButtonHidden(true)
-        Spacer()
-        NavigationView {
+        
+        VStack {
             
             VStack(spacing: 30) {
-//
-//                HStack{
-//                    VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "PT_test", withExtension:"mp4")!))
-//                        .edgesIgnoringSafeArea(.all)
-//                }
-//
+                //
+                //                HStack{
+                //                    VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "PT_test", withExtension:"mp4")!))
+                //                        .edgesIgnoringSafeArea(.all)
+                //                }
+                //
                 Image("PT_test_spot")
                     .resizable()
                     .scaledToFill()
@@ -87,74 +85,60 @@ struct PT_test: View {
                         
                     }
                     .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
-                    
-                    }
-                Button("Save Anwser"){
-                    nextQuesion = true
                 }
-                    .padding(.leading, 10)
-                    .navigationBarBackButtonHidden(true)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                showMedicalInfo.toggle();
-                            } label: {
-                                Label("MediInfo", systemImage: "info.circle")
-                            }
-                        }
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            NavigationLink(destination: DP_test()){
-                                Button {
-                                    
-                                } label: {
-                                    Label("", systemImage: "arrow.left")
-                                }
-                                
-                            }
-                        }
-                        
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                                Button {
-                                    showPictorialResources.toggle();
-                                } label: {
-                                    Label("PictorialVideo", systemImage: "play.circle.fill")
-                                }
-                            }
-                        
-                        
-                    }
-                    .fullScreenCover(isPresented: $showMedicalInfo)
-                    {
-                        MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-                    }
-                    .fullScreenCover(isPresented: $nextQuesion)
-                    {
-                        MyModal()
-                    }
-                    .fullScreenCover(isPresented: $showPictorialResources)
-                    {
-                       NavigationView {
-                            WithPictorial(videoName: "PT_test")
-                            .navigationBarItems(leading: Button(action: {
-                                showPictorialResources = false
-                            })
-                            {
-                                Image(systemName: "chevron.left")
-                                Text("Back")
-                            }
-                            )
-                        }
-                    }
+                .padding(.leading, 10)
+
+                NavigationLink(destination: Monofilament_test()) {
+                    Text("Save Anwser")
                 }
-            }
-            .onReceive([nextQuesion].publisher.first()) { _ in
-                player.pause()
-            }
-            .onDisappear {
-                player.pause()
-            }
-            .onAppear {
-                player.play()
             }
         }
+        .offset(y:-60)
+        .navigationTitle("PT Test")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showMedicalInfo.toggle();
+                } label: {
+                    Label("MediInfo", systemImage: "info.circle")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showPictorialResources.toggle();
+                } label: {
+                    Label("PictorialVideo", systemImage: "play.circle.fill")
+                }
+            }
+            
+            
+        }
+        .fullScreenCover(isPresented: $showMedicalInfo)
+        {
+            MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+        }
+        .fullScreenCover(isPresented: $showPictorialResources)
+        {
+            NavigationView {
+                WithPictorial(videoName: "PT_test")
+                    .navigationBarItems(leading: Button(action: {
+                        showPictorialResources = false
+                    })
+                                        {
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                    }
+                    )
+            }
+        }
+        .onReceive([nextQuesion].publisher.first()) { _ in
+            player.pause()
+        }
+        .onDisappear {
+            player.pause()
+        }
+        .onAppear {
+            player.play()
+        }
     }
+}
