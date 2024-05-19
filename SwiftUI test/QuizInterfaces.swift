@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-let sections = ["Ask", "Touch", "Observation"]
+let sections = ["Ask", "Skin","Touch", "Result"]
+// Change it to set globally.
 // 1. QuestionData Struct
 
 struct QuestionData: Identifiable { // Make QuestionData Identifiable for use in List
@@ -80,8 +81,14 @@ struct Quizinerfaces: View {
     }
 
     @State private var progress = 0.0
-
+    
     var body: some View {
+        // Mingu default navigationBarBackButtonHidden to manage Navigation View after wards
+        Spacer()
+        .navigationBarBackButtonHidden(true)
+        Spacer()
+        
+        
         NavigationView {
             VStack {
                 
@@ -89,31 +96,63 @@ struct Quizinerfaces: View {
                     AskSectionView(questions: questions)
                 }
                 else if sections[currentSection] == "Touch" {
-                    TouchTestView(touchTest: $touchTest)
+                    //TouchTestView(touchTest: $touchTest)
+                    PT_test()
                 }
+                // Mingu : Add connection to Skin condition
+                else if sections[currentSection] == "Skin" {
+                    Q1()
+                }
+                // Mingu : Add connection to EndPage
+                else if sections[currentSection] == "Result" {
+                    EndPage()
+                        .navigationBarBackButtonHidden()
+                }
+                
             }
-            .toolbar { // Add the toolbar
-                ToolbarItemGroup(placement: .bottomBar) { // Items at the bottom
-                    Button(sections[max(0, currentSection - 1)]) { // Previous section
-                        if currentSection > 0 {
-                            currentSection -= 1
+            // Mingu : edit toolbar items to switch each of sections.
+            .toolbar {
+                
+                ToolbarItem(placement: .bottomBar) {
+                    HStack {
+                        ForEach(0..<sections.count) { index in
+                            Button(action: { currentSection = index })
+                            {
+                                Text(sections[index])
+                                .foregroundColor(index == currentSection ? .red : .gray)
+                                .padding(.horizontal)
+                            }
                         }
                     }
-                    Button(sections[currentSection]) {
-                        // No action if tapping the current section
-                    }
-                    .disabled(true) // Make the current section button non-interactive
-                    Button(sections[min(sections.count - 1, currentSection + 1)]) { // Next
-                        if currentSection < sections.count - 1 {
-                            currentSection += 1
-                        }
-                    }
                 }
             }
+        }
+            
+//            .toolbar { // Add the toolbar
+//                ToolbarItemGroup(placement: .bottomBar) { // Items at the bottom
+//                    Button(sections[max(0, currentSection - 1)]) { // Previous section
+//                        if currentSection > 0 {
+//                            currentSection -= 1
+//                        }
+//                    }
+//                    Button(sections[currentSection]) {
+//                        // No action if tapping the current section
+//                    }
+//                    .disabled(true) // Make the current section button non-interactive
+//                    Button(sections[min(sections.count - 1, currentSection + 1)]) { // Next
+//                        if currentSection < sections.count - 1 {
+//                            currentSection += 1
+//                        }
+//                    }
+//                }
+//            }
             .alert("Please provide an answer", isPresented: $showAlert) { }
         }
     }
-}
+
+
+
+
 struct AskSectionView: View{
     @State private var currentQuestionIndex = 0 // Track current question
     
@@ -308,4 +347,8 @@ struct TouchTestView: View{
             }
         }
     }
+}
+
+#Preview {
+    Quizinerfaces()
 }
