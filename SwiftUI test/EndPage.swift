@@ -7,7 +7,6 @@
 import SwiftUI
 import PDFKit
 import UIKit
-import MessageUI // email..
 
 struct EndPage: View {
     @EnvironmentObject var answer: UserAnswer
@@ -31,7 +30,8 @@ struct EndPage: View {
         }
 
     var body: some View {
-
+        Spacer()
+        .navigationBarBackButtonHidden(true)
         VStack
         {
             PDFdocument(pdfDoc: PDFDocument(data: createPDF())!)
@@ -42,7 +42,6 @@ struct EndPage: View {
     @MainActor
     private func createPDF() -> Data{
         // Capture current date and time
-        
         let dateFormatter = DateFormatter()
         //dateFormatter.dateFormat = "dd. M. yyyy HH:mm:ss"
         dateFormatter.dateFormat = "dd. M. yyyy"
@@ -72,6 +71,9 @@ struct EndPage: View {
                 Risk assessment level : High
                 
                 """,x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
+            
+    
+            
             
             alignTexst(value:
             """
@@ -147,10 +149,11 @@ struct EndPage: View {
                   - Right foot :  \(answer.answerRecord[14])
                   - Left foot  :  \(answer.answerRecord[15])
                 
-                MonoFilamentTest: \(answer.answerRecord[16])
+                MonoFilament test: \(answer.answerRecord[16])
+                
+                IPSWICH touch test: Total Score\(answer.answerRecord[17])
                 
                 """,x: 0, y: 610, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
- 
         }
         return data
     }
@@ -169,9 +172,6 @@ struct EndPage: View {
         
         value.draw(in: textRect, withAttributes: attributes)
     }
-    
-    
-    
     @MainActor
     func savePDF(){
         let fileName = "FootAssessmentResult.pdf"

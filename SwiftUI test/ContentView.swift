@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+        @EnvironmentObject var answer : UserAnswer
+
         var body: some View {
             NavigationView { // Use NavigationView for navigation structure
                 VStack(alignment: .center) {
@@ -24,6 +25,10 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
+                    .onTapGesture {
+                        //Record time, when assessment task statr
+                        answer.dateRecords.append(Date())
+                    }
                     //Start uer log in page
                     NavigationLink(destination: SignInView()) {
                         Text("FirstSign In page")
@@ -33,7 +38,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                     }
                     //Mingu : i'm gonna use this link to test my part of code!
-                    NavigationLink(destination:   Monofilament_test())
+                    NavigationLink(destination:   IPSWICH_test())
                     {
                         Text("Mingu Test")
                             .padding()
