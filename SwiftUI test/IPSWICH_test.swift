@@ -34,6 +34,8 @@ struct IPSWICH_test: View {
     // 16 user answer.
     
     var body: some View {
+        Spacer()
+        .navigationBarBackButtonHidden(true)
         VStack {
             ScrollView {
                 VStack(spacing: 30) {
@@ -61,6 +63,7 @@ struct IPSWICH_test: View {
                         Button("No") {
                             isSelected_R_1 = false
                             isSelected_R_1_No = true
+                            answer.IPSWICHScore += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1_No))
                     }.padding(-30)
@@ -77,6 +80,8 @@ struct IPSWICH_test: View {
                         Button("No") {
                             isSelected_R_2 = false
                             isSelected_R_2_No = true
+                            answer.IPSWICHScore += 1
+
 
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2_No))
@@ -94,6 +99,8 @@ struct IPSWICH_test: View {
                         Button("No") {
                             isSelected_R_3 = false
                             isSelected_R_3_No = true
+                            answer.IPSWICHScore += 1
+
 
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3_No))
@@ -112,6 +119,8 @@ struct IPSWICH_test: View {
                         Button("No") {
                             isSelected_L_1 = false
                             isSelected_L_1_No = true
+                            answer.IPSWICHScore += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1_No))
                     }.padding(-30)
@@ -128,6 +137,8 @@ struct IPSWICH_test: View {
                         Button("No") {
                             isSelected_L_2 = false
                             isSelected_L_2_No = true
+                            answer.IPSWICHScore += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2_No))
                     }.padding(-20)
@@ -145,6 +156,8 @@ struct IPSWICH_test: View {
                         Button("No") {
                             isSelected_L_3 = false
                             isSelected_L_3_No = true
+                            answer.IPSWICHScore += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3_No))
                     }
@@ -154,7 +167,8 @@ struct IPSWICH_test: View {
                 .padding()
                 //save answer and link to next question
                 Spacer().padding(7)
-                NavigationLink(destination: EndPage()){
+                NavigationLink(destination: RiskCalculator()){
+                    
                     Text("Save Answer")
                 }
                 .simultaneousGesture(TapGesture().onEnded {

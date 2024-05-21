@@ -15,6 +15,7 @@ struct Monofilament_test: View {
     @State private var isSelected_L_1_No = false
     @State private var isSelected_L_2_No = false
     @State private var isSelected_L_3_No = false
+    
     @State private var medicalInfoScript = "Contact time should be approximately 2 seconds and if the answer is no, do not try again, If the patient can’t feel the monofilament at one or more of the sites, they would need further checks."
     private var task = "Monofilament_test"
     @State private var showMedicalInfo = false
@@ -55,6 +56,7 @@ struct Monofilament_test: View {
                         Button("No") {
                             isSelected_R_1 = false
                             isSelected_R_1_No = true
+                            answer.MonofilamentScore += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1_No))
                     }.padding(-30)
@@ -68,14 +70,15 @@ struct Monofilament_test: View {
                             score_rf += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2))
+                        
                         Button("No") {
                             isSelected_R_2 = false
                             isSelected_R_2_No = true
-
+                            answer.MonofilamentScore += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2_No))
                     }.padding(-20)
-                        .padding(.leading, 10)
+                    .padding(.leading, 10)
                     
                     Text("Spot 3: Ball of foot near little toe ").padding(.leading, -90)
                     HStack {
@@ -88,7 +91,7 @@ struct Monofilament_test: View {
                         Button("No") {
                             isSelected_R_3 = false
                             isSelected_R_3_No = true
-
+                            answer.MonofilamentScore += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3_No))
                     }.padding(-20)
@@ -110,6 +113,8 @@ struct Monofilament_test: View {
                         Button("No") {
                             isSelected_L_1 = false
                             isSelected_L_1_No = true
+                            answer.MonofilamentScore += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1_No))
                     }.padding(-30)
@@ -126,6 +131,8 @@ struct Monofilament_test: View {
                         Button("No") {
                             isSelected_L_2 = false
                             isSelected_L_2_No = true
+                            answer.MonofilamentScore += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2_No))
                     }.padding(-20)
@@ -143,6 +150,8 @@ struct Monofilament_test: View {
                         Button("No") {
                             isSelected_L_3 = false
                             isSelected_L_3_No = true
+                            answer.MonofilamentScore += 1
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3_No))
                     }

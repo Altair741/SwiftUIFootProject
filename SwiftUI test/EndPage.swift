@@ -30,8 +30,8 @@ struct EndPage: View {
         }
 
     var body: some View {
-        Spacer()
-        .navigationBarBackButtonHidden(true)
+        Spacer().navigationBarBackButtonHidden(true)
+
         VStack
         {
             PDFdocument(pdfDoc: PDFDocument(data: createPDF())!)
@@ -66,14 +66,12 @@ struct EndPage: View {
                 
                 Date: \(formattedDate)
                 Location : \(currentLocation)
-                Mingu Kang
-                UniSA Health Clinic
-                Risk assessment level : High
+                Name : \(answer.userInfo[0])
+                Work Place : \(answer.userInfo[2])
+                Email : \(answer.userInfo[1])
+                system risk assessment level : \(answer.system_g_risk)
                 
                 """,x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
-            
-    
-            
             
             alignTexst(value:
             """
@@ -155,7 +153,9 @@ struct EndPage: View {
                 
                 """,x: 0, y: 610, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
         }
+        
         return data
+        
     }
     
     func alignTexst(value :String, x: Int, y: Int, width: Int, height: Int, alignment: NSTextAlignment, textFont: UIFont)
@@ -171,7 +171,10 @@ struct EndPage: View {
         let textRect = CGRect(x: x, y: y, width: width, height: height)
         
         value.draw(in: textRect, withAttributes: attributes)
+
     }
+    
+   
     @MainActor
     func savePDF(){
         let fileName = "FootAssessmentResult.pdf"
