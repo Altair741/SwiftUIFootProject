@@ -19,24 +19,54 @@ struct Clinic: Identifiable {
 struct SignInView: View {
     @State private var name: String = ""
     @State private var workEmail: String = ""
-    @State private var selectedClinic: Clinic? // To hold the selected clinic
-    @State private var showHomeScreen = false
+    @State private var selectedClinic: Clinic?
+    @State private var goEndPage = false
+    @EnvironmentObject var answer: UserAnswer
 
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Name", text: $name)
-                TextField("Work Email", text: $workEmail)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
                 
-                // ClinicMapView is initialized here with selectedClinic binding
+                TextField("Work Email", text: $workEmail)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .autocapitalization(.none) // non capital letter start
+                
                 ClinicMapView(selectedClinic: $selectedClinic)
+                
+                Button(action: {
+                    saveInput()
+                    goEndPage = true
+                }) {
+                    Text("Save")
+                        .padding()
+                        .frame(width: 120, height: 50)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                }
+                .padding()
+                
+                NavigationLink(destination: EndPage(), isActive: $goEndPage) {
+                    EmptyView()
+                }
             }
             .navigationTitle("Sign In")
         }
     }
-}
     
-        
+    func saveInput() {
+        answer.userInfo[0] = name
+        answer.userInfo[1] = workEmail
+        answer.userInfo[2] = selectedClinic?.name ?? "No clinic selected"
+    }
+}
+ 
+
+
 struct ClinicMapView: View {
     @Binding var selectedClinic: Clinic? // Make selectedClinic a binding
     @StateObject private var locationManager = LocationManager()
