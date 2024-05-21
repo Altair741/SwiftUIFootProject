@@ -54,11 +54,11 @@ struct MyModal: View {
                             .fullScreenCover(isPresented: $moveToTouchTest)
                             {
                                 // should be modified to touch test
-                                EndPage()
+                                EndPage(clinicName: String(), workEmail: String(), clinicWorkplace: String())
                             }
                             .fullScreenCover(isPresented: $moveToMonoTest)
                             {
-                                Monofilament_test()
+                                //Monofilament_test()
                             }
                         }
                 }

@@ -12,7 +12,11 @@ import MessageUI // email..
 struct EndPage: View {
     @EnvironmentObject var answer: UserAnswer
     @EnvironmentObject var locationManager: LocationManager2
- 
+    
+    let clinicName: String
+    let workEmail: String
+    let clinicWorkplace: String
+    
     var currentLocation: String {
             guard let placemark = locationManager.placemark else {
                 return "Location not available"
@@ -64,14 +68,13 @@ struct EndPage: View {
             // Think of how to capture those data,d
             // Also need to include: location, date, basic info of healthworker, risk assessment.
             alignTexst(value: """
-                
-                Date: \(formattedDate)
-                Location : \(currentLocation)
-                Mingu Kang
-                UniSA Health Clinic
-                Risk assessment level : High
-                
-                """,x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
+                  Date: \(formattedDate)
+                  Location : \(currentLocation)
+                  \(clinicName)
+                  \(workEmail)
+                  \(clinicWorkplace)
+                  Risk assessment level : High
+                  """, x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             
             alignTexst(value:
             """

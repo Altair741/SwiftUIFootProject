@@ -88,9 +88,9 @@ struct PT_test: View {
                 }
                 .padding(.leading, 10)
 
-                NavigationLink(destination: Monofilament_test()) {
-                    Text("Save Anwser")
-                }
+//                NavigationLink(destination: Monofilament_test()) {
+//                    Text("Save Anwser")
+//                }
             }
         }
         .offset(y:-60)

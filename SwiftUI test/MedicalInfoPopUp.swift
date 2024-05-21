@@ -157,20 +157,19 @@ struct MedicalInfoPopUp: View {
                     }.simultaneousGesture(TapGesture())
 
                 }
-                else if task == "Monofilament_test"
-                {
-                    NavigationLink(destination: Monofilament_test().navigationBarBackButtonHidden(true)) {
-                        Text("Back")
-                            .frame(width: 120, height: 50)
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(25)
-                    }
-                    .simultaneousGesture(TapGesture())
+//                else if task == "Monofilament_test"
+//                {
+//                    NavigationLink(destination: Monofilament_test().navigationBarBackButtonHidden(true)) {
+//                        Text("Back")
+//                            .frame(width: 120, height: 50)
+//                            .background(Color.green)
+//                            .foregroundColor(.white)
+//                            .cornerRadius(25)
+//                    }
+//                    .simultaneousGesture(TapGesture())
                 }
             }
 
         }
     }
-}
 

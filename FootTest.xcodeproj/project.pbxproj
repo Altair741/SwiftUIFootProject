@@ -23,7 +23,6 @@
 		F9933C6C2BF3D08000A264B6 /* LocationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C662BF3D08000A264B6 /* LocationManager2.swift */; };
 		F9933C6D2BF3D08000A264B6 /* PDFdocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C672BF3D08000A264B6 /* PDFdocument.swift */; };
 		F9933C6E2BF3D08000A264B6 /* MedicalInfoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C682BF3D08000A264B6 /* MedicalInfoPopUp.swift */; };
-		F9933C6F2BF3D08000A264B6 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C692BF3D08000A264B6 /* LoginPage.swift */; };
 		F9933C7E2BF3D08D00A264B6 /* Q2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C702BF3D08D00A264B6 /* Q2.swift */; };
 		F9933C7F2BF3D08D00A264B6 /* Q7.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C712BF3D08D00A264B6 /* Q7.swift */; };
 		F9933C802BF3D08D00A264B6 /* Q6.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C722BF3D08D00A264B6 /* Q6.swift */; };
@@ -44,7 +43,7 @@
 		F9933C972BF3D3D800A264B6 /* Q1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C962BF3D3D800A264B6 /* Q1.swift */; };
 		F9933CA92BF7D58A00A264B6 /* launch_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = F9933CA82BF7D58A00A264B6 /* launch_screen.png */; };
 		F9933CAB2BF7D5A100A264B6 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CAA2BF7D5A100A264B6 /* LaunchScreen.swift */; };
-		F9933CAD2BF7FA0700A264B6 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CAC2BF7FA0700A264B6 /* LoginPage.swift */; };
+		F9933CAD2BF7FA0700A264B6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CAC2BF7FA0700A264B6 /* SignInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +66,6 @@
 		F9933C662BF3D08000A264B6 /* LocationManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager2.swift; sourceTree = "<group>"; };
 		F9933C672BF3D08000A264B6 /* PDFdocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFdocument.swift; sourceTree = "<group>"; };
 		F9933C682BF3D08000A264B6 /* MedicalInfoPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalInfoPopUp.swift; sourceTree = "<group>"; };
-		F9933C692BF3D08000A264B6 /* LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		F9933C702BF3D08D00A264B6 /* Q2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Q2.swift; sourceTree = "<group>"; };
 		F9933C712BF3D08D00A264B6 /* Q7.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Q7.swift; sourceTree = "<group>"; };
 		F9933C722BF3D08D00A264B6 /* Q6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Q6.swift; sourceTree = "<group>"; };
@@ -89,7 +87,7 @@
 		F9933C962BF3D3D800A264B6 /* Q1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Q1.swift; sourceTree = "<group>"; };
 		F9933CA82BF7D58A00A264B6 /* launch_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_screen.png; sourceTree = "<group>"; };
 		F9933CAA2BF7D5A100A264B6 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
-		F9933CAC2BF7FA0700A264B6 /* LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
+		F9933CAC2BF7FA0700A264B6 /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +133,7 @@
 				AAC029ED2BE79E0600DA9F3D /* SwiftUI_testApp.swift */,
 				AAC029EF2BE79E0600DA9F3D /* ContentView.swift */,
 				F9933C662BF3D08000A264B6 /* LocationManager2.swift */,
-				F9933C692BF3D08000A264B6 /* LoginPage.swift */,
-				F9933CAC2BF7FA0700A264B6 /* LoginPage.swift */,
+				F9933CAC2BF7FA0700A264B6 /* SignInView.swift */,
 				F9933C672BF3D08000A264B6 /* PDFdocument.swift */,
 				F9933C772BF3D08D00A264B6 /* ProgressBar2.swift */,
 				F9933C8C2BF3D09A00A264B6 /* SwiftUI_testApp.swift */,
@@ -249,7 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9933CAD2BF7FA0700A264B6 /* LoginPage.swift in Sources */,
+				F9933CAD2BF7FA0700A264B6 /* SignInView.swift in Sources */,
 				F9933C922BF3D0A300A264B6 /* UserAnswer.swift in Sources */,
 				F9933C6E2BF3D08000A264B6 /* MedicalInfoPopUp.swift in Sources */,
 				F9933CAB2BF7D5A100A264B6 /* LaunchScreen.swift in Sources */,
@@ -259,7 +256,6 @@
 				F9933C972BF3D3D800A264B6 /* Q1.swift in Sources */,
 				F9933C8F2BF3D09A00A264B6 /* SelectButton.swift in Sources */,
 				F9933C612BF3D06300A264B6 /* DP_test.swift in Sources */,
-				F9933C6F2BF3D08000A264B6 /* LoginPage.swift in Sources */,
 				F9933C842BF3D08D00A264B6 /* Q5.swift in Sources */,
 				F9933C6C2BF3D08000A264B6 /* LocationManager2.swift in Sources */,
 				F9933C6A2BF3D08000A264B6 /* Monofilament_test.swift in Sources */,

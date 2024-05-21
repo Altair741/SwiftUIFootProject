@@ -61,13 +61,22 @@ let toesOrder = [
 // 4. Quiz Struct (Main View)
 struct Quizinerfaces: View {
     @State private var currentSection = 0
-    @State private var currentQuestion = 0
+    @State private var currentAskQuestion = 0
     @State private var showAlert = false
     @State private var selectedButtonIndex: Int? = nil
     @State private var answers: [[String]]
     @State private var touchTest = IpswichTouchTest()
+
+    @State private var isQuestionListExpanded = false
+    @State private var moveToSkinconditionCheck = false
+    @State private var showRegisterAlert = false
     
 
+
+    // Move showSignInView and showEndPage to here
+    @State private var showSignInView = false
+    @State private var showEndPage = false
+    
     init(answers: [[String]] = []) {
         _answers = State(initialValue: answers)
     }
@@ -82,6 +91,15 @@ struct Quizinerfaces: View {
 
     @State private var progress = 0.0
     
+    
+ 
+
+    // New function to handle registration
+    private func register() {
+        showRegisterAlert = true
+    }
+
+    
     var body: some View {
         // Mingu default navigationBarBackButtonHidden to manage Navigation View after wards
         Spacer()
@@ -90,42 +108,63 @@ struct Quizinerfaces: View {
         
         
         NavigationView {
-            VStack {
-                
-                if sections[currentSection] == "Ask" {
-                    AskSectionView(questions: questions)
+        
+                VStack {
+                    if sections[currentSection] == "Ask" {
+                        AskSectionView(questions: questions)
+                    } else if sections[currentSection] == "Touch" {
+                        PT_test()
+                    } else if sections[currentSection] == "Skin" {
+                        Q1()
+                    } else if sections[currentSection] == "Result" {
+                        SignInView()
+                            .navigationBarBackButtonHidden()
+                    }
                 }
-                else if sections[currentSection] == "Touch" {
-                    //TouchTestView(touchTest: $touchTest)
-                    PT_test()
-                }
-                // Mingu : Add connection to Skin condition
-                else if sections[currentSection] == "Skin" {
-                    Q1()
-                }
-                // Mingu : Add connection to EndPage
-                else if sections[currentSection] == "Result" {
-                    EndPage()
-                        .navigationBarBackButtonHidden()
-                }
-                
-            }
-            // Mingu : edit toolbar items to switch each of sections.
-            .toolbar {
-                
-                ToolbarItem(placement: .bottomBar) {
-                    HStack {
+                .navigationTitle("Assessment")
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
                         ForEach(0..<sections.count) { index in
-                            Button(action: { currentSection = index })
-                            {
+                            Button(action: {
+                                if index == sections.count - 1 && currentSection != index { // Check if it's the "Result" section
+                                    register() // Call the register function
+                                } else {
+                                    currentSection = index
+                                }
+                            }) {
                                 Text(sections[index])
-                                .foregroundColor(index == currentSection ? .red : .gray)
-                                .padding(.horizontal)
+                                    .foregroundColor(index == currentSection ? .red : .gray)
+                                    .padding(.horizontal)
                             }
                         }
                     }
                 }
+                .onChange(of: currentSection) { newSection in // remove the old onchange as we have replaced with new funtion
+                    if newSection == sections.count - 1 {
+                        //showRegisterAlert = true // call the register function instead of showalert
+                    }
+                }
+                .alert("Register?", isPresented: $showRegisterAlert) {
+                    Button("Yes") {
+                        showSignInView = true // Trigger navigation to SignInView
+                    }
+                    Button("No", role: .cancel) {
+                        showEndPage = true // Trigger navigation to EndPage
+                    }
+                } message: {
+                    Text("Do you want to register?")
+                }
+                .fullScreenCover(isPresented: $showSignInView) { // Use fullScreenCover for SignInView
+                    SignInView()
+                }
+                .fullScreenCover(isPresented: $showEndPage) { // Use fullScreenCover for EndPage
+                    EndPage(clinicName: String(), workEmail: String(), clinicWorkplace: String())
+                }
             }
+        }
+                
+    
+
         }
             
 //            .toolbar { // Add the toolbar
@@ -146,9 +185,8 @@ struct Quizinerfaces: View {
 //                    }
 //                }
 //            }
-            .alert("Please provide an answer", isPresented: $showAlert) { }
-        }
-    }
+     
+    
 
 
 
@@ -163,7 +201,8 @@ struct AskSectionView: View{
     @EnvironmentObject var answer : UserAnswer
     // Mingu : var moveToSkinconditionCheck is to navigate skin condition assessment part
     @State private var moveToSkinconditionCheck = false
-    
+    @State private var isQuestionListExpanded = false
+    @State private var showAlert = false
        let questions: [QuestionData]
 
        var body: some View {
@@ -217,6 +256,31 @@ struct AskSectionView: View{
                    .disabled(currentQuestionIndex == questions.count - 1 || selectedAnswers.count <= currentQuestionIndex) // Disable at the end or if no answer is selected
                }
                .padding()
+               // Foldable Question Navigation List
+               DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
+                   List {
+                       ForEach(0..<questions.count, id: \.self) { index in
+                           Button(action: {
+                               if index > currentQuestionIndex {
+                                   showAlert = true // Show alert if trying to skip ahead
+                               } else {
+                                   currentQuestionIndex = index // Allow jumping back
+                               }
+                           }) {
+                               Text("\(index + 1)")
+                                   .foregroundColor(index == currentQuestionIndex ? Color.blue : Color.primary)
+                           }
+                       }
+                   }
+                   .frame(height: isQuestionListExpanded ? 200 : 0)
+                   .clipped()
+               }
+               .padding(.bottom)
+               .alert("Alert", isPresented: $showAlert) {
+                   Button("OK", role: .cancel) { }
+               } message: {
+                   Text("You can't skip ahead. Please answer the current question first.")
+               }
            }
            // Mingu : navigate to skin condition question
            .fullScreenCover(isPresented: $moveToSkinconditionCheck)
@@ -347,8 +411,4 @@ struct TouchTestView: View{
             }
         }
     }
-}
-
-#Preview {
-    Quizinerfaces()
 }
