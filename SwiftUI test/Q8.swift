@@ -29,7 +29,7 @@ struct Q8: View {
                     .frame(width: 240, height: 200)
                     .clipped()
                     Text("Does the patient have hammer and clawed toes?")
-                    ProgressBar2(progess: 8)
+                    ProgressBar2(progess: 20)
                     
                     HStack {
                         NavigationLink(destination: Q9()) {

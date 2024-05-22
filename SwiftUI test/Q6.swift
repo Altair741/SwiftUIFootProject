@@ -29,7 +29,7 @@ struct Q6: View {
                         .frame(width: 240, height: 200)
                         .clipped()
                     Text("Does the patient have ingrown toenails?")
-                    ProgressBar2(progess: 6)
+                    ProgressBar2(progess: 18)
 
                     HStack {
                         NavigationLink(destination: Q7()) {

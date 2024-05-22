@@ -21,7 +21,7 @@ struct Q5: View {
                         .frame(width: 240, height: 200)
                         .clipped()
                     Text("Does the patient have thickened toenails?")
-                    ProgressBar2(progess: 5)
+                    ProgressBar2(progess: 17)
 
                     HStack {
                         NavigationLink(destination: Q6()) {

@@ -20,7 +20,7 @@ struct Q3: View {
                         .frame(width: 240, height: 200)
                         .clipped()
                     Text("Does the patient have tinea?")
-                    ProgressBar2(progess: 3)
+                    ProgressBar2(progess: 15)
                     
                     HStack {
                         NavigationLink(destination: Q4()) {

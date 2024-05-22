@@ -30,7 +30,7 @@ struct Q12: View {
                         .clipped()
                     
                     Text("Has the patient had any amputations?")
-                    ProgressBar2(progess: 12)
+                    ProgressBar2(progess: 24)
 
                     HStack {
                         NavigationLink(destination: DP_test()) {

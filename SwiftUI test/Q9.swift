@@ -28,7 +28,7 @@ struct Q9: View {
                     .frame(width: 240, height: 200)
                     .clipped()
                     Text("Does the patient have flat feet?")
-                    ProgressBar2(progess: 9)
+                    ProgressBar2(progess: 21)
                     
                     HStack {
                         NavigationLink(destination: Q10()) {
