@@ -7,10 +7,14 @@
 import SwiftUI
 import PDFKit
 import UIKit
+import MessageUI
+
 
 struct EndPage: View {
     @EnvironmentObject var answer: UserAnswer
     @EnvironmentObject var locationManager: LocationManager2
+    @State private var sendMail = false
+
  
     var currentLocation: String {
             guard let placemark = locationManager.placemark else {
@@ -34,12 +38,30 @@ struct EndPage: View {
 
         VStack
         {
+            
             PDFdocument(pdfDoc: PDFDocument(data: createPDF())!)
-            Button(action: {savePDF()}, label: {Text("Save PDF")})
-        }
+            Button(action: {
+                savePDF()
+                sendMail = true
+            }, label: {Text("Share")})
+            .sheet(isPresented: $sendMail, content: {
+                if MFMailComposeViewController.canSendMail()
+                {
+                    EmailView(
+                        recipients: [answer.userInfo[2]], 
+                        subject: "Foot Assessment Result",
+                        messageBody: "Please find the link in regards to foot assessment result",
+                        isHTML: false
+                    )
+                    .environmentObject(answer)
+                }else {
+                    Text("Can not send the mail")
+                }
+            })
+            
+        }.navigationBarBackButtonHidden(true)
     }
     // func to create PDF
-    @MainActor
     private func createPDF() -> Data{
         // Capture current date and time
         let dateFormatter = DateFormatter()
@@ -181,15 +203,28 @@ struct EndPage: View {
         let pdfData = createPDF()
         
         if let documentDirect = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
-            let documentURL =
-            documentDirect.appendingPathComponent(fileName)
+            let documentURL = documentDirect.appendingPathComponent(fileName)
             do{
                 try pdfData.write(to: documentURL)
                 print("PDF saved at: \(documentURL) ")
+                answer.pdf_url = documentURL
             } catch
             {
                 print("cannt saved PDF document")
             }
         }
+    }
+}
+
+struct PDFViewUI: UIViewRepresentable {
+    let pdfDocument: PDFDocument
+
+    func makeUIView(context: Context) -> PDFView {
+        let pdfView = PDFView()
+        pdfView.document = pdfDocument
+        return pdfView
+    }
+
+    func updateUIView(_ uiView: PDFView, context: Context) {
     }
 }
