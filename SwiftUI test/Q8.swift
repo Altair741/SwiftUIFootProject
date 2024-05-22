@@ -22,7 +22,12 @@ struct Q8: View {
         
         VStack {
             ZStack {
-                VStack(spacing: 30) {
+                VStack(spacing : 30) {
+                Image("clawed_toes")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 240, height: 200)
+                    .clipped()
                     Text("Does the patient have hammer and clawed toes?")
                     ProgressBar2(progess: 8)
                     

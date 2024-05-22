@@ -12,7 +12,12 @@ struct Q2: View {
     var body: some View {
         VStack{
             ZStack {
-                VStack() {
+                VStack(spacing : 30) {
+                    Image("corns")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 240, height: 200)
+                        .clipped()
                     Text("Does the patient have corns?")
                     ProgressBar2(progess: 2)
                     

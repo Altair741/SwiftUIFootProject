@@ -88,7 +88,6 @@ struct Quizinerfaces: View {
             .navigationBarBackButtonHidden(true)
         Spacer()
         
-        
         NavigationView {
             VStack {
                 
@@ -108,7 +107,7 @@ struct Quizinerfaces: View {
                     EndPage()
                         .navigationBarBackButtonHidden()
                 }
-                
+            
             }
             // Mingu : edit toolbar items to switch each of sections.
             .toolbar {
@@ -126,6 +125,7 @@ struct Quizinerfaces: View {
                         }
                     }
                 }
+        
             }
 
         }

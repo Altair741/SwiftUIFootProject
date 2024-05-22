@@ -21,7 +21,12 @@ struct Q9: View {
     var body: some View {
         VStack {
             ZStack {
-                VStack(spacing: 30) {
+                VStack(spacing : 30) {
+                Image("flat_feet")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 240, height: 200)
+                    .clipped()
                     Text("Does the patient have flat feet?")
                     ProgressBar2(progess: 9)
                     

@@ -38,9 +38,10 @@ struct IPSWICH_test: View {
         .navigationBarBackButtonHidden(true)
         VStack {
             ScrollView {
-                VStack(spacing: 30) {
+                VStack(spacing: 20) {
                     Text("IPSWICH touch test").fontWeight(.semibold)
                         .font(.title)
+                    
                     
                     Image("IPSWICH_touch_test_spot")
                         .resizable()
@@ -52,7 +53,10 @@ struct IPSWICH_test: View {
                     
                     ProgressBar2(progess: 16)
                     
-                    Text("Spot 1: Right first toe").padding(.leading, -140).padding(-30)
+                    Text("Spot 1: Right first toe")
+                        .padding(.leading, -140)
+                        .padding(.bottom, -20)
+                    
                     HStack {
                         Button("Yes") {
                             isSelected_R_1 = true
@@ -66,10 +70,12 @@ struct IPSWICH_test: View {
                             answer.IPSWICHScore += 1
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1_No))
-                    }.padding(-30)
+                    }.padding(10)
                         .padding(.leading, 10)
                     
-                    Text("Spot 2: Right fifth toe ").padding(.leading, -100)
+                    Text("Spot 2: Right fifth toe ")  .padding(.leading, -135)
+                        .padding(.bottom, -20)
+                    
                     HStack {
                         Button("Yes") {
                             isSelected_R_2 = true
@@ -81,14 +87,13 @@ struct IPSWICH_test: View {
                             isSelected_R_2 = false
                             isSelected_R_2_No = true
                             answer.IPSWICHScore += 1
-
-
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2_No))
-                    }.padding(-20)
+                    }.padding(10)
                         .padding(.leading, 10)
                     
-                    Text("Spot 3: Left first toe").padding(.leading, -90)
+                    Text("Spot 3: Left first toe") .padding(.leading, -145)
+                        .padding(.bottom, -20)
                     HStack {
                         Button("Yes") {
                             isSelected_R_3 = true
@@ -100,14 +105,13 @@ struct IPSWICH_test: View {
                             isSelected_R_3 = false
                             isSelected_R_3_No = true
                             answer.IPSWICHScore += 1
-
-
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3_No))
-                    }.padding(-20)
+                    }.padding(10)
                         .padding(.leading, 10)
            
-                    Text("Spot 4: Left fifth toe ").padding(.leading, -140).padding(-30)
+                    Text("Spot 4: Left fifth toe ") .padding(.leading, -145)
+                        .padding(.bottom, -20)
                     HStack {
                         Button("Yes") {
                             isSelected_L_1 = true
@@ -123,10 +127,11 @@ struct IPSWICH_test: View {
 
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1_No))
-                    }.padding(-30)
+                    }.padding(10)
                         .padding(.leading, 10)
                     
-                    Text("Spot 5: Right third toe ").padding(.leading, -100)
+                    Text("Spot 5: Right third toe ") .padding(.leading, -140)
+                        .padding(.bottom, -20)
                     HStack {
                         Button("Yes") {
                             isSelected_L_2 = true
@@ -141,10 +146,11 @@ struct IPSWICH_test: View {
 
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2_No))
-                    }.padding(-20)
+                    }.padding(10)
                         .padding(.leading, 10)
                     
-                    Text("Spot 6: Left third toe").padding(.leading, -90)
+                    Text("Spot 6: Left third toe") .padding(.leading, -140)
+                        .padding(.bottom, -20)
                     HStack {
                         Button("Yes") {
                             isSelected_L_3 = true
@@ -161,7 +167,7 @@ struct IPSWICH_test: View {
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3_No))
                     }
-                    .padding(-20)
+                    .padding(10)
                     .padding(.leading, 10)
                 }
                 .padding()
@@ -183,8 +189,8 @@ struct IPSWICH_test: View {
                 Spacer()
                     .padding(20)
             }
-            .offset(y:60)
-            .navigationTitle("IPSWICH Test")
+            .offset(y:-40)
+//            .navigationTitle("IPSWICH Test")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
@@ -211,3 +217,10 @@ struct IPSWICH_test: View {
 
     }
 }
+
+struct IPSWICH_test_Previews: PreviewProvider {
+    static var previews: some View{
+        IPSWICH_test()
+    }
+}
+

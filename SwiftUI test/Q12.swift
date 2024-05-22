@@ -26,7 +26,7 @@ struct Q12: View {
                     Image("ampuation")
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 240, height: 200)
+                        .frame(width: 260, height: 200)
                         .clipped()
                     
                     Text("Has the patient had any amputations?")

@@ -1,65 +1,49 @@
+
+import Combine
 import Foundation
 import MessageUI
 import SwiftUI
 
-
-class EmailSender: MFMailComposeViewController {
-    init(recipients: [String]?, subject: String = "Foot Assessment Result", messageBody: String = "",messageBodyIsHTML: Bool = false, resultURL : URL? )
-    {
-        super.init(nibName: nil, bundle: nil)
-        setToRecipients(recipients)
-        setSubject(subject)
-        setMessageBody(messageBody, isHTML: messageBodyIsHTML)
-        
-        if let resultURL = resultURL, let fileData = try? Data(contentsOf: resultURL) {
-                  addAttachmentData(fileData, mimeType: "application/pdf", fileName: resultURL.lastPathComponent)
-              }
-    }
-    required init?(coder aDecoder : NSCoder){
-        fatalError("Error")
-    }
-}
-
-
-struct EmailView: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var answer: UserAnswer
-    
+struct EmailSender: UIViewControllerRepresentable {
+    @Binding var isShowing: Bool
     var recipients: [String]
     var subject: String
     var messageBody: String
     var isHTML: Bool
     
+    func makeCoordinator() -> MailComposerCoordinator {
+        return MailComposerCoordinator(parent: self)
+    }
+    
     func makeUIViewController(context: Context) -> MFMailComposeViewController {
-        let mailComposeViewController = EmailSender(
-            recipients: recipients,
-            subject: subject,
-            messageBody: messageBody,
-            messageBodyIsHTML: isHTML,
-            resultURL : answer.pdf_url
-            
-        )
+        
+        print("Creating MFMailComposeViewController")
+
+        let mailComposeViewController = MFMailComposeViewController()
         mailComposeViewController.mailComposeDelegate = context.coordinator
+        mailComposeViewController.setToRecipients(recipients)
+        mailComposeViewController.setSubject(subject)
+        mailComposeViewController.setMessageBody(messageBody, isHTML: isHTML)
         return mailComposeViewController
     }
     
-    func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: Context) {}
+    func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: Context) {
+    }
+}
+
+
+class MailComposerCoordinator: NSObject, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
+    var parent: EmailSender
     
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+    init(parent: EmailSender) {
+        self.parent = parent
     }
     
-    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
-        var parent: EmailView
-        
-        init(_ parent: EmailView) {
-            self.parent = parent
-        }
-        
-        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-            controller.dismiss(animated: true) {
-                self.parent.presentationMode.wrappedValue.dismiss()
-            }
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        print("Mail composition finished with result: \(result)")
+
+        controller.dismiss(animated: true) {
+            self.parent.isShowing = false
         }
     }
 }

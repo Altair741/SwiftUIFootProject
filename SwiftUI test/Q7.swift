@@ -24,7 +24,12 @@ struct Q7: View {
 
         VStack {
             ZStack {
-                VStack(spacing: 30) {
+                VStack(spacing : 30) {
+                Image("bunions")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 240, height: 200)
+                    .clipped()
                     Text("Does the patient have bunions?")
                     ProgressBar2(progess: 7)
                     

@@ -14,52 +14,54 @@ struct EndPage: View {
     @EnvironmentObject var answer: UserAnswer
     @EnvironmentObject var locationManager: LocationManager2
     @State private var sendMail = false
-
- 
+    
+    
     var currentLocation: String {
-            guard let placemark = locationManager.placemark else {
-                return "Location not available"
-            }
-            // get location information
-            let address = [
-                placemark.subThoroughfare ?? "",
-                placemark.thoroughfare ?? "",
-                placemark.locality ?? "",
-                placemark.administrativeArea ?? "",
-                placemark.postalCode ?? "",
-                placemark.country ?? ""
-            ].filter { !$0.isEmpty }.joined(separator: ", ")
-            
-            return address
+        guard let placemark = locationManager.placemark else {
+            return "Location not available"
         }
-
+        // get location information
+        let address = [
+            placemark.subThoroughfare ?? "",
+            placemark.thoroughfare ?? "",
+            placemark.locality ?? "",
+            placemark.administrativeArea ?? "",
+            placemark.postalCode ?? "",
+            placemark.country ?? ""
+        ].filter { !$0.isEmpty }.joined(separator: ", ")
+        
+        return address
+    }
+    
     var body: some View {
         Spacer().navigationBarBackButtonHidden(true)
-
+        
         VStack
         {
             
             PDFdocument(pdfDoc: PDFDocument(data: createPDF())!)
             Button(action: {
-                savePDF()
                 sendMail = true
+                savePDF()
             }, label: {Text("Share")})
-            .sheet(isPresented: $sendMail, content: {
-                if MFMailComposeViewController.canSendMail()
-                {
-                    EmailView(
-                        recipients: [answer.userInfo[2]], 
+            .sheet(isPresented: $sendMail) {
+                if MFMailComposeViewController.canSendMail() {
+                    EmailSender(
+                        isShowing: $sendMail,
+                        recipients: [answer.userInfo[2]],
                         subject: "Foot Assessment Result",
-                        messageBody: "Please find the link in regards to foot assessment result",
+                        messageBody: "Please find the link in regards to foot assessment result \(String(describing: answer.pdf_url))",
                         isHTML: false
                     )
-                    .environmentObject(answer)
-                }else {
-                    Text("Can not send the mail")
+                } else {
+                    Text("Cannot send the mail")
                 }
-            })
-            
-        }.navigationBarBackButtonHidden(true)
+            }.onDisappear {
+                sendMail = false
+                // Error AttributeGraph:
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
     // func to create PDF
     private func createPDF() -> Data{
@@ -72,12 +74,12 @@ struct EndPage: View {
         
         let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(
             // A4 size
-        x: 0, y: 0, width: 595, height: 2000
+            x: 0, y: 0, width: 595, height: 2000
         ))
         
         let data = pdfRenderer.pdfData{ context in context.beginPage()
             
-        
+            
             
             // Text goes here
             alignTexst(value: "Assessment Result", x: 0, y: 10, width: 595, height: 50, alignment: .center, textFont: UIFont.systemFont(ofSize: 30, weight: .bold))
@@ -96,12 +98,12 @@ struct EndPage: View {
                 """,x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             
             alignTexst(value:
-            """
+                """
                 Assessment Task
                 
                 """,x: 0, y: 170, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
-            """
+                """
                 What kind of shoes is the patient wearing today?  \(answer.assessmentRecord[0])
                 
                 Does the patient have pain in their legs when walking?   \(answer.assessmentRecord[1])
@@ -127,16 +129,16 @@ struct EndPage: View {
                 What is the temperature of the foot?  \(answer.assessmentRecord[11])
                 
                 
-
+                
                 """,x: 0, y: 200, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
             
             alignTexst(value:
-            """
+                """
                 Skin conditions
                 
                 """,x: 0, y: 580, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
-            """
+                """
                 Does the patient have callus? \(answer.answerRecord[0])
                 
                 Does the patient have corns?  \(answer.answerRecord[1])
@@ -193,11 +195,9 @@ struct EndPage: View {
         let textRect = CGRect(x: x, y: y, width: width, height: height)
         
         value.draw(in: textRect, withAttributes: attributes)
-
+        
     }
     
-   
-    @MainActor
     func savePDF(){
         let fileName = "FootAssessmentResult.pdf"
         let pdfData = createPDF()
@@ -218,13 +218,13 @@ struct EndPage: View {
 
 struct PDFViewUI: UIViewRepresentable {
     let pdfDocument: PDFDocument
-
+    
     func makeUIView(context: Context) -> PDFView {
         let pdfView = PDFView()
         pdfView.document = pdfDocument
         return pdfView
     }
-
+    
     func updateUIView(_ uiView: PDFView, context: Context) {
     }
 }

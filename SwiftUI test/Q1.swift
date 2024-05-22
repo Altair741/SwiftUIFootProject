@@ -59,9 +59,14 @@ struct Q1: View {
         .navigationBarBackButtonHidden(true)
         Spacer()
         NavigationView {
-            VStack{
+            VStack(){
                 ZStack {
-                    VStack() {
+                    VStack(spacing : 30) {
+                        Image("callus")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 260, height: 200)
+                            .clipped()
                         Text("Does the patient have callus?")
                         ProgressBar2(progess: 1)
                         HStack {
