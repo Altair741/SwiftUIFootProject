@@ -20,9 +20,15 @@ struct Q4: View {
     var body: some View {
         VStack {
             ZStack {
-                VStack() {
+                VStack(spacing : 30) {
+                    Image("Ulcer")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 240, height: 200)
+                        .clipped()
+                    
                     Text("Has the patient had a previous or current ulcer?")
-                    ProgressBar2(progess: 4)
+                    ProgressBar2(progess: 16)
 
                     HStack {
                         NavigationLink(destination: Q5()) {

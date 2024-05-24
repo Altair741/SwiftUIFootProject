@@ -22,9 +22,14 @@ struct Q6: View {
     var body: some View {
         VStack {
             ZStack {
-                VStack(spacing: 30) {
+                VStack(spacing : 30) {
+                    Image("ingrown_toenails")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 240, height: 200)
+                        .clipped()
                     Text("Does the patient have ingrown toenails?")
-                    ProgressBar2(progess: 6)
+                    ProgressBar2(progess: 18)
 
                     HStack {
                         NavigationLink(destination: Q7()) {

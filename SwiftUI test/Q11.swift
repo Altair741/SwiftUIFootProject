@@ -22,9 +22,14 @@ struct Q11: View {
 
         VStack {
             ZStack {
-                VStack() {
+                VStack(spacing : 30) {
+                Image("Charcot_foot")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 240, height: 200)
+                    .clipped()
                     Text("Does the patient have Charcot foot?")
-                    ProgressBar2(progess: 11)
+                    ProgressBar2(progess: 23)
 
                     HStack {
                         NavigationLink(destination: Q12()) {

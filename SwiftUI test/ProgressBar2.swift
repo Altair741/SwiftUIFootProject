@@ -12,7 +12,7 @@ struct ProgressBar2: View {
     @State var progess: Double = 0
     
     var body: some View {
-        ProgressView("\(progess) out of 12", value: progess, total: 12 )
+        ProgressView("\(Int(progess)) out of 28 total questions", value: progess, total: 28 )
             .padding()
     }
 }
