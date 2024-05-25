@@ -10,7 +10,6 @@ struct Q2: View {
     @State private var nextQuesion = false
     
     var body: some View {
-        VStack{
             ZStack {
                 VStack(spacing : 30) {
                     Image("corns")
@@ -70,11 +69,15 @@ struct Q2: View {
                     }
                 }
             }
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
             
         }
     }
-}
+

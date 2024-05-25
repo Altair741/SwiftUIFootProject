@@ -51,7 +51,10 @@ struct EndPage: View {
                         recipients: [answer.userInfo[2]],
                         subject: "Foot Assessment Result",
                         messageBody: "Please find the link in regards to foot assessment result \(String(describing: answer.pdf_url))",
-                        isHTML: false
+                        isHTML: false,
+                        attachmentData: createPDF(),
+                        attachmentMimeType: "application/pdf",
+                        attachmentFileName: "FootAssessmentResult.pdf"
                     )
                 } else {
                     Text("Cannot send the mail")
@@ -74,7 +77,7 @@ struct EndPage: View {
         
         let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(
             // A4 size
-            x: 0, y: 0, width: 595, height: 2000
+            x: 0, y: 0, width: 555, height: 2000
         ))
         
         let data = pdfRenderer.pdfData{ context in context.beginPage()

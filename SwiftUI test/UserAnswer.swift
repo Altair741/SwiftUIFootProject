@@ -26,5 +26,12 @@ class UserAnswer : ObservableObject
     
 
     @Published var userInfo : [String] = ["", "", ""]
+    
+    func updateAnswerRecord(at index: Int, with value: String) {
+            guard index >= 0 && index < answerRecord.count else {
+                return
+            }
+            answerRecord[index] = value
+        }
 
 }

@@ -34,14 +34,10 @@ struct IPSWICH_test: View {
     // 16 user answer.
     
     var body: some View {
-        Spacer()
-        .navigationBarBackButtonHidden(true)
+    
         VStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("IPSWICH touch test").fontWeight(.semibold)
-                        .font(.title)
-                    
                     
                     Image("IPSWICH_touch_test_spot")
                         .resizable()
@@ -189,8 +185,8 @@ struct IPSWICH_test: View {
                 Spacer()
                     .padding(20)
             }
-            .offset(y:-40)
-//            .navigationTitle("IPSWICH Test")
+            .offset(y:-30)
+            .navigationTitle("IPSWICH Test")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
@@ -208,19 +204,18 @@ struct IPSWICH_test: View {
                         }
                     }
             }
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
+
             
         }
 
-    }
-}
-
-struct IPSWICH_test_Previews: PreviewProvider {
-    static var previews: some View{
-        IPSWICH_test()
     }
 }
 

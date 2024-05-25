@@ -27,113 +27,121 @@ struct DP_test: View {
     
     
     var body: some View {
-        
-        VStack {
+
+        VStack{
             ScrollView{
-                VStack(spacing: 30) {
-                    
-                    Image("DP_test_spot")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 240, height: 200)
-                        .clipped()
-                    
-                    Text("Can you feel the pulse in the dorsalis pedis")
-                    ProgressBar2(progess: 3)
-                    Text("Right Foot")
-                    
-                    HStack {
-                        Button("Yes") {
-                            isSelected = true
-                            isSelected2 = false
-                            answer.answerRecord[12] = "Yes"
-                            player.pause()
-                        }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
+            VStack {
+
+                    VStack(spacing: 30) {
                         
-                        Button("No") {
-                            isSelected2 = true
-                            isSelected = false
-                            answer.answerRecord[12] = "No"
-                            player.pause()
+                        
+                        Image("DP_test_spot")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 240, height: 200)
+                            .clipped()
+                        
+                        Text("Can you feel the pulse in the dorsalis pedis")
+                        ProgressBar2(progess: 3)
+                        Text("Right Foot")
+                        
+                        HStack {
+                            Button("Yes") {
+                                isSelected = true
+                                isSelected2 = false
+                                answer.answerRecord[12] = "Yes"
+                                player.pause()
+                            }
+                            .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
                             
+                            Button("No") {
+                                isSelected2 = true
+                                isSelected = false
+                                answer.answerRecord[12] = "No"
+                                player.pause()
+                                
+                            }
+                            .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
                         }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected2))
-                    }
-                    .padding(.leading, 10)
-                    
-                    Text("Left Foot")
-                    HStack {
-                        Button("Yes") {
-                            isSelected3 = true
-                            isSelected4 = false
-                            answer.answerRecord[13] = "Yes"
-                            player.pause()
-                        }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected3))
+                        .padding(.leading, 10)
                         
-                        Button("No") {
-                            isSelected3 = false
-                            isSelected4 = true
-                            answer.answerRecord[13] = "No"
-                            player.pause()
+                        Text("Left Foot")
+                        HStack {
+                            Button("Yes") {
+                                isSelected3 = true
+                                isSelected4 = false
+                                answer.answerRecord[13] = "Yes"
+                                player.pause()
+                            }
+                            .buttonStyle(SelectedButtonStyle(isSelected: isSelected3))
+                            
+                            Button("No") {
+                                isSelected3 = false
+                                isSelected4 = true
+                                answer.answerRecord[13] = "No"
+                                player.pause()
+                            }
+                            .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
                         }
-                        .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
-                    }
-                    
-                    NavigationLink(destination: PT_test()) {
-                        Text("Save Anwser")
-                    }
-                    
-                    
-                    .padding(.leading, 10)
-                    .navigationTitle("DP Test")
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                showMedicalInfo.toggle();
-                            } label: {
-                                Label("MediInfo", systemImage: "info.circle")
+                        
+                        NavigationLink(destination: PT_test()) {
+                            Text("Save Anwser")
+                        }
+                        .padding(.leading, 10)
+                        .navigationTitle("DP Test")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button {
+                                    showMedicalInfo.toggle();
+                                } label: {
+                                    Label("MediInfo", systemImage: "info.circle")
+                                }
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button {
+                                    showPictorialResources.toggle();
+                                } label: {
+                                    Label("PictorialVideo", systemImage: "play.circle.fill")
+                                }
                             }
                         }
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                showPictorialResources.toggle();
-                            } label: {
-                                Label("PictorialVideo", systemImage: "play.circle.fill")
-                            }
+                        
+                    }
+                    .popover(isPresented: $showMedicalInfo) {
+                                    VStack {
+                                        Text(medicalInfoScript)
+                                            .padding()
+                                            .multilineTextAlignment(.center)
+                                        Spacer()
+                                    }
+                                }
+
+                    .fullScreenCover(isPresented: $showPictorialResources)
+                    {
+                        NavigationView {
+                            WithPictorial(videoName: "DP_test")
+                                .navigationBarItems(leading: Button(action: {
+                                    showPictorialResources = false
+                                })
+                                                    {
+                                    Image(systemName: "chevron.left")
+                                    Text("Back")
+                                }
+                                )
                         }
                     }
-                    
                 }
-                .fullScreenCover(isPresented: $showMedicalInfo)
-                {
-                    MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+                .onReceive([nextQuesion].publisher.first()) { _ in
+                    player.pause()
                 }
-                .fullScreenCover(isPresented: $showPictorialResources)
-                {
-                    NavigationView {
-                        WithPictorial(videoName: "DP_test")
-                            .navigationBarItems(leading: Button(action: {
-                                showPictorialResources = false
-                            })
-                                                {
-                                Image(systemName: "chevron.left")
-                                Text("Back")
-                            }
-                            )
-                    }
+                .onDisappear {
+                    player.pause()
                 }
-            }
-            .onReceive([nextQuesion].publisher.first()) { _ in
-                player.pause()
-            }
-            .onDisappear {
-                player.pause()
-            }
-            .onAppear {
-                player.play()
+                .onAppear {
+                    player.play()
+                }
             }
         }
     }
 }
+

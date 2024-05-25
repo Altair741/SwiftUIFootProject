@@ -81,10 +81,14 @@ struct Q4: View {
             }
             .offset(y:-60)
 
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
         }
     }
 }

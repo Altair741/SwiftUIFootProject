@@ -38,7 +38,7 @@ struct ContentView: View {
                             .cornerRadius(10)
                     }
                     //Mingu : i'm gonna use this link to test my part of code!
-                    NavigationLink(destination:  IPSWICH_test())
+                    NavigationLink(destination:  Basic_assessment())
                     {
                         Text("Mingu Test")
                             .padding()

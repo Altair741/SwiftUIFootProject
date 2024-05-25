@@ -24,7 +24,7 @@ struct SignInView: View {
     @EnvironmentObject var answer: UserAnswer
 
     var body: some View {
-        NavigationView {
+        ZStack {
             VStack {
                 TextField("Name", text: $name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())

@@ -7,25 +7,6 @@
 
 import SwiftUI
 
-struct SkinConditionQeustion : View {
-    @State private var isSelected = false
-    @State private var isSelected2 = false
-    @State private var showMedicalInfo = false
-    @State private var nextQuestion = false
-    @State private var qeustionString = "" // = qeustionList[0]
-    @State private var taskName = ""
-    @State private var currentProgress = 0;
-    @EnvironmentObject var answer : UserAnswer
-
-    
-    var body: some View {
-        ZStack{
-            Text(" Qustion : \(qeustionString)")
-            ProgressBar2(progess: Double(Int(currentProgress)))
-
-        }
-    }
-}
 
 struct SelectedButtonStyle: ButtonStyle {
     var isSelected: Bool
@@ -56,79 +37,82 @@ struct Q1: View {
     
     var body: some View {
         Spacer()
-        .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
         Spacer()
-        NavigationView {
-            VStack(){
-                ZStack {
-                    VStack(spacing : 30) {
-                        Image("callus")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 260, height: 200)
-                            .clipped()
-                        Text("Does the patient have callus?")
-                        ProgressBar2(progess: 13)
-                        HStack {
-                            NavigationLink(destination: Q2()) {
-                                Text("Yes")
-                                    .padding()
-                                    .frame(width: 120, height: 50)
-                                    .background(isSelected ? Color.green : Color.gray)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(25)
-                            }
-                            .padding(0.0)
-                            .simultaneousGesture(TapGesture().onEnded {
-                                isSelected = true
-                                isSelected2 = false
-                                nextQuesion = true
-                                answer.answerRecord[0] = "Yes"
-                                
-                            }
-                            )
-                            NavigationLink(destination: Q2()) {
-                                Text("No")
-                                    .padding()
-                                    .frame(width: 120, height: 50)
-                                    .background(isSelected2 ? Color.red : Color.gray)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(25)
-                            }
-                            .simultaneousGesture(TapGesture().onEnded {
-                                isSelected = false
-                                isSelected2 = true
-                                nextQuesion = true
-                                answer.answerRecord[0] = "No"
-                            })
+        
+        NavigationView{
+            ZStack{
+                VStack(spacing : 30) {
+                    Image("callus")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 260, height: 200)
+                        .clipped()
+                    Text("Does the patient have callus?")
+                    ProgressBar2(progess: 13)
+                    HStack {
+                        NavigationLink(destination: Q2()) {
+                            Text("Yes")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected ? Color.green : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
                         }
+                        .padding(0.0)
+                        .simultaneousGesture(TapGesture().onEnded {
+                            isSelected = true
+                            isSelected2 = false
+                            nextQuesion = true
+                            answer.answerRecord[0] = "Yes"
+                            
+                        }
+                        )
+                        NavigationLink(destination: Q12()) {
+                            Text("No")
+                                .padding()
+                                .frame(width: 120, height: 50)
+                                .background(isSelected2 ? Color.red : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            isSelected = false
+                            isSelected2 = true
+                            nextQuesion = true
+                            answer.answerRecord[0] = "No"
+                        })
+                    }
+                }
+                
+            }// end ZStack
+            .navigationTitle("Skin Q.1")
+            .offset(y:-60)
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                Spacer()
+                            }
+                        }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showMedicalInfo.toggle();
+                    } label: {
+                        Label("MediInfo", systemImage: "cross.circle.fill")
                     }
                     
-                }// end ZStack
-                .navigationTitle("Skin Q.1")
-                .offset(y:-60)
-                .fullScreenCover(isPresented: $showMedicalInfo)
-                {
-                    MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            showMedicalInfo.toggle();
-                        } label: {
-                            Label("MediInfo", systemImage: "cross.circle.fill")
-                        }
-                        
-                    }
-                }
                 }
             }
+        }
     }
     
+}
     
     struct Q1_Previews: PreviewProvider {
         static var previews: some View{
             Q1()
         }
     }
-}
+

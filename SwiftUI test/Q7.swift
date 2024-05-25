@@ -82,10 +82,15 @@ struct Q7: View {
                         }
                     }
                 }
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
+
         }
     }
 }
