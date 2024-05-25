@@ -15,6 +15,10 @@
 		AAE8B7A62BE9FFBC00DA6694 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */; };
 		AAE8B7A92BEA026100DA6694 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE8B7A82BEA026100DA6694 /* LocationManager.swift */; };
 		AAE8B7AD2BEB16C900DA6694 /* Shoes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAE8B7AC2BEB16C900DA6694 /* Shoes.jpg */; };
+		F9368F002BFD8B94004D79D3 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368EFF2BFD8B94004D79D3 /* EmailSender.swift */; };
+		F9368F0C2BFE5FAA004D79D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F0B2BFE5FAA004D79D3 /* ViewController.swift */; };
+		F9368F102C00FC42004D79D3 /* Basic_assessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F0F2C00FC42004D79D3 /* Basic_assessment.swift */; };
+		F9368F122C012D01004D79D3 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F112C012D01004D79D3 /* Test.swift */; };
 		F9933C612BF3D06300A264B6 /* DP_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C5E2BF3D06300A264B6 /* DP_test.swift */; };
 		F9933C622BF3D06300A264B6 /* DP_test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F9933C5F2BF3D06300A264B6 /* DP_test.mp4 */; };
 		F9933C632BF3D06300A264B6 /* EndPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933C602BF3D06300A264B6 /* EndPage.swift */; };
@@ -45,8 +49,8 @@
 		F9933CA92BF7D58A00A264B6 /* launch_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = F9933CA82BF7D58A00A264B6 /* launch_screen.png */; };
 		F9933CAB2BF7D5A100A264B6 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CAA2BF7D5A100A264B6 /* LaunchScreen.swift */; };
 		F9933CAD2BF7FA0700A264B6 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CAC2BF7FA0700A264B6 /* LoginPage.swift */; };
-		F9933CB72BFA37E800A264B6 /* RiskCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CB62BFA37E800A264B6 /* RiskCalculator.swift */; };
 		F9933CB92BFA3A8B00A264B6 /* IPSWICH_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CB82BFA3A8B00A264B6 /* IPSWICH_test.swift */; };
+		F99822AD2BFD0858001ABEE6 /* RiskCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99822AC2BFD0858001ABEE6 /* RiskCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +65,10 @@
 		AAE8B7A72BEA014F00DA6694 /* FootTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FootTest-Info.plist"; sourceTree = "<group>"; };
 		AAE8B7A82BEA026100DA6694 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AAE8B7AC2BEB16C900DA6694 /* Shoes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Shoes.jpg; path = "SwiftUI test/Assets.xcassets/Shoes.jpg"; sourceTree = SOURCE_ROOT; };
+		F9368EFF2BFD8B94004D79D3 /* EmailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
+		F9368F0B2BFE5FAA004D79D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F9368F0F2C00FC42004D79D3 /* Basic_assessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_assessment.swift; sourceTree = "<group>"; };
+		F9368F112C012D01004D79D3 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		F9933C5E2BF3D06300A264B6 /* DP_test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DP_test.swift; sourceTree = "<group>"; };
 		F9933C5F2BF3D06300A264B6 /* DP_test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DP_test.mp4; sourceTree = "<group>"; };
 		F9933C602BF3D06300A264B6 /* EndPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPage.swift; sourceTree = "<group>"; };
@@ -92,8 +100,8 @@
 		F9933CA82BF7D58A00A264B6 /* launch_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_screen.png; sourceTree = "<group>"; };
 		F9933CAA2BF7D5A100A264B6 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		F9933CAC2BF7FA0700A264B6 /* LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
-		F9933CB62BFA37E800A264B6 /* RiskCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskCalculator.swift; sourceTree = "<group>"; };
 		F9933CB82BFA3A8B00A264B6 /* IPSWICH_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPSWICH_test.swift; sourceTree = "<group>"; };
+		F99822AC2BFD0858001ABEE6 /* RiskCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RiskCalculator.swift; path = "../../../../Desktop/SwiftUI test_Mingu/RiskCalculator.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,16 +135,20 @@
 		AAC029EC2BE79E0600DA9F3D /* SwiftUI test */ = {
 			isa = PBXGroup;
 			children = (
+				F9368EFF2BFD8B94004D79D3 /* EmailSender.swift */,
+				F9368F0B2BFE5FAA004D79D3 /* ViewController.swift */,
+				F9933C602BF3D06300A264B6 /* EndPage.swift */,
 				F9933C5F2BF3D06300A264B6 /* DP_test.mp4 */,
 				F9933C7C2BF3D08D00A264B6 /* PT_test.mp4 */,
+				F9933C652BF3D08000A264B6 /* MyModal.swift */,
+				F9368F112C012D01004D79D3 /* Test.swift */,
+				F9933CB82BFA3A8B00A264B6 /* IPSWICH_test.swift */,
+				F9933C642BF3D08000A264B6 /* Monofilament_test.swift */,
 				F9933C5E2BF3D06300A264B6 /* DP_test.swift */,
 				F9933C7D2BF3D08D00A264B6 /* PT_test.swift */,
-				F9933C642BF3D08000A264B6 /* Monofilament_test.swift */,
-				F9933CB82BFA3A8B00A264B6 /* IPSWICH_test.swift */,
-				F9933C602BF3D06300A264B6 /* EndPage.swift */,
 				F9933C682BF3D08000A264B6 /* MedicalInfoPopUp.swift */,
-				F9933C652BF3D08000A264B6 /* MyModal.swift */,
 				F9933C8D2BF3D09A00A264B6 /* SelectButton.swift */,
+				F99822AC2BFD0858001ABEE6 /* RiskCalculator.swift */,
 				AAC029ED2BE79E0600DA9F3D /* SwiftUI_testApp.swift */,
 				AAC029EF2BE79E0600DA9F3D /* ContentView.swift */,
 				F9933C662BF3D08000A264B6 /* LocationManager2.swift */,
@@ -166,7 +178,7 @@
 				F9933C902BF3D0A300A264B6 /* UserAnswer.swift */,
 				AAC029F12BE79E0800DA9F3D /* Assets.xcassets */,
 				AAC029F32BE79E0800DA9F3D /* Preview Content */,
-				F9933CB62BFA37E800A264B6 /* RiskCalculator.swift */,
+				F9368F0F2C00FC42004D79D3 /* Basic_assessment.swift */,
 			);
 			path = "SwiftUI test";
 			sourceTree = "<group>";
@@ -261,6 +273,7 @@
 				F9933CAB2BF7D5A100A264B6 /* LaunchScreen.swift in Sources */,
 				F9933C8B2BF3D08D00A264B6 /* PT_test.swift in Sources */,
 				AACE4B9B2BF3871000E6D1A3 /* QuizInterfaces.swift in Sources */,
+				F99822AD2BFD0858001ABEE6 /* RiskCalculator.swift in Sources */,
 				AAE8B7A92BEA026100DA6694 /* LocationManager.swift in Sources */,
 				F9933C972BF3D3D800A264B6 /* Q1.swift in Sources */,
 				F9933C8F2BF3D09A00A264B6 /* SelectButton.swift in Sources */,
@@ -277,7 +290,7 @@
 				F9933C882BF3D08D00A264B6 /* Q12.swift in Sources */,
 				AAC029EE2BE79E0600DA9F3D /* SwiftUI_testApp.swift in Sources */,
 				F9933C7F2BF3D08D00A264B6 /* Q7.swift in Sources */,
-				F9933CB72BFA37E800A264B6 /* RiskCalculator.swift in Sources */,
+				F9368F122C012D01004D79D3 /* Test.swift in Sources */,
 				F9933C862BF3D08D00A264B6 /* Q9.swift in Sources */,
 				F9933C932BF3D0A300A264B6 /* WithPictorial.swift in Sources */,
 				F9933C802BF3D08D00A264B6 /* Q6.swift in Sources */,
@@ -285,7 +298,10 @@
 				F9933CB92BFA3A8B00A264B6 /* IPSWICH_test.swift in Sources */,
 				AAE8B7A62BE9FFBC00DA6694 /* Quiz.swift in Sources */,
 				F9933C6B2BF3D08000A264B6 /* MyModal.swift in Sources */,
+				F9368F0C2BFE5FAA004D79D3 /* ViewController.swift in Sources */,
+				F9368F002BFD8B94004D79D3 /* EmailSender.swift in Sources */,
 				F9933C892BF3D08D00A264B6 /* Q10.swift in Sources */,
+				F9368F102C00FC42004D79D3 /* Basic_assessment.swift in Sources */,
 				F9933C822BF3D08D00A264B6 /* Q4.swift in Sources */,
 				F9933C812BF3D08D00A264B6 /* Q11.swift in Sources */,
 				F9933C872BF3D08D00A264B6 /* Q3.swift in Sources */,
@@ -419,10 +435,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI test/Preview Content\"";
-				DEVELOPMENT_TEAM = G8WKBYPJR2;
+				DEVELOPMENT_TEAM = 673FASKM69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "FootTest-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your app needs location access for clinics";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your app needs location access for clinics";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -433,7 +451,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Ethan.SwiftUI-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "Foot.SwiftUI-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -449,10 +467,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI test/Preview Content\"";
-				DEVELOPMENT_TEAM = G8WKBYPJR2;
+				DEVELOPMENT_TEAM = 673FASKM69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "FootTest-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your app needs location access for clinics";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your app needs location access for clinics";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -463,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Ethan.SwiftUI-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "Foot.SwiftUI-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
