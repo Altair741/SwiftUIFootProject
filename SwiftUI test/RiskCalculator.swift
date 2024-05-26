@@ -19,102 +19,117 @@ struct RiskCalculator: View {
     @State private var isSelected2 = false
     @State private var isSelected3 = false
     @State private var finishTest = true
-
+    @State private var allquestionAnswered = false
+    @State private var startAgain = false
+    
+    
     var body: some View {
-       
-        VStack {
-            Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(.green)
-                .font(.system(size: 100))
-                .padding(.top)
-            
-            Text("The assessemnt took \(Int(answer.assessmentTime)) seconds").bold().font(.system(size: 20))
-                .padding(.top)
-            Text("Assessment result")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .padding(.top, 10)
-            
-            switch answer.system_g_risk {
-                
-            case "VERY LOW":
-                Text("Very Low")
-                    .padding()
-                    .frame(width: 200, height: 50)
-                    .background( Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            case "LOW":
-                Text("Low")
-                    .padding()
-                    .frame(width: 200, height: 50)
-                    .background( Color.yellow)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            default:
-                Text("Moderate or High")
-                    .padding()
-                    .frame(width: 200, height: 50)
-                    .background( Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+        ZStack{
+            if !checkQuestionCompletion(){
+                AlertPopup(allquestionAnswered : $allquestionAnswered, action : {}, startAain : $startAgain).zIndex(1)
+                // zIndex to screen layout index
             }
-            
-            Text("Pick one")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .padding(.top, 10)
-            
             VStack {
-                NavigationLink(destination: SignInView()) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+                    .font(.system(size: 100))
+                    .padding(.top)
+                
+                Text("The assessemnt took \(Int(answer.assessmentTime)) seconds").bold().font(.system(size: 20))
+                    .padding(.top)
+                Text("Assessment result")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .padding(.top, 10)
+                
+                switch answer.system_g_risk {
+                    
+                case "VERY LOW":
                     Text("Very Low")
                         .padding()
                         .frame(width: 200, height: 50)
-                        .background(isSelected ? Color.green : Color.gray)
+                        .background( Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
-                }
-                .simultaneousGesture(TapGesture().onEnded {
-                    isSelected = true
-                    isSelected2 = false
-                    isSelected3 = false
-                    answer.user_s_risk = "Very Low"
-
-                })
-                
-                NavigationLink(destination: SignInView()) {
+                case "LOW":
                     Text("Low")
                         .padding()
                         .frame(width: 200, height: 50)
-                        .background(isSelected2 ? Color.yellow : Color.gray)
+                        .background( Color.yellow)
                         .foregroundColor(.white)
                         .cornerRadius(10)
-                }
-                .simultaneousGesture(TapGesture().onEnded {
-                    isSelected = false
-                    isSelected2 = true
-                    isSelected3 = false
-                    answer.user_s_risk = "Low"
-                })
-                NavigationLink(destination: SignInView()) {
-                    Text("Modearate or High")
+                default:
+                    Text("Moderate or High")
                         .padding()
                         .frame(width: 200, height: 50)
-                        .background(isSelected3 ? Color.red : Color.gray)
+                        .background( Color.red)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
-                .simultaneousGesture(TapGesture().onEnded {
-                    isSelected = false
-                    isSelected2 = false
-                    isSelected3 = true
-                    answer.user_s_risk = "Modearate or High"
-                })
                 
+                Text("Pick one")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .padding(.top, 10)
+                
+                VStack {
+                    NavigationLink(destination: SignInView()) {
+                        Text("Very Low")
+                            .padding()
+                            .frame(width: 200, height: 50)
+                            .background(isSelected ? Color.green : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        isSelected = true
+                        isSelected2 = false
+                        isSelected3 = false
+                        answer.user_s_risk = "Very Low"
+                        
+                    })
+                    
+                    NavigationLink(destination: SignInView()) {
+                        Text("Low")
+                            .padding()
+                            .frame(width: 200, height: 50)
+                            .background(isSelected2 ? Color.yellow : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        isSelected = false
+                        isSelected2 = true
+                        isSelected3 = false
+                        answer.user_s_risk = "Low"
+                    })
+                    NavigationLink(destination: SignInView()) {
+                        Text("Modearate or High")
+                            .padding()
+                            .frame(width: 200, height: 50)
+                            .background(isSelected3 ? Color.red : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        isSelected = false
+                        isSelected2 = false
+                        isSelected3 = true
+                        answer.user_s_risk = "Modearate or High"
+                    })
+                    
+                }
+                NavigationLink(
+                    destination: ContentView().navigationBarBackButtonHidden(true)
+                        .navigationBarHidden(true),
+                    isActive: $startAgain,
+                    label: { EmptyView() }
+                )
             }
         }
         .onAppear {
             riskCalculate()
             getRisk()
             getAssessmentTime()
+            checkQuestionCompletion()
         }
         .navigationTitle("Risk Assessment")
     }
@@ -287,6 +302,31 @@ struct RiskCalculator: View {
             
             let assessmentTime = endTime.timeIntervalSince(startTime)
             answer.assessmentTime = assessmentTime
+        }
+    }
+    func checkQuestionCompletion() -> Bool
+    {
+        for answer in answer.answerRecord {
+            if answer == "Not Answered"
+            {
+                print("not fully answerd")
+                
+            }
+        }
+        
+        for answer in answer.assessmentRecord {
+            if answer == "Not Answered"
+            {
+                print("not fully answerd")
+            }
+        }
+        
+        if !allquestionAnswered
+        {
+            return false
+        }
+        else {
+            return true
         }
     }
 }

@@ -11,7 +11,9 @@ import Combine
 class UserAnswer : ObservableObject
 {
 //    @Published var userDetails: [String] = Array(repeating: "Not given", count: 4)
-    @Published var answerRecord: [String] = Array(repeating: "Not Answered", count: 20)
+    // user answer records for examination part
+    @Published var answerRecord: [String] = Array(repeating: "Not Answered", count: 18)
+    // user answer records for basic prompt part
     @Published var assessmentRecord : [String] = Array(repeating: "Not Answered", count: 12)
     @Published var timeRecords: [Date] = Array(repeating: Date(), count: 2)
     @Published var assessmentTime: TimeInterval = 0

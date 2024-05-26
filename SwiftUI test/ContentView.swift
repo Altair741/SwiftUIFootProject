@@ -51,6 +51,7 @@ struct ContentView: View {
                 .navigationBarHidden(true) // Hide navigation bar
             }
         }
+        
     }
 
 struct ManualPage: View {
