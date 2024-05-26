@@ -77,7 +77,7 @@ struct EndPage: View {
         
         let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(
             // A4 size
-            x: 0, y: 0, width: 555, height: 2000
+            x: 0, y: 0, width: 595, height: 2000
         ))
         
         let data = pdfRenderer.pdfData{ context in context.beginPage()
@@ -97,6 +97,7 @@ struct EndPage: View {
                 Work Place : \(answer.userInfo[2])
                 Email : \(answer.userInfo[1])
                 system risk assessment level : \(answer.system_g_risk)
+                Health woker risk assessment level : \(answer.user_s_risk)
                 
                 """,x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             
@@ -107,29 +108,29 @@ struct EndPage: View {
                 """,x: 0, y: 170, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
                 """
-                What kind of shoes is the patient wearing today?  \(answer.assessmentRecord[0])
+                  What kind of shoes is the patient wearing today?  \(answer.assessmentRecord[0])
                 
-                Does the patient have pain in their legs when walking?   \(answer.assessmentRecord[1])
+                  Does the patient have pain in their legs when walking?   \(answer.assessmentRecord[1])
                 
-                Does the patient have pain in their legs when lying down? \(answer.assessmentRecord[2])
+                  Does the patient have pain in their legs when lying down? \(answer.assessmentRecord[2])
                 
-                Does the patient get pins and needles? \(answer.assessmentRecord[3])
+                  Does the patient get pins and needles? \(answer.assessmentRecord[3])
                 
-                Does the patient feel sharp pain? \(answer.assessmentRecord[4])
+                  Does the patient feel sharp pain? \(answer.assessmentRecord[4])
                 
-                Do the patient's feet get numb? \(answer.assessmentRecord[5])
+                  Do the patient's feet get numb? \(answer.assessmentRecord[5])
                 
-                Do the patient’s toes get numb?  \(answer.assessmentRecord[6])
+                  Do the patient’s toes get numb?  \(answer.assessmentRecord[6])
                 
-                Does the patient make regular podiatrist visits?  \(answer.assessmentRecord[7])
+                  Does the patient make regular podiatrist visits?  \(answer.assessmentRecord[7])
                 
-                Does the patient smoke?  \(answer.assessmentRecord[8])
+                  Does the patient smoke?  \(answer.assessmentRecord[8])
                 
-                What is the current condition of the patient’s skin?  \(answer.assessmentRecord[9])
+                  What is the current condition of the patient’s skin?  \(answer.assessmentRecord[9])
                 
-                Is there any swelling around the feet and ankle?  \(answer.assessmentRecord[10])
+                  Is there any swelling around the feet and ankle?  \(answer.assessmentRecord[10])
                 
-                What is the temperature of the foot?  \(answer.assessmentRecord[11])
+                  What is the temperature of the foot?  \(answer.assessmentRecord[11])
                 
                 
                 
@@ -137,46 +138,46 @@ struct EndPage: View {
             
             alignTexst(value:
                 """
-                Skin conditions
+                  Skin conditions
                 
                 """,x: 0, y: 580, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
                 """
-                Does the patient have callus? \(answer.answerRecord[0])
+                  Does the patient have callus? \(answer.answerRecord[0])
                 
-                Does the patient have corns?  \(answer.answerRecord[1])
+                  Does the patient have corns?  \(answer.answerRecord[1])
                 
-                Does the patient have tinea? \(answer.answerRecord[2])
+                  Does the patient have tinea? \(answer.answerRecord[2])
                 
-                Has the patient had a previous or current ulcer? \(answer.answerRecord[3])
+                  Has the patient had a previous or current ulcer? \(answer.answerRecord[3])
                 
-                Does the patient have thickened toenails? \(answer.answerRecord[4])
+                  Does the patient have thickened toenails? \(answer.answerRecord[4])
                 
-                Does the patient have ingrown toenails? \(answer.answerRecord[5])
+                  Does the patient have ingrown toenails? \(answer.answerRecord[5])
                 
-                Does the patient have bunions? \(answer.answerRecord[6])
+                  Does the patient have bunions? \(answer.answerRecord[6])
                 
-                Does the patient have hammer and clawed toes? \(answer.answerRecord[7])
+                  Does the patient have hammer and clawed toes? \(answer.answerRecord[7])
                 
-                Does the patient have flat feet? \(answer.answerRecord[8])
+                  Does the patient have flat feet? \(answer.answerRecord[8])
                 
-                Does the patient have high arched feet? \(answer.answerRecord[9])
+                  Does the patient have high arched feet? \(answer.answerRecord[9])
                 
-                Does the patient have Charcot foot? \(answer.answerRecord[10])
+                  Does the patient have Charcot foot? \(answer.answerRecord[10])
                 
-                Has the patient had any amputations? \(answer.answerRecord[11])
+                  Has the patient had any amputations? \(answer.answerRecord[11])
                 
-                Can you feel the pulse in the dorsalis pedis (DP)
-                  - Right foot :  \(answer.answerRecord[12])
-                  - Left foot  :  \(answer.answerRecord[13])
+                  Can you feel the pulse in the dorsalis pedis (DP)
+                    - Right foot :  \(answer.answerRecord[12])
+                    - Left foot  :  \(answer.answerRecord[13])
                 
-                Can you feel the pulse in the posterior tibial (TP)
-                  - Right foot :  \(answer.answerRecord[14])
-                  - Left foot  :  \(answer.answerRecord[15])
+                  Can you feel the pulse in the posterior tibial (TP)
+                    - Right foot :  \(answer.answerRecord[14])
+                    - Left foot  :  \(answer.answerRecord[15])
                 
-                MonoFilament test: \(answer.answerRecord[16])
+                  MonoFilament test: \(answer.answerRecord[16])
                 
-                IPSWICH touch test: Total Score\(answer.answerRecord[17])
+                  IPSWICH touch test: Total Score\(answer.answerRecord[17])
                 
                 """,x: 0, y: 610, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
         }

@@ -13,7 +13,8 @@ class UserAnswer : ObservableObject
 //    @Published var userDetails: [String] = Array(repeating: "Not given", count: 4)
     @Published var answerRecord: [String] = Array(repeating: "Not Answered", count: 20)
     @Published var assessmentRecord : [String] = Array(repeating: "Not Answered", count: 12)
-    @Published var dateRecords: [Date] = Array(repeating: Date(), count: 2)
+    @Published var timeRecords: [Date] = Array(repeating: Date(), count: 2)
+    @Published var assessmentTime: TimeInterval = 0
     @Published var riskFactor: [String] = Array(repeating: "Fuck", count : 25)
     
     // 0 ~ 5 : Monofilament test, 6 ~ 11 : IPSWICH test
@@ -23,6 +24,9 @@ class UserAnswer : ObservableObject
     @Published var system_g_risk = ""
     @Published var user_s_risk = ""
     @Published var pdf_url : URL?
+    //stratTime.timeIntervalSince(endTime)
+
+
     
 
     @Published var userInfo : [String] = ["", "", ""]
@@ -33,5 +37,4 @@ class UserAnswer : ObservableObject
             }
             answerRecord[index] = value
         }
-
 }

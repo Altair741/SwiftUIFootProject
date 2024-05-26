@@ -27,7 +27,7 @@ struct ContentView: View {
                     }
                     .onTapGesture {
                         //Record time, when assessment task statr
-                        answer.dateRecords.append(Date())
+                        answer.timeRecords.append(Date())
                     }
                     //Start uer log in page
                     NavigationLink(destination: SignInView()) {
