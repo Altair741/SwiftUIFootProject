@@ -166,7 +166,6 @@ struct Monofilament_test: View {
                 }
                 .simultaneousGesture(TapGesture().onEnded {
                     // Record time, when assessment task is done
-                    answer.dateRecords.append(Date())
                     answer.answerRecord[16] =
                     """
                     Final Score:

@@ -174,8 +174,6 @@ struct IPSWICH_test: View {
                     Text("Save Answer")
                 }
                 .simultaneousGesture(TapGesture().onEnded {
-                    // Record time, when assessment task is done
-                    answer.dateRecords.append(Date())
                     answer.answerRecord[17] =
                     """
                     Final Score:
