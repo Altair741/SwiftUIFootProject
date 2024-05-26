@@ -4,7 +4,7 @@ struct Q3: View {
     @State private var isSelected = false
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "If tinea does not go away, after the initial treatment, the patient would need to be referred to a GP or podiatrist."
-    private var task = "Q3"
+    private var task = "Tinea"
     @State private var showMedicalInfo = false
     @State private var nextQuesion = false
     @EnvironmentObject var answer : UserAnswer
@@ -60,7 +60,7 @@ struct Q3: View {
             } // Z
             .padding()
             .offset(y:-60)
-            .navigationTitle("Skin Q.3")
+            .navigationTitle("Tinea")
             .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {

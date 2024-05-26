@@ -4,7 +4,7 @@ struct Q5: View {
     @State private var isSelected = false
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "Thickened nails can cause pressure under the skin leading to ulcers. Infections may occur and with thick toenails, patients may have a hard time cutting them. "
-    private var task = "Q5"
+    private var task = "Thickened toenails"
     @State private var showMedicalInfo = false
     @EnvironmentObject var answer : UserAnswer
     @State private var nextQuesion = false
@@ -63,7 +63,7 @@ struct Q5: View {
             }
             .padding()
             .offset(y:-60)
-            .navigationTitle("Skint Q.5")
+            .navigationTitle("Thickened toenails")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {

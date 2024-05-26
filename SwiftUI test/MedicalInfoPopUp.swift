@@ -19,7 +19,7 @@ struct MedicalInfoPopUp: View {
             {
                 Text(medicalInfoString)
                 // Add conditional logic to navigate different view
-                if task == "Q1"{
+                if task == "Callus"{
                     NavigationLink(destination: Q1().navigationBarBackButtonHidden(true)) {
                         Text("Back")
                             .frame(width: 120, height: 50)
@@ -29,7 +29,7 @@ struct MedicalInfoPopUp: View {
                     }.simultaneousGesture(TapGesture())
 
                     
-                }else if task == "Q2"
+                }else if task == "Corns"
                 {
                     NavigationLink(destination: Q2().navigationBarBackButtonHidden(true)) {
                         Text("Back")
@@ -39,7 +39,7 @@ struct MedicalInfoPopUp: View {
                             .cornerRadius(25)
                     }.simultaneousGesture(TapGesture())
 
-                }else if task == "Q3"
+                }else if task == "Tinea"
                 {
                     NavigationLink(destination: Q3().navigationBarBackButtonHidden(true)) {
                         Text("Back")
@@ -50,7 +50,7 @@ struct MedicalInfoPopUp: View {
                     }.simultaneousGesture(TapGesture())
 
                     
-                }else if task == "Q4"
+                }else if task == "Ulcer"
                 {
                     NavigationLink(destination: Q4().navigationBarBackButtonHidden(true)) {
                         Text("Back")
@@ -61,7 +61,7 @@ struct MedicalInfoPopUp: View {
                     }.simultaneousGesture(TapGesture())
 
                     
-                }else if task == "Q5"
+                }else if task == "Thickened toenails"
                 {
                     NavigationLink(destination: Q5().navigationBarBackButtonHidden(true)) {
                         Text("Back")
@@ -70,7 +70,7 @@ struct MedicalInfoPopUp: View {
                             .foregroundColor(.white)
                             .cornerRadius(25)
                     }.simultaneousGesture(TapGesture())
-                }else if task == "Q6"
+                }else if task == "Ingrown toenails"
                 {NavigationLink(destination: Q6().navigationBarBackButtonHidden(true)) {
                     Text("Back")
                         .frame(width: 120, height: 50)

@@ -69,7 +69,7 @@ struct Q8: View {
             }
             .padding()
             .offset(y:-60)
-            .navigationTitle("Skin Q.8")
+            .navigationTitle("Clawed toes")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

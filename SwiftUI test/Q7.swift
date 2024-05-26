@@ -71,7 +71,7 @@ struct Q7: View {
                 
             }
             .padding()
-            .navigationTitle("Skin Q.7")
+            .navigationTitle("Bunions")
             .offset(y:-60)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

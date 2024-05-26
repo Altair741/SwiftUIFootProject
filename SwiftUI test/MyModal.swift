@@ -20,6 +20,7 @@ struct MyModal: View {
                 Text("This test requires a monofilament, if you do not have one press skip and move onto the Ipswich Touch Test")
                     .padding(.top, 30)
                     .padding(.bottom, 20)
+                    .font(.title2)
                 
                 HStack {
                     NavigationLink(destination: Monofilament_test()) {

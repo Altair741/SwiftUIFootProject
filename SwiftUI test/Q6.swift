@@ -12,7 +12,7 @@ struct Q6: View {
     @State private var isSelected = false
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "As the nails continue to grow forward, the edges of the nail can penetrate causing can infection."
-    private var task = "Q6"
+    private var task = "Ingrown toenails"
     @State private var showMedicalInfo = false
     @EnvironmentObject var answer : UserAnswer
     @State private var nextQuesion = false
@@ -68,7 +68,7 @@ struct Q6: View {
                 }
             }
             .offset(y:-60)
-            .navigationTitle("Skin Q.6")
+            .navigationTitle("Ingrown toenails")
             .padding()
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

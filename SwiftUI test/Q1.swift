@@ -32,7 +32,7 @@ struct Q1: View {
     // Record User answer
     @EnvironmentObject var answer : UserAnswer
     
-    private var task = "Q1"
+    private var task = "Callus"
     
     
     var body: some View {
@@ -86,7 +86,7 @@ struct Q1: View {
                 }
                 
             }// end ZStack
-            .navigationTitle("Skin Q.1")
+            .navigationTitle("Callus")
             .offset(y:-60)
             .popover(isPresented: $showMedicalInfo) {
                             VStack {

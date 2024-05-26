@@ -68,7 +68,7 @@ struct Q12: View {
                 }
                 .padding()
                 .offset(y:-60)
-                .navigationTitle("Skin Q.12")
+                .navigationTitle("Amputations")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
