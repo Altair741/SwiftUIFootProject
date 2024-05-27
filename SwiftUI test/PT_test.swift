@@ -17,12 +17,12 @@ struct PT_test: View {
     @State private var medicalInfoScript = "For the following check you may not be able to find the pulse if there is a lot of swelling around the ankle and if the arteries are deep, if you cannot feel a pulse and you think the patient may have circulation problems refer them to the local doctor. Check right foot first. "
     
     private var task = "PT_test"
-    @State private var showModal: Bool = false
     @State private var showMedicalInfo = false
     @State private var showPictorialResources = false
-    @State private var nextQuesion = false
     @EnvironmentObject var answer : UserAnswer
     @State private var player = AVPlayer()
+    @State private var showAlert = false
+    @State private var allquestionAnswered = false
 
     init() {
         print("PT_test initialized")
@@ -84,11 +84,12 @@ struct PT_test: View {
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
                     }
-                    
-                    NavigationLink(destination: MyModal(showModal: $showModal)) {
-                        Text("Save Answer")
+                    NavigationLink(destination: MyModal(), isActive: $allquestionAnswered) {
+                        Text("Save Anwser")
+                            .onTapGesture {
+                            checkQuestionCompletion()
+                        }
                     }
-
                     .padding(.leading, 10)
                     .navigationTitle("PT Test")
                     .toolbar {
@@ -96,7 +97,7 @@ struct PT_test: View {
                             Button {
                                 showMedicalInfo.toggle();
                             } label: {
-                                Label("MediInfo", systemImage: "info.circle")
+                                Label("MediInfo", systemImage: "cross.circle.fill")
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -108,7 +109,15 @@ struct PT_test: View {
                         }
                     }
                     
-                }.popover(isPresented: $showMedicalInfo) {
+                }
+                .alert(isPresented: $showAlert, content: {
+                    Alert(
+                        title: Text("Incomplete Information"),
+                        message: Text("Please fill in all fields."),
+                        dismissButton: .default(Text("OK"))
+                    )
+                })
+                .popover(isPresented: $showMedicalInfo) {
                     VStack {
                         Text(medicalInfoScript)
                             .padding()
@@ -134,6 +143,18 @@ struct PT_test: View {
                 
             }
         }
+        func checkQuestionCompletion()
+        {
+            if answer.answerRecord[14] == "Not Answered" || answer.answerRecord[15] == "Not Answered"
+            {
+                showAlert = true
+            }
+            
+            if answer.answerRecord[14] != "Not Answered" || answer.answerRecord[15] != "Not Answered"
+            {
+                allquestionAnswered = true
+            }
+    }
         
     }
 

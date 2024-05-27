@@ -15,7 +15,7 @@ struct DP_test: View {
     @State private var isSelected3 = false
     @State private var isSelected4 = false
     @State private var isSaved = false
-    
+    @State private var allquestionAnswered = false
     @State private var medicalInfoScript = "For the following check you may not be able to find the pulse if there is a lot of swelling around the ankle and if the arteries are deep, if you cannot feel a pulse and you think the patient may have circulation problems refer them to the local doctor. Check right foot first."
     
     private var task = "DP_test"
@@ -24,14 +24,15 @@ struct DP_test: View {
     @State private var nextQuesion = false
     @EnvironmentObject var answer : UserAnswer
     @State private var player = AVPlayer()
+    @State private var showAlert = false
     
     
     var body: some View {
-
+        
         VStack{
             ScrollView{
-            VStack {
-
+                VStack {
+                    
                     VStack(spacing: 30) {
                         
                         
@@ -42,7 +43,7 @@ struct DP_test: View {
                             .clipped()
                         
                         Text("Can you feel the pulse in the dorsalis pedis")
-                        ProgressBar2(progess: 3)
+                        ProgressBar2(progess: 25)
                         Text("Right Foot")
                         
                         HStack {
@@ -84,8 +85,11 @@ struct DP_test: View {
                             .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
                         }
                         
-                        NavigationLink(destination: PT_test()) {
+                        NavigationLink(destination: PT_test(), isActive: $allquestionAnswered) {
                             Text("Save Anwser")
+                                .onTapGesture {
+                                checkQuestionCompletion()
+                            }
                         }
                         .padding(.leading, 10)
                         .navigationTitle("DP Test")
@@ -94,7 +98,7 @@ struct DP_test: View {
                                 Button {
                                     showMedicalInfo.toggle();
                                 } label: {
-                                    Label("MediInfo", systemImage: "info.circle")
+                                    Label("MediInfo", systemImage: "cross.circle.fill")
                                 }
                             }
                             ToolbarItem(placement: .navigationBarTrailing) {
@@ -107,15 +111,23 @@ struct DP_test: View {
                         }
                         
                     }
+                    .alert(isPresented: $showAlert, content: {
+                        Alert(
+                            title: Text("Incomplete Information"),
+                            message: Text("Please fill in all fields."),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    })
                     .popover(isPresented: $showMedicalInfo) {
-                                    VStack {
-                                        Text(medicalInfoScript)
-                                            .padding()
-                                            .multilineTextAlignment(.center)
-                                        Spacer()
-                                    }
-                                }
-
+                        VStack {
+                            Text(medicalInfoScript)
+                                .padding()
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+                    }
+                    
+                    
                     .fullScreenCover(isPresented: $showPictorialResources)
                     {
                         NavigationView {
@@ -131,6 +143,7 @@ struct DP_test: View {
                         }
                     }
                 }
+                
                 .onReceive([nextQuesion].publisher.first()) { _ in
                     player.pause()
                 }
@@ -141,7 +154,21 @@ struct DP_test: View {
                     player.play()
                 }
             }
+            
         }
     }
+    func checkQuestionCompletion()
+    {
+        if answer.answerRecord[12] == "Not Answered" || answer.answerRecord[13] == "Not Answered"
+        {
+            showAlert = true
+        }
+        
+        if answer.answerRecord[12] != "Not Answered" || answer.answerRecord[13] != "Not Answered"
+        {
+            allquestionAnswered = true
+        }
+    }
+
 }
 

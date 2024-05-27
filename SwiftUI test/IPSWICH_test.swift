@@ -27,11 +27,14 @@ struct IPSWICH_test: View {
     @State private var medicalInfoScript = "Lightly touch the indicated parts of the foot and hold for 1 to 2 seconds. Do not press, poke, tap, or stroke. If the response is no, do not try again or press harder. The toes must be touched in the following order."
     private var task = "IPSWICH_touch_test"
     @State private var showMedicalInfo = false
-    @State private var nextQuesion = false
+    @State private var nextQuestion = false
     @EnvironmentObject var answer : UserAnswer
     // score value to Right foot
     @State private var score_rf: Int = 0
     @State private var score_lf: Int = 0
+    @State private var testRecord: [String] = Array(repeating: "Not Answered", count: 6)
+    @State private var showAlert = false
+
 
     // 16 user answer.
     
@@ -60,12 +63,16 @@ struct IPSWICH_test: View {
                             isSelected_R_1 = true
                             isSelected_R_1_No = false
                             score_rf += 1
+                            testRecord[0] = "yes"
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1))
                         Button("No") {
                             isSelected_R_1 = false
                             isSelected_R_1_No = true
                             answer.IPSWICHScore += 1
+                            testRecord[0] = "yes"
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1_No))
                     }.padding(10)
@@ -79,12 +86,16 @@ struct IPSWICH_test: View {
                             isSelected_R_2 = true
                             isSelected_R_2_No = false
                             score_rf += 1
+                            testRecord[1] = "yes"
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2))
                         Button("No") {
                             isSelected_R_2 = false
                             isSelected_R_2_No = true
                             answer.IPSWICHScore += 1
+                            testRecord[1] = "yes"
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2_No))
                     }.padding(10)
@@ -97,12 +108,16 @@ struct IPSWICH_test: View {
                             isSelected_R_3 = true
                             isSelected_R_3_No = false
                             score_rf += 1
+                            testRecord[2] = "yes"
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3))
                         Button("No") {
                             isSelected_R_3 = false
                             isSelected_R_3_No = true
                             answer.IPSWICHScore += 1
+                            testRecord[2] = "yes"
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3_No))
                     }.padding(10)
@@ -115,6 +130,8 @@ struct IPSWICH_test: View {
                             isSelected_L_1 = true
                             isSelected_L_1_No = false
                             score_rf += 1
+                            testRecord[3] = "yes"
+
 
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1))
@@ -122,7 +139,7 @@ struct IPSWICH_test: View {
                             isSelected_L_1 = false
                             isSelected_L_1_No = true
                             answer.IPSWICHScore += 1
-
+                            testRecord[3] = "yes"
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1_No))
                     }.padding(10)
@@ -135,13 +152,15 @@ struct IPSWICH_test: View {
                             isSelected_L_2 = true
                             isSelected_L_2_No = false
                             score_rf += 1
+                            testRecord[4] = "yes"
+
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2))
                         Button("No") {
                             isSelected_L_2 = false
                             isSelected_L_2_No = true
                             answer.IPSWICHScore += 1
-
+                            testRecord[4] = "yes"
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2_No))
                     }.padding(10)
@@ -154,14 +173,14 @@ struct IPSWICH_test: View {
                             isSelected_L_3 = true
                             isSelected_L_3_No = false
                             score_rf += 1
-
+                            testRecord[5] = "yes"
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3))
                         Button("No") {
                             isSelected_L_3 = false
                             isSelected_L_3_No = true
                             answer.IPSWICHScore += 1
-
+                            testRecord[5] = "yes"
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3_No))
                     }
@@ -171,9 +190,11 @@ struct IPSWICH_test: View {
                 .padding()
                 //save answer and link to next question
                 Spacer().padding(7)
-                NavigationLink(destination: RiskCalculator()){
-                    
-                    Text("Save Answer")
+                NavigationLink(destination: RiskCalculator(), isActive: $nextQuestion){
+                    Text("Save Answer").onTapGesture {
+                        // check all of the answers has fully answered
+                        checkQuestionCompletion()
+                    }
                 }
                 .simultaneousGesture(TapGesture().onEnded {
                     answer.answerRecord[17] =
@@ -192,7 +213,7 @@ struct IPSWICH_test: View {
                         Button {
                             showMedicalInfo.toggle();
                         } label: {
-                            Label("MediInfo", systemImage: "info.circle")
+                            Label("MediInfo", systemImage: "cross.circle.fill")
                         }
                     }
                 // Link to Pictorial resource in regards to Monofilament test
@@ -204,6 +225,13 @@ struct IPSWICH_test: View {
                         }
                     }
             }
+            .alert(isPresented: $showAlert, content: {
+                Alert(
+                    title: Text("Incomplete Information"),
+                    message: Text("Please fill in all fields."),
+                    dismissButton: .default(Text("OK"))
+                )
+            })
             .popover(isPresented: $showMedicalInfo) {
                             VStack {
                                 Text(medicalInfoScript)
@@ -216,6 +244,21 @@ struct IPSWICH_test: View {
             
         }
 
+    }
+    func checkQuestionCompletion()
+    {
+       if (testRecord[0] != "yes" ||
+            testRecord[1] != "yes" ||
+            testRecord[2] != "yes" ||
+            testRecord[3] != "yes" ||
+            testRecord[4] != "yes" ||
+            testRecord[5] != "yes")
+        {
+           showAlert = true
+       }
+        else{
+            nextQuestion = true
+        }
     }
 }
 
