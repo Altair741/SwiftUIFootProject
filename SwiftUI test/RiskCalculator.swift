@@ -117,12 +117,13 @@ struct RiskCalculator: View {
                     })
                     
                 }
-                NavigationLink(
-                    destination: ContentView().navigationBarBackButtonHidden(true)
-                        .navigationBarHidden(true),
-                    isActive: $startAgain,
-                    label: { EmptyView() }
-                )
+                
+//                NavigationLink(
+//                    destination: ContentView().navigationBarBackButtonHidden(true)
+//                        .navigationBarHidden(true),
+//                    isActive: $startAgain,
+//                    label: { EmptyView() }
+//                )
             }
         }
         .onAppear {

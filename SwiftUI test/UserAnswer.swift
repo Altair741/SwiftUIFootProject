@@ -18,7 +18,6 @@ class UserAnswer : ObservableObject
     @Published var timeRecords: [Date] = Array(repeating: Date(), count: 2)
     @Published var assessmentTime: TimeInterval = 0
     @Published var riskFactor: [String] = Array(repeating: "Fuck", count : 25)
-    
     // 0 ~ 5 : Monofilament test, 6 ~ 11 : IPSWICH test
     // The score go up when the paitient say No
     @Published var MonofilamentScore : Int = 0
@@ -27,6 +26,7 @@ class UserAnswer : ObservableObject
     @Published var user_s_risk = ""
     @Published var pdf_url : URL?
     //stratTime.timeIntervalSince(endTime)
+    @Published var currentDate : String?
 
 
     
