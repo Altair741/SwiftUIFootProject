@@ -90,9 +90,7 @@ struct Q1: View {
             .offset(y:-60)
             .popover(isPresented: $showMedicalInfo) {
                             VStack {
-                                Text(medicalInfoScript)
-                                    .padding()
-                                Spacer()
+                               MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
                             }
                         }
             .toolbar {

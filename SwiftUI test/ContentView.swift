@@ -38,14 +38,14 @@ struct ContentView: View {
                             .cornerRadius(10)
                     }
                     //Mingu : i'm gonna use this link to test my part of code!
-                    NavigationLink(destination:  Basic_assessment())
-                    {
-                        Text("Mingu Test")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
+//                    NavigationLink(destination:  MedicalInfoPopUp(medicalInfoString: "this is medical string", task: "Q8"))
+//                    {
+//                        Text("Mingu Test")
+//                            .padding()
+//                            .background(Color.blue)
+//                            .foregroundColor(.white)
+//                            .cornerRadius(10)
+//                    }
                 }
                 .navigationTitle("") // Hide default title
                 .navigationBarHidden(true) // Hide navigation bar

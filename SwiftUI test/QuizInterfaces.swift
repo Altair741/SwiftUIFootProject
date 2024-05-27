@@ -105,10 +105,10 @@ struct Quizinerfaces: View {
                 //                    DP_test()
                 //                }
                 // Mingu : Add connection to EndPage
-                //                else if sections[currentSection] == "Result" {
-                //                    EndPage()
-                //                        .navigationBarBackButtonHidden()
-                //                }
+//                else if sections[currentSection] == "Result" {
+//                    EndPage("","","")
+//                        .navigationBarBackButtonHidden()
+//                }
                 
             }
             // Mingu : edit toolbar items to switch each of sections.

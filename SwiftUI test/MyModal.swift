@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct MyModal: View {
-    @Binding var showModal: Bool
     @EnvironmentObject var answer : UserAnswer
     @State private var isSelected = false
     @State private var isSelected2 = false
