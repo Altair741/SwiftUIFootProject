@@ -36,6 +36,8 @@ struct SignInView: View {
     @State private var clinicName: String = ""
     @State private var workEmail: String = ""
     @State private var selectedClinic: Clinic?
+    @State private var showRegisterAlert = false
+    @State private var showSignInView = false
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: -34.8071, longitude: 138.6353), // Default: Mawson Lakes
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
@@ -64,11 +66,12 @@ let clinics: [Clinic] = [ // Sample clinic data
     @State private var navigateToEndPage = false
     
     var body: some View {
+        
         NavigationView {
             Form {
                 Section(header: Text("Clinic Details")) {
-                    TextField("Name", text: $clinicName)
-                    TextField("Work Email", text: $workEmail)
+                    TextField("Name : ", text: $clinicName)
+                    TextField("Work Email : ", text: $workEmail)
                         .keyboardType(.emailAddress)
                 }
 
@@ -110,6 +113,7 @@ let clinics: [Clinic] = [ // Sample clinic data
                                     Text("Register Clinic")
                                 }
                             }
+            
                             .navigationTitle("Clinic Registration")
                             .alert(isPresented: $showAlert) {
                                 Alert(
@@ -118,6 +122,22 @@ let clinics: [Clinic] = [ // Sample clinic data
                                     dismissButton: .default(Text("OK"))
                                 )
                             }
+                           
+                            .alert("Register?", isPresented: $showRegisterAlert) {
+                                Button("Yes") {
+                                    showRegisterAlert = false
+                                }
+                                Button("No", role: .cancel) {
+                                    navigateToEndPage = true // Trigger navigation to EndPage
+                                }
+                            } message: {
+                                Text("Do you want to register?")
+                            }
+                            .fullScreenCover(isPresented: $showSignInView) { // Use fullScreenCover for SignInView
+                                SignInView()
+                            }
+            
+            
                             .navigationDestination(for: Bool.self) { destination in
 //                                if navigateToEndPage {
 //                                    EndPage(clinicName: String, workEmail: String, clinicWorkplace: String)
@@ -127,16 +147,30 @@ let clinics: [Clinic] = [ // Sample clinic data
 //                                }
                                
                             }
+            
+//                                NavigationLink( destination: EndPage(
+//                                    clinicName: self.clinicName,
+//                                    workEmail: self.workEmail,
+//                                    clinicWorkplace: self.selectedClinic?.name ?? ""
+//                                ), isActive: $navigateToEndPage)
+//                                {
+//                                    EmptyView()
+//                                }
+//                            
+                            
+                            
                             .fullScreenCover(isPresented: $navigateToEndPage) {
                                 EndPage(
                                     clinicName: self.clinicName,
                                     workEmail: self.workEmail,
                                     clinicWorkplace: self.selectedClinic?.name ?? ""
                             )
-
-                                             // Pass data to EndPage
-                            }
-                        }
-     
-                    }
+            }
+        }.onAppear {
+            self.showRegisterAlert = true
+        }
+        .onDisappear(){
+            self.showRegisterAlert = false
+        }
+    }
 }

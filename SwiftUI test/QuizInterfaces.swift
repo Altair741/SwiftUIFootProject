@@ -66,7 +66,7 @@ struct Quizinerfaces: View {
     @State private var selectedButtonIndex: Int? = nil
     @State private var answers: [[String]]
     @State private var touchTest = IpswichTouchTest()
-
+    
     
     init(answers: [[String]] = []) {
         _answers = State(initialValue: answers)
@@ -100,15 +100,15 @@ struct Quizinerfaces: View {
                 else if sections[currentSection] == "examination" {
                     Q1()
                 }
-//                else if sections[currentSection] == "Touch" {
-//                    //TouchTestView(touchTest: $touchTest)
-//                    DP_test()
-//                }
+                //                else if sections[currentSection] == "Touch" {
+                //                    //TouchTestView(touchTest: $touchTest)
+                //                    DP_test()
+                //                }
                 // Mingu : Add connection to EndPage
-//                else if sections[currentSection] == "Result" {
-//                    EndPage()
-//                        .navigationBarBackButtonHidden()
-//                }
+                //                else if sections[currentSection] == "Result" {
+                //                    EndPage()
+                //                        .navigationBarBackButtonHidden()
+                //                }
                 
             }
             // Mingu : edit toolbar items to switch each of sections.
@@ -145,122 +145,122 @@ struct AskSectionView: View{
     let questions: [QuestionData]
     
     var body: some View {
-            NavigationView {
-                VStack {
-                    // Mingu: Test if selectedAnswers can capture the answer.
-                    //Text(selectedAnswers.indices.contains(1) ? selectedAnswers[1] : "")
-
-
-                    // Progress Bar
-                    ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
-                        .padding()
-
-                    // Question Area
-                    Group {
-                        if let imageName = questions[currentQuestionIndex].imageName {
-                            Image(imageName)
-                                .resizable()
-                                .scaledToFit()
-                        }
-
-                        Text(questions[currentQuestionIndex].question)
-                            .font(.headline)
-                            .padding()
-                    }
-
-                    // Answer Buttons
-                    ForEach(questions[currentQuestionIndex].buttonLabels, id: \.self) { label in
-                        Button(action: {
-                            selectedAnswers.append(label) // Store selected answer
-                            nextQuestion() // Move to next question
-                        }) {
-                            Text(label)
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                        }
-                    }
-
-                    // Navigation Buttons
-                    HStack {
-                        Button("Back") {
-                            previousQuestion()
-                        }
-                        .disabled(currentQuestionIndex == 0) // Disable if at the beginning
-
-                        Spacer() // Push buttons to sides
-
-                        Button("Next") {
-                            nextQuestion()
-                        }
-                        .disabled(currentQuestionIndex == questions.count - 1 || selectedAnswers.count <= currentQuestionIndex) // Disable at the end or if no answer is selected
-
-                    }
+        NavigationView {
+            VStack {
+                // Mingu: Test if selectedAnswers can capture the answer.
+                //Text(selectedAnswers.indices.contains(1) ? selectedAnswers[1] : "")
+                
+                
+                // Progress Bar
+                ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
                     .padding()
+                
+                // Question Area
+                Group {
+                    if let imageName = questions[currentQuestionIndex].imageName {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                    }
                     
-                    DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
-                                     List {
-                                         ForEach(0..<questions.count, id: \.self) { index in
-                                             Button(action: {
-                                                 if index > currentQuestionIndex {
-                                                     showAlert = true // Show alert if trying to skip ahead
-                                                 } else {
-                                                     currentQuestionIndex = index // Allow jumping back
-                                                 }
-                                             }) {
-                                                 Text("\(index + 1)")
-                                                     .foregroundColor(index == currentQuestionIndex ? Color.blue : Color.primary)
-                                             }
-                                         }
-                                     }
-                                     .frame(height: isQuestionListExpanded ? 200 : 0)
-                                     .clipped()
-                                 }
-                    // Mingu : navigate to skin condition question
-                    NavigationLink(
-                        destination: Q1(),
-                        isActive: $moveToSkinconditionCheck,
-                        label: {
-                            EmptyView()
-                        }
-                    )
+                    Text(questions[currentQuestionIndex].question)
+                        .font(.headline)
+                        .padding()
                 }
+                
+                // Answer Buttons
+                ForEach(questions[currentQuestionIndex].buttonLabels, id: \.self) { label in
+                    Button(action: {
+                        selectedAnswers.append(label) // Store selected answer
+                        nextQuestion() // Move to next question
+                    }) {
+                        Text(label)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                }
+                
+                // Navigation Buttons
+                HStack {
+                    Button("Back") {
+                        previousQuestion()
+                    }
+                    .disabled(currentQuestionIndex == 0) // Disable if at the beginning
+                    
+                    Spacer() // Push buttons to sides
+                    
+                    Button("Next") {
+                        nextQuestion()
+                    }
+                    .disabled(currentQuestionIndex == questions.count - 1 || selectedAnswers.count <= currentQuestionIndex) // Disable at the end or if no answer is selected
+                    
+                }
+                .padding()
+                
+                DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
+                    List {
+                        ForEach(0..<questions.count, id: \.self) { index in
+                            Button(action: {
+                                if index > currentQuestionIndex {
+                                    showAlert = true // Show alert if trying to skip ahead
+                                } else {
+                                    currentQuestionIndex = index // Allow jumping back
+                                }
+                            }) {
+                                Text("\(index + 1)")
+                                    .foregroundColor(index == currentQuestionIndex ? Color.blue : Color.primary)
+                            }
+                        }
+                    }
+                    .frame(height: isQuestionListExpanded ? 200 : 0)
+                    .clipped()
+                }
+                // Mingu : navigate to skin condition question
+                NavigationLink(
+                    destination: Q1(),
+                    isActive: $moveToSkinconditionCheck,
+                    label: {
+                        EmptyView()
+                    }
+                )
             }
-
         }
-
-        func nextQuestion() {
-            answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
-            // Mingu : Test to see value in console.
-            //           print(answer.assessmentRecord[currentQuestionIndex])
-
-            if currentQuestionIndex < questions.count - 1 {
-                currentQuestionIndex += 1
-            }
-            // Mingu modified, if it hit the last question..
-            else{
-                moveToSkinconditionCheck = true
-                // Mingu: If it hit the last questions store all of the answers to global variable
-            }
+        
+    }
+    
+    func nextQuestion() {
+        answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
+        // Mingu : Test to see value in console.
+        //           print(answer.assessmentRecord[currentQuestionIndex])
+        
+        if currentQuestionIndex < questions.count - 1 {
+            currentQuestionIndex += 1
         }
-
-        func previousQuestion() {
-            if currentQuestionIndex > 0 {
-                currentQuestionIndex -= 1
-            }
-        }
-        // Mingu : method to capture the answer and store them to global scale variable
-        func updateAnswer(_ answer: UserAnswer) {
-            for e in selectedAnswers {
-                answer.assessmentRecord.append(e)
-            }
+        // Mingu modified, if it hit the last question..
+        else{
+            moveToSkinconditionCheck = true
+            // Mingu: If it hit the last questions store all of the answers to global variable
         }
     }
     
-    
-    
-    
+    func previousQuestion() {
+        if currentQuestionIndex > 0 {
+            currentQuestionIndex -= 1
+        }
+    }
+    // Mingu : method to capture the answer and store them to global scale variable
+    func updateAnswer(_ answer: UserAnswer) {
+        for e in selectedAnswers {
+            answer.assessmentRecord.append(e)
+        }
+    }
+}
+
+
+
+
 struct TouchTestView: View{
     @Binding var touchTest: IpswichTouchTest
     @Environment(\.dismiss) var dismiss // For sheet dismissal

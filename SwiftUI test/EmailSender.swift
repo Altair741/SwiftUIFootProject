@@ -13,6 +13,7 @@ struct EmailSender: UIViewControllerRepresentable {
     let attachmentData: Data
     let attachmentMimeType: String
     let attachmentFileName: String
+    @EnvironmentObject var answer: UserAnswer
     
     
     func makeCoordinator() -> MailComposerCoordinator {
@@ -29,13 +30,12 @@ struct EmailSender: UIViewControllerRepresentable {
         mailComposeViewController.setSubject(subject)
         mailComposeViewController.setMessageBody(messageBody, isHTML: isHTML)
         mailComposeViewController.addAttachmentData(attachmentData, mimeType: attachmentMimeType, fileName: attachmentFileName)
-        
         return mailComposeViewController
     }
     
     func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: Context) {
     }
-}
+    }
 
 
 class MailComposerCoordinator: NSObject, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {

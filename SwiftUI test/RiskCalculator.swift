@@ -22,7 +22,6 @@ struct RiskCalculator: View {
     @State private var allquestionAnswered = false
     @State private var startAgain = false
     
-    
     var body: some View {
         ZStack{
             if !checkQuestionCompletion(){
@@ -332,8 +331,4 @@ struct RiskCalculator: View {
     }
 }
 
-#Preview {
-    RiskCalculator()
-        .environmentObject(UserAnswer())
-}
 

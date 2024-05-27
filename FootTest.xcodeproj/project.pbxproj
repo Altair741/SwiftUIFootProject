@@ -136,8 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				F9368EFF2BFD8B94004D79D3 /* EmailSender.swift */,
-				F9368F0B2BFE5FAA004D79D3 /* ViewController.swift */,
 				F9933C602BF3D06300A264B6 /* EndPage.swift */,
+				F9368F0B2BFE5FAA004D79D3 /* ViewController.swift */,
 				F9933C5F2BF3D06300A264B6 /* DP_test.mp4 */,
 				F9933C7C2BF3D08D00A264B6 /* PT_test.mp4 */,
 				F9933C652BF3D08000A264B6 /* MyModal.swift */,
