@@ -10,6 +10,10 @@ struct EmailSender: UIViewControllerRepresentable {
     var subject: String
     var messageBody: String
     var isHTML: Bool
+    let attachmentData: Data
+    let attachmentMimeType: String
+    let attachmentFileName: String
+    
     
     func makeCoordinator() -> MailComposerCoordinator {
         return MailComposerCoordinator(parent: self)
@@ -18,12 +22,14 @@ struct EmailSender: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> MFMailComposeViewController {
         
         print("Creating MFMailComposeViewController")
-
+        
         let mailComposeViewController = MFMailComposeViewController()
         mailComposeViewController.mailComposeDelegate = context.coordinator
         mailComposeViewController.setToRecipients(recipients)
         mailComposeViewController.setSubject(subject)
         mailComposeViewController.setMessageBody(messageBody, isHTML: isHTML)
+        mailComposeViewController.addAttachmentData(attachmentData, mimeType: attachmentMimeType, fileName: attachmentFileName)
+        
         return mailComposeViewController
     }
     
@@ -41,7 +47,7 @@ class MailComposerCoordinator: NSObject, MFMailComposeViewControllerDelegate, UI
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         print("Mail composition finished with result: \(result)")
-
+        
         controller.dismiss(animated: true) {
             self.parent.isShowing = false
         }

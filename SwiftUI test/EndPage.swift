@@ -7,46 +7,68 @@
 import SwiftUI
 import PDFKit
 import UIKit
-import MessageUI // email..
+import MessageUI
+
 
 struct EndPage: View {
     @EnvironmentObject var answer: UserAnswer
     @EnvironmentObject var locationManager: LocationManager2
+    @State private var sendMail = false
     
-    let clinicName: String
-    let workEmail: String
-    let clinicWorkplace: String
     
     var currentLocation: String {
-            guard let placemark = locationManager.placemark else {
-                return "Location not available"
-            }
-            // get location information
-            let address = [
-                placemark.subThoroughfare ?? "",
-                placemark.thoroughfare ?? "",
-                placemark.locality ?? "",
-                placemark.administrativeArea ?? "",
-                placemark.postalCode ?? "",
-                placemark.country ?? ""
-            ].filter { !$0.isEmpty }.joined(separator: ", ")
-            
-            return address
+        guard let placemark = locationManager.placemark else {
+            return "Location not available"
         }
-
+        // get location information
+        let address = [
+            placemark.subThoroughfare ?? "",
+            placemark.thoroughfare ?? "",
+            placemark.locality ?? "",
+            placemark.administrativeArea ?? "",
+            placemark.postalCode ?? "",
+            placemark.country ?? ""
+        ].filter { !$0.isEmpty }.joined(separator: ", ")
+        
+        return address
+    }
+    
     var body: some View {
-
+        Spacer().navigationBarBackButtonHidden(true)
+        
         VStack
         {
+            
             PDFdocument(pdfDoc: PDFDocument(data: createPDF())!)
-            Button(action: {savePDF()}, label: {Text("Save PDF")})
+            Button(action: {
+                sendMail = true
+                savePDF()
+            }, label: {Text("Share")})
+            .sheet(isPresented: $sendMail) {
+                if MFMailComposeViewController.canSendMail() {
+                    EmailSender(
+                        isShowing: $sendMail,
+                        recipients: [answer.userInfo[2]],
+                        subject: "Foot Assessment Result",
+                        messageBody: "Please find the link in regards to foot assessment result \(String(describing: answer.pdf_url))",
+                        isHTML: false,
+                        attachmentData: createPDF(),
+                        attachmentMimeType: "application/pdf",
+                        attachmentFileName: "FootAssessmentResult.pdf"
+                    )
+                } else {
+                    Text("Cannot send the mail")
+                }
+            }.onDisappear {
+                sendMail = false
+                // Error AttributeGraph:
+            }
         }
+        .navigationBarBackButtonHidden(true)
     }
     // func to create PDF
-    @MainActor
     private func createPDF() -> Data{
         // Capture current date and time
-        
         let dateFormatter = DateFormatter()
         //dateFormatter.dateFormat = "dd. M. yyyy HH:mm:ss"
         dateFormatter.dateFormat = "dd. M. yyyy"
@@ -55,12 +77,12 @@ struct EndPage: View {
         
         let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(
             // A4 size
-        x: 0, y: 0, width: 595, height: 2000
+            x: 0, y: 0, width: 595, height: 2000
         ))
         
         let data = pdfRenderer.pdfData{ context in context.beginPage()
             
-        
+            
             
             // Text goes here
             alignTexst(value: "Assessment Result", x: 0, y: 10, width: 595, height: 50, alignment: .center, textFont: UIFont.systemFont(ofSize: 30, weight: .bold))
@@ -68,94 +90,100 @@ struct EndPage: View {
             // Think of how to capture those data,d
             // Also need to include: location, date, basic info of healthworker, risk assessment.
             alignTexst(value: """
-                  Date: \(formattedDate)
-                  Location : \(currentLocation)
-                  \(clinicName)
-                  \(workEmail)
-                  \(clinicWorkplace)
-                  Risk assessment level : High
-                  """, x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
+                
+                Date: \(formattedDate)
+                Location : \(currentLocation)
+                Name : \(answer.userInfo[0])
+                Work Place : \(answer.userInfo[2])
+                Email : \(answer.userInfo[1])
+                system risk assessment level : \(answer.system_g_risk)
+                Health woker risk assessment level : \(answer.user_s_risk)
+                
+                """,x: 0, y: 50, width: 595, height: 595,alignment: .right, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             
             alignTexst(value:
-            """
+                """
                 Assessment Task
                 
                 """,x: 0, y: 170, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
-            """
-                What kind of shoes is the patient wearing today?  \(answer.assessmentRecord[0])
+                """
+                  What kind of shoes is the patient wearing today?  \(answer.assessmentRecord[0])
                 
-                Does the patient have pain in their legs when walking?   \(answer.assessmentRecord[1])
+                  Does the patient have pain in their legs when walking?   \(answer.assessmentRecord[1])
                 
-                Does the patient have pain in their legs when lying down? \(answer.assessmentRecord[2])
+                  Does the patient have pain in their legs when lying down? \(answer.assessmentRecord[2])
                 
-                Does the patient get pins and needles? \(answer.assessmentRecord[3])
+                  Does the patient get pins and needles? \(answer.assessmentRecord[3])
                 
-                Does the patient feel sharp pain? \(answer.assessmentRecord[4])
+                  Does the patient feel sharp pain? \(answer.assessmentRecord[4])
                 
-                Do the patient's feet get numb? \(answer.assessmentRecord[5])
+                  Do the patient's feet get numb? \(answer.assessmentRecord[5])
                 
-                Do the patient’s toes get numb?  \(answer.assessmentRecord[6])
+                  Do the patient’s toes get numb?  \(answer.assessmentRecord[6])
                 
-                Does the patient make regular podiatrist visits?  \(answer.assessmentRecord[7])
+                  Does the patient make regular podiatrist visits?  \(answer.assessmentRecord[7])
                 
-                Does the patient smoke?  \(answer.assessmentRecord[8])
+                  Does the patient smoke?  \(answer.assessmentRecord[8])
                 
-                What is the current condition of the patient’s skin?  \(answer.assessmentRecord[9])
+                  What is the current condition of the patient’s skin?  \(answer.assessmentRecord[9])
                 
-                Is there any swelling around the feet and ankle?  \(answer.assessmentRecord[10])
+                  Is there any swelling around the feet and ankle?  \(answer.assessmentRecord[10])
                 
-                What is the temperature of the foot?  \(answer.assessmentRecord[11])
+                  What is the temperature of the foot?  \(answer.assessmentRecord[11])
                 
                 
-
+                
                 """,x: 0, y: 200, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
             
             alignTexst(value:
-            """
-                Skin conditions
+                """
+                  Skin conditions
                 
                 """,x: 0, y: 580, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 15, weight: .bold))
             alignTexst(value:
-            """
-                Does the patient have callus? \(answer.answerRecord[0])
+                """
+                  Does the patient have callus? \(answer.answerRecord[0])
                 
-                Does the patient have corns?  \(answer.answerRecord[1])
+                  Does the patient have corns?  \(answer.answerRecord[1])
                 
-                Does the patient have tinea? \(answer.answerRecord[2])
+                  Does the patient have tinea? \(answer.answerRecord[2])
                 
-                Has the patient had a previous or current ulcer? \(answer.answerRecord[3])
+                  Has the patient had a previous or current ulcer? \(answer.answerRecord[3])
                 
-                Does the patient have thickened toenails? \(answer.answerRecord[4])
+                  Does the patient have thickened toenails? \(answer.answerRecord[4])
                 
-                Does the patient have ingrown toenails? \(answer.answerRecord[5])
+                  Does the patient have ingrown toenails? \(answer.answerRecord[5])
                 
-                Does the patient have bunions? \(answer.answerRecord[6])
+                  Does the patient have bunions? \(answer.answerRecord[6])
                 
-                Does the patient have hammer and clawed toes? \(answer.answerRecord[7])
+                  Does the patient have hammer and clawed toes? \(answer.answerRecord[7])
                 
-                Does the patient have flat feet? \(answer.answerRecord[8])
+                  Does the patient have flat feet? \(answer.answerRecord[8])
                 
-                Does the patient have high arched feet? \(answer.answerRecord[9])
+                  Does the patient have high arched feet? \(answer.answerRecord[9])
                 
-                Does the patient have Charcot foot? \(answer.answerRecord[10])
+                  Does the patient have Charcot foot? \(answer.answerRecord[10])
                 
-                Has the patient had any amputations? \(answer.answerRecord[11])
+                  Has the patient had any amputations? \(answer.answerRecord[11])
                 
-                Can you feel the pulse in the dorsalis pedis (DP)
-                  - Right foot :  \(answer.answerRecord[12])
-                  - Left foot  :  \(answer.answerRecord[13])
+                  Can you feel the pulse in the dorsalis pedis (DP)
+                    - Right foot :  \(answer.answerRecord[12])
+                    - Left foot  :  \(answer.answerRecord[13])
                 
-                Can you feel the pulse in the posterior tibial (TP)
-                  - Right foot :  \(answer.answerRecord[14])
-                  - Left foot  :  \(answer.answerRecord[15])
+                  Can you feel the pulse in the posterior tibial (TP)
+                    - Right foot :  \(answer.answerRecord[14])
+                    - Left foot  :  \(answer.answerRecord[15])
                 
-                MonoFilamentTest: \(answer.answerRecord[16])
+                  MonoFilament test: \(answer.answerRecord[16])
+                
+                  IPSWICH touch test: Total Score\(answer.answerRecord[17])
                 
                 """,x: 0, y: 610, width: 595, height: 595,alignment: .left, textFont: UIFont.systemFont(ofSize: 13, weight: .regular))
- 
         }
+        
         return data
+        
     }
     
     func alignTexst(value :String, x: Int, y: Int, width: Int, height: Int, alignment: NSTextAlignment, textFont: UIFont)
@@ -171,25 +199,36 @@ struct EndPage: View {
         let textRect = CGRect(x: x, y: y, width: width, height: height)
         
         value.draw(in: textRect, withAttributes: attributes)
+        
     }
     
-    
-    
-    @MainActor
     func savePDF(){
         let fileName = "FootAssessmentResult.pdf"
         let pdfData = createPDF()
         
         if let documentDirect = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
-            let documentURL =
-            documentDirect.appendingPathComponent(fileName)
+            let documentURL = documentDirect.appendingPathComponent(fileName)
             do{
                 try pdfData.write(to: documentURL)
                 print("PDF saved at: \(documentURL) ")
+                answer.pdf_url = documentURL
             } catch
             {
                 print("cannt saved PDF document")
             }
         }
+    }
+}
+
+struct PDFViewUI: UIViewRepresentable {
+    let pdfDocument: PDFDocument
+    
+    func makeUIView(context: Context) -> PDFView {
+        let pdfView = PDFView()
+        pdfView.document = pdfDocument
+        return pdfView
+    }
+    
+    func updateUIView(_ uiView: PDFView, context: Context) {
     }
 }

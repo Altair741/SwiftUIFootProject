@@ -4,13 +4,12 @@ struct Q2: View {
     @State private var isSelected = false
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "As corns are caused by pressure, patients diagnosed with diabetes may not feel the sensation and this may lead to ulcers."
-    private var task = "Q2"
+    private var task = "Corns"
     @State private var showMedicalInfo = false
     @EnvironmentObject var answer : UserAnswer
     @State private var nextQuesion = false
     
     var body: some View {
-        VStack{
             ZStack {
                 VStack(spacing : 30) {
                     Image("corns")
@@ -59,7 +58,7 @@ struct Q2: View {
                 
             }// ZStack
             .offset(y:-60)
-            .navigationTitle("Skin Q.2")
+            .navigationTitle("Corns")
             .padding()
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -70,11 +69,15 @@ struct Q2: View {
                     }
                 }
             }
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
             
         }
     }
-}
+

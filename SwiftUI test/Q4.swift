@@ -11,7 +11,7 @@ struct Q4: View {
     @State private var isSelected = false
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "The damage would build up on their foot as they would have no feeling. They can be initially caused by injuries or from pressure."
-    private var task = "Q4"
+    private var task = "Ulcer"
     @State private var showMedicalInfo = false
     @EnvironmentObject var answer : UserAnswer
     @State private var nextQuesion = false
@@ -69,7 +69,7 @@ struct Q4: View {
             }
             .padding()
             .offset(y:60)
-            .navigationTitle("Skin Q.4")
+            .navigationTitle("Ulcer")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
@@ -81,10 +81,14 @@ struct Q4: View {
             }
             .offset(y:-60)
 
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
         }
     }
 }

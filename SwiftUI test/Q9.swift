@@ -68,7 +68,7 @@ struct Q9: View {
             }
             .padding()
             .offset(y:-60)
-            .navigationTitle("Skin Q.9")
+            .navigationTitle("Flat feet")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
@@ -78,10 +78,15 @@ struct Q9: View {
                         }
                     }
                 }
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
+
 
         }
     }

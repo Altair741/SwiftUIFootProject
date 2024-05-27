@@ -9,14 +9,16 @@ import SwiftUI
 
 @main
 struct SwiftUI_testApp: App {
-    @StateObject var userAnswer = UserAnswer()
     @StateObject var locationManager = LocationManager2()
+    @StateObject var answer = UserAnswer()
+
     
     var body: some Scene {
         WindowGroup {
-            LaunchScreen()
-                .environmentObject(userAnswer)
-                .environmentObject(locationManager)
+                LaunchScreen()
+                    .environmentObject(answer)
+                    .environmentObject(locationManager)
+            
         }
     }
 }

@@ -71,7 +71,7 @@ struct Q7: View {
                 
             }
             .padding()
-            .navigationTitle("Skin Q.7")
+            .navigationTitle("Bunions")
             .offset(y:-60)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -82,10 +82,15 @@ struct Q7: View {
                         }
                     }
                 }
-            .fullScreenCover(isPresented: $showMedicalInfo)
-            {
-                MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-            }
+            .popover(isPresented: $showMedicalInfo) {
+                            VStack {
+                                Text(medicalInfoScript)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }
+
         }
     }
 }

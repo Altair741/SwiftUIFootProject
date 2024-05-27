@@ -68,7 +68,7 @@ struct Q11: View {
                 }
                 .padding()
                 .offset(y:-60)
-                .navigationTitle("Skin Q.11")
+                .navigationTitle("Charcot foot")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
@@ -78,18 +78,17 @@ struct Q11: View {
                             }
                         }
                 }
-                .fullScreenCover(isPresented: $showMedicalInfo)
-                {
-                    MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
-                }
+                .popover(isPresented: $showMedicalInfo) {
+                                VStack {
+                                    Text(medicalInfoScript)
+                                        .padding()
+                                        .multilineTextAlignment(.center)
+                                    Spacer()
+                                }
+                            }
+
             }
         }
-        .onDisappear {
-                // back to origin status setting
-                isSelected = false
-                isSelected2 = false
-                showMedicalInfo = false
-                nq = false
-            }
+       
     }
 }
