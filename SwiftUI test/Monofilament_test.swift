@@ -44,7 +44,7 @@ struct Monofilament_test: View {
                     
                     Text("press the monofilament against the points indicated in the picture ")
                     
-                    ProgressBar2(progess: 16)
+                    ProgressBar2(progess: 27)
                     
                     Text("Right foot").padding(10).font(.title)
                     Text("Spot 1: Big Toe").padding(.leading, -140).padding(-30).padding()
