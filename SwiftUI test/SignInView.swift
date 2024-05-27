@@ -156,7 +156,7 @@ let clinics: [Clinic] = [ // Sample clinic data
 //                                {
 //                                    EmptyView()
 //                                }
-//                            
+//
                             
                             
                             .fullScreenCover(isPresented: $navigateToEndPage) {
