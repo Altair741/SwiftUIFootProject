@@ -51,9 +51,6 @@ struct Basic_assessment: View {
 }
 
 
-#Preview {
-    Basic_assessment()
-}
 
 
 

@@ -48,6 +48,7 @@ let questions: [QuestionData] = [
     QuestionData(question: "What is the condition of the skin?", imageName: nil, buttonLabels: ["Dry","Normal","Sweaty","Shiney"]),
     QuestionData(question: "what is the temperature of the foot?", imageName: nil, buttonLabels:["Cold","Warm","Hot"]),
     QuestionData(question: "Is there any swelling aroud the feet and ankle?", imageName: nil, buttonLabels: ["Yes", "No"])
+    
 ]
 let toesOrder = [
     (side: "Right", toe: "Big Toe", imageName: "rightBigToe.avif"),
@@ -100,10 +101,10 @@ struct Quizinerfaces: View {
                 else if sections[currentSection] == "examination" {
                     Q1()
                 }
-                //                else if sections[currentSection] == "Touch" {
-                //                    //TouchTestView(touchTest: $touchTest)
-                //                    DP_test()
-                //                }
+                                else if sections[currentSection] == "Touch" {
+                                    //TouchTestView(touchTest: $touchTest)
+                                    DP_test()
+                                }
                 // Mingu : Add connection to EndPage
 //                else if sections[currentSection] == "Result" {
 //                    EndPage("","","")
