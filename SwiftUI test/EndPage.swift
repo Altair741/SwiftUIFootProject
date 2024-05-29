@@ -18,9 +18,9 @@ struct EndPage: View {
     let clinicName: String
     let workEmail: String
     let clinicWorkplace: String
-    @State private var currentDate : String = ""
-    
-    
+    var currentDate : String {
+        getCurruentDate()
+    }
     
     var currentLocation: String {
         guard let placemark = locationManager.placemark else {
@@ -193,14 +193,14 @@ struct EndPage: View {
         
         
     }
-    func getCurruentDate() {
+    func getCurruentDate() -> String {
         let dateFormatter = DateFormatter()
         //dateFormatter.dateFormat = "dd. M. yyyy HH:mm:ss"
         dateFormatter.dateFormat = "dd. M. yyyy"
         let currentTime = Date()
         let formattedDate = dateFormatter.string(from: currentTime)
-        currentDate = formattedDate
         
+        return formattedDate
     }
 
     

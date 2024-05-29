@@ -25,7 +25,7 @@ struct SelectedButtonStyle: ButtonStyle {
 struct Q1: View {
     @State private var isSelected = false
     @State private var isSelected2 = false
-    @State private var medicalInfoScript = "Fissures are caused by cracks in the skin which go deep enough to cause bleeding. For patients diagnosed with diabetes, they may not be able to feel the pain causing further injuries and ulcers."
+    @State private var medicalInfoScript = "Callus/Fissures are caused by cracks in the skin which go deep enough to cause bleeding. For patients diagnosed with diabetes, they may not be able to feel the pain causing further injuries and ulcers."
     @State private var showMedicalInfo = false
     // to use controll screen to be full
     @State private var nextQuesion = false
@@ -68,7 +68,7 @@ struct Q1: View {
                             
                         }
                         )
-                        NavigationLink(destination: Q12()) {
+                        NavigationLink(destination: Q2()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)

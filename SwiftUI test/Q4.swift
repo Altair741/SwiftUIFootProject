@@ -82,13 +82,11 @@ struct Q4: View {
             .offset(y:-60)
 
             .popover(isPresented: $showMedicalInfo) {
-                            VStack {
-                                Text(medicalInfoScript)
-                                    .padding()
-                                    .multilineTextAlignment(.center)
-                                Spacer()
-                            }
-                        }
+                VStack {
+                   MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+                }
+
+            }
         }
     }
 }

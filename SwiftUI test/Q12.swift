@@ -4,7 +4,6 @@
 //
 //  Created by 강민구 on 29/4/2024.
 //
-
 import SwiftUI
 
 struct Q12: View {
@@ -31,7 +30,7 @@ struct Q12: View {
                     
                     Text("Has the patient had any amputations?")
                     ProgressBar2(progess: 24)
-
+                    
                     HStack {
                         NavigationLink(destination: DP_test()) {
                             Text("Yes")
@@ -46,7 +45,7 @@ struct Q12: View {
                             isSelected2 = false
                             nq = true
                             answer.answerRecord[11] = "Yes"
-
+                            
                         }
                         )
                         NavigationLink(destination: DP_test()) {
@@ -62,7 +61,7 @@ struct Q12: View {
                             isSelected2 = true
                             nq = true
                             answer.answerRecord[11] = "No"
-
+                            
                         })
                     }
                 }
@@ -71,22 +70,19 @@ struct Q12: View {
                 .navigationTitle("Amputations")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                showMedicalInfo.toggle();
-                            } label: {
-                                Label("MediInfo", systemImage: "cross.circle.fill")
-                            }
+                        Button {
+                            showMedicalInfo.toggle();
+                        } label: {
+                            Label("MediInfo", systemImage: "cross.circle.fill")
                         }
                     }
+                }
                 .popover(isPresented: $showMedicalInfo) {
-                                VStack {
-                                    Text(medicalInfoScript)
-                                        .padding()
-                                        .multilineTextAlignment(.center)
-                                    Spacer()
-                                }
-                            }
+                    VStack {
+                       MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+                    }
 
+                }
             }
         }
     }

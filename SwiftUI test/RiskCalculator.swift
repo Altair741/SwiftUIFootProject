@@ -24,10 +24,10 @@ struct RiskCalculator: View {
     
     var body: some View {
         ZStack{
-            if !checkQuestionCompletion(){
-                AlertPopup(allquestionAnswered : $allquestionAnswered, action : {}, startAain : $startAgain).zIndex(1)
-                // zIndex to screen layout index
-            }
+//            if !checkQuestionCompletion(){
+//                AlertPopup(allquestionAnswered : $allquestionAnswered, action : {}, startAain : $startAgain).zIndex(1)
+//                // zIndex to screen layout index
+//            }
             VStack {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
@@ -129,7 +129,7 @@ struct RiskCalculator: View {
             riskCalculate()
             getRisk()
             getAssessmentTime()
-            checkQuestionCompletion()
+//            checkQuestionCompletion()
         }
         .navigationTitle("Risk Assessment")
     }

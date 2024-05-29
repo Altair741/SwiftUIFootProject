@@ -71,13 +71,10 @@ struct Q3: View {
                     }
                 }
             .popover(isPresented: $showMedicalInfo) {
-                            VStack {
-                                Text(medicalInfoScript)
-                                    .padding()
-                                    .multilineTextAlignment(.center)
-                                Spacer()
-                            }
-                        }
-        }
+                VStack {
+                   MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+                }
+
+            }        }
     }
 }

@@ -27,11 +27,7 @@ class UserAnswer : ObservableObject
     @Published var pdf_url : URL?
     //stratTime.timeIntervalSince(endTime)
     @Published var currentDate : String?
-
-
-    
-
-    @Published var userInfo : [String] = ["", "", ""]
+    @Published var emailTosend : [String]?
     
     func updateAnswerRecord(at index: Int, with value: String) {
             guard index >= 0 && index < answerRecord.count else {

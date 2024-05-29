@@ -188,7 +188,7 @@ struct Monofilament_test: View {
                 .padding()
                 //save answer and link to next question
                 Spacer().padding(7)
-                NavigationLink(destination: IPSWICH_test(), isActive: $nextQuestion){
+                NavigationLink(destination: RiskCalculator(), isActive: $nextQuestion){
                     Text("Save Answer").onTapGesture {
                         // check all of the answers has fully answered
                         checkQuestionCompletion()
@@ -196,6 +196,7 @@ struct Monofilament_test: View {
                 }
                 .simultaneousGesture(TapGesture().onEnded {
                     // Record time, when assessment task is done
+                    answer.answerRecord[17] = "Task has sikpped"
                     answer.answerRecord[16] =
                     """
                     Final Score:
@@ -209,8 +210,8 @@ struct Monofilament_test: View {
             .offset(y:-40)
             .alert(isPresented: $showAlert, content: {
                 Alert(
-                    title: Text("Incomplete Information"),
-                    message: Text("Please fill in all fields."),
+                    title: Text("Not completed!"),
+                    message: Text("Please, enter the answer."),
                     dismissButton: .default(Text("OK"))
                 )
             })
@@ -234,13 +235,11 @@ struct Monofilament_test: View {
                 }
             }
             .popover(isPresented: $showMedicalInfo) {
-                            VStack {
-                                Text(medicalInfoScript)
-                                    .padding()
-                                    .multilineTextAlignment(.center)
-                                Spacer()
-                            }
-                        }
+                VStack {
+                   MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+                }
+
+            }
 
             
         }

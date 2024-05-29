@@ -5,8 +5,10 @@
 //  Created by Ethan Li on 14/5/2024.
 //
 
+
+
 import SwiftUI
-let sections = ["Basic prompt", "examination",]//"Touch", "Result"
+let sections = ["Basic prompt", "examination", "Touch"]//, "Result"
 // Change it to set globally.
 // 1. QuestionData Struct
 
@@ -15,6 +17,7 @@ struct QuestionData: Identifiable { // Make QuestionData Identifiable for use in
     let question: String
     let imageName: String?
     let buttonLabels: [String]
+    
 }
 
 // 2. IpswichTouchTest Struct
@@ -93,8 +96,10 @@ struct Quizinerfaces: View {
             ZStack {
                 
                 if sections[currentSection] == "Basic prompt" {
+                    // Navigation View{
                     AskSectionView(questions: questions)
                 }
+                
                 
                 // Mingu : Add connection to Skin condition
                 else if sections[currentSection] == "examination" {
@@ -105,10 +110,9 @@ struct Quizinerfaces: View {
                 //                    DP_test()
                 //                }
                 // Mingu : Add connection to EndPage
-//                else if sections[currentSection] == "Result" {
-//                    EndPage("","","")
-//                        .navigationBarBackButtonHidden()
-//                }
+                else if sections[currentSection] == "Touch" {
+                    TouchTestView(touchTest: $touchTest)
+                }
                 
             }
             // Mingu : edit toolbar items to switch each of sections.
@@ -356,3 +360,4 @@ struct TouchTestView: View{
         }
     }
 }
+

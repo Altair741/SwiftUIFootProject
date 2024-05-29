@@ -227,19 +227,17 @@ struct IPSWICH_test: View {
             }
             .alert(isPresented: $showAlert, content: {
                 Alert(
-                    title: Text("Incomplete Information"),
-                    message: Text("Please fill in all fields."),
+                    title: Text("Not completed!"),
+                    message: Text("Please, enter the answer."),
                     dismissButton: .default(Text("OK"))
                 )
             })
             .popover(isPresented: $showMedicalInfo) {
-                            VStack {
-                                Text(medicalInfoScript)
-                                    .padding()
-                                    .multilineTextAlignment(.center)
-                                Spacer()
-                            }
-                        }
+                VStack {
+                   MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+                }
+
+            }
 
             
         }
