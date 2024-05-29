@@ -635,7 +635,7 @@ struct AskSectionView: View{
                             EmptyView()
                         }
                     )
-                }
+                }// end
             }
         }
     }

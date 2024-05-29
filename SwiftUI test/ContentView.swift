@@ -46,29 +46,44 @@ struct ContentView: View {
                     }.padding()
                     
                     
-                    Button("Exit App")
-                    
-                    {
-                        showExitAlert = true
+                    NavigationLink(destination: QListView()) {
+                        Text("gggg")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .bold()
+                            .cornerRadius(10)
+                            .frame(width: 200, height: 50)
                     }
-                    .font(.title)
-                    .padding()
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .bold()
-                    .cornerRadius(10)
-                    .frame(width: 200, height: 50)
-                    .alert(isPresented: $showExitAlert){
-                        Alert(title:
-                                Text("Exit App"),
-                              message: Text("Are you sure?"),
-                              primaryButton: .destructive(Text("Exit")){
-                            dismiss()
-                        },
-                              secondaryButton: . cancel()
-                        )
-                    }
+                    .onTapGesture {
+                        //Record time, when assessment task statr
+                        answer.timeRecords.append(Date())
+                    }.padding()
                     
+//                    Button("Exit App")
+//                    
+//                    {
+//                        showExitAlert = true
+//                    }
+//                    .font(.title)
+//                    .padding()
+//                    .background(Color.red)
+//                    .foregroundColor(.white)
+//                    .bold()
+//                    .cornerRadius(10)
+//                    .frame(width: 200, height: 50)
+//                    .alert(isPresented: $showExitAlert){
+//                        Alert(title:
+//                                Text("Exit App"),
+//                              message: Text("Are you sure?"),
+//                              primaryButton: .destructive(Text("Exit")){
+//                            dismiss()
+//                        },
+//                              secondaryButton: . cancel()
+//                        )
+//                    }
+//                    
                     //Start uer log in page
                     //                    NavigationLink(destination: SignInView()) {
                     //                        Text("FirstSign In page")

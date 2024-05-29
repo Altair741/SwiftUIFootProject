@@ -9,7 +9,27 @@ struct QuestionItem: Identifiable {
 }
 
 struct QListView: View {
+    @State private var isQuestionListExpanded = false
+    @State private var currentViewOrder = 0
     
+
+    let taskView : [AnyView] = [
+        AnyView(Q1()),
+        AnyView(Q2()),
+        AnyView(Q3()),
+        AnyView(Q4()),
+        AnyView(Q5()),
+        AnyView(Q6()),
+        AnyView(Q7()),
+        AnyView(Q8()),
+        AnyView(Q9()),
+        AnyView(Q10()),
+        AnyView(Q11()),
+        AnyView(PT_test()),
+        AnyView(DP_test()),
+        AnyView(Monofilament_test()),
+        AnyView(IPSWICH_test())
+    ]
     let taskList: [QuestionItem] = [
         QuestionItem(task: "Callus", view: AnyView(Q1())),
         QuestionItem(task: "Corns", view: AnyView(Q2())),
@@ -32,17 +52,23 @@ struct QListView: View {
     var body: some View {
         
         VStack{
+  
+            self.taskView[currentViewOrder]
             
-            NavigationView {
+            DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
                 List(taskList) { question in
                     NavigationLink(destination: question.view) {
                         Text(question.task)
                     }
                 }
-                .navigationTitle("Examination")
-                
+                .frame(height: isQuestionListExpanded ? 200 : 0)
+                .clipped()
             }
         }
+    }
+    func nextStep()
+    {
+        currentViewOrder += 1
     }
 }
 
