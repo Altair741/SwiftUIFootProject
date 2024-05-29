@@ -48,7 +48,6 @@ let questions: [QuestionData] = [
     QuestionData(question: "What is the condition of the skin?", imageName: nil, buttonLabels: ["Dry","Normal","Sweaty","Shiney"]),
     QuestionData(question: "what is the temperature of the foot?", imageName: nil, buttonLabels:["Cold","Warm","Hot"]),
     QuestionData(question: "Is there any swelling aroud the feet and ankle?", imageName: nil, buttonLabels: ["Yes", "No"])
-    
 ]
 let toesOrder = [
     (side: "Right", toe: "Big Toe", imageName: "rightBigToe.avif"),
@@ -67,7 +66,7 @@ struct Quizinerfaces: View {
     @State private var selectedButtonIndex: Int? = nil
     @State private var answers: [[String]]
     @State private var touchTest = IpswichTouchTest()
-    
+
     
     init(answers: [[String]] = []) {
         _answers = State(initialValue: answers)
@@ -101,13 +100,13 @@ struct Quizinerfaces: View {
                 else if sections[currentSection] == "examination" {
                     Q1()
                 }
-                                else if sections[currentSection] == "Touch" {
-                                    //TouchTestView(touchTest: $touchTest)
-                                    DP_test()
-                                }
+//                else if sections[currentSection] == "Touch" {
+//                    //TouchTestView(touchTest: $touchTest)
+//                    DP_test()
+//                }
                 // Mingu : Add connection to EndPage
 //                else if sections[currentSection] == "Result" {
-//                    EndPage("","","")
+//                    EndPage()
 //                        .navigationBarBackButtonHidden()
 //                }
                 
@@ -145,6 +144,35 @@ struct AskSectionView: View{
     @State private var showAlert = false
     let questions: [QuestionData]
     
+
+    func nextQuestion() {
+        answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
+        // Mingu : Test to see value in console.
+        //           print(answer.assessmentRecord[currentQuestionIndex])
+
+        if currentQuestionIndex < questions.count - 1 {
+            currentQuestionIndex += 1
+        }
+        // Mingu modified, if it hit the last question..
+        else{
+            moveToSkinconditionCheck = true
+            // Mingu: If it hit the last questions store all of the answers to global variable
+        }
+    }
+
+    func previousQuestion() {
+        if currentQuestionIndex > 0 {
+            currentQuestionIndex -= 1
+        }
+    }
+    // Mingu : method to capture the answer and store them to global scale variable
+    func updateAnswer(_ answer: UserAnswer) {
+        for e in selectedAnswers {
+            answer.assessmentRecord.append(e)
+        }
+    }
+
+
     var body: some View {
         NavigationView {
             VStack {
@@ -169,15 +197,24 @@ struct AskSectionView: View{
                         .padding()
                 }
                 
-                // Answer Buttons
+                
+                // Answer Buttons (Enhanced)
                 ForEach(questions[currentQuestionIndex].buttonLabels, id: \.self) { label in
                     Button(action: {
-                        selectedAnswers.append(label) // Store selected answer
-                        nextQuestion() // Move to next question
+                        if selectedAnswers.count > currentQuestionIndex {
+                            selectedAnswers[currentQuestionIndex] = label
+                        } else {
+                            selectedAnswers.append(label)
+                        }
+                        answer.assessmentRecord = selectedAnswers // Update global model
                     }) {
                         Text(label)
                             .padding()
-                            .background(Color.blue)
+                            .background(
+                                selectedAnswers.count > currentQuestionIndex &&
+                                selectedAnswers[currentQuestionIndex] == label ?
+                                Color.green : Color.blue
+                            ) // Highlight if selected
                             .foregroundColor(.white)
                             .cornerRadius(8)
                     }
@@ -209,59 +246,50 @@ struct AskSectionView: View{
                                 } else {
                                     currentQuestionIndex = index // Allow jumping back
                                 }
-                            }) {
-                                Text("\(index + 1)")
-                                    .foregroundColor(index == currentQuestionIndex ? Color.blue : Color.primary)
+                            })
+                            {
+                                HStack {
+                                    Text("\(index + 1)")
+                                        .frame(minWidth: 20, alignment: .leading) // Align question numbers
+                                        .foregroundColor(index == currentQuestionIndex ? Color.blue : Color.primary)
+                                    
+                                    Spacer() // Push tick to the right
+                                    
+                                    Text(questions[index].question) // Question text on the same line
+                                        .font(.caption) // Adjust font size as needed
+                                    
+                                    Spacer() // Push tick to the right
+                                    
+                                    // Tick Mark (Conditional)
+                                    if index < selectedAnswers.count {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.green)
+                                    }
+                                } // End of HStack
                             }
                         }
                     }
                     .frame(height: isQuestionListExpanded ? 200 : 0)
                     .clipped()
+                    // Mingu : navigate to skin condition question
+                    NavigationLink(
+                        destination: Q1(),
+                        isActive: $moveToSkinconditionCheck,
+                        label: {
+                            EmptyView()
+                        }
+                    )
                 }
-                // Mingu : navigate to skin condition question
-                NavigationLink(
-                    destination: Q1(),
-                    isActive: $moveToSkinconditionCheck,
-                    label: {
-                        EmptyView()
-                    }
-                )
             }
         }
-        
     }
     
-    func nextQuestion() {
-        answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
-        // Mingu : Test to see value in console.
-        //           print(answer.assessmentRecord[currentQuestionIndex])
-        
-        if currentQuestionIndex < questions.count - 1 {
-            currentQuestionIndex += 1
-        }
-        // Mingu modified, if it hit the last question..
-        else{
-            moveToSkinconditionCheck = true
-            // Mingu: If it hit the last questions store all of the answers to global variable
-        }
-    }
-    
-    func previousQuestion() {
-        if currentQuestionIndex > 0 {
-            currentQuestionIndex -= 1
-        }
-    }
-    // Mingu : method to capture the answer and store them to global scale variable
-    func updateAnswer(_ answer: UserAnswer) {
-        for e in selectedAnswers {
-            answer.assessmentRecord.append(e)
-        }
-    }
 }
 
 
-
-
+    
+    
+    
 struct TouchTestView: View{
     @Binding var touchTest: IpswichTouchTest
     @Environment(\.dismiss) var dismiss // For sheet dismissal
@@ -357,3 +385,4 @@ struct TouchTestView: View{
         }
     }
 }
+
