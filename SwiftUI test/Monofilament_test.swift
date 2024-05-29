@@ -37,7 +37,7 @@ struct Monofilament_test: View {
                         .font(.title)
                     
                     ProgressBar2(progess: 26)
-
+                    
                     Image("Monofilament_test_spot")
                         .resizable()
                         .scaledToFill()
@@ -55,7 +55,7 @@ struct Monofilament_test: View {
                             isSelected_R_1_No = false
                             score_rf += 1
                             testRecord[0] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1))
                         Button("No") {
@@ -63,7 +63,7 @@ struct Monofilament_test: View {
                             isSelected_R_1_No = true
                             answer.MonofilamentScore += 1
                             testRecord[0] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_1_No))
                     }.padding(-30)
@@ -76,7 +76,7 @@ struct Monofilament_test: View {
                             isSelected_R_2_No = false
                             score_rf += 1
                             testRecord[1] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2))
                         
@@ -85,7 +85,7 @@ struct Monofilament_test: View {
                             isSelected_R_2_No = true
                             answer.MonofilamentScore += 1
                             testRecord[1] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_2_No))
                     }.padding(-20)
@@ -98,7 +98,7 @@ struct Monofilament_test: View {
                             isSelected_R_3_No = false
                             score_rf += 1
                             testRecord[2] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3))
                         Button("No") {
@@ -106,7 +106,7 @@ struct Monofilament_test: View {
                             isSelected_R_3_No = true
                             answer.MonofilamentScore += 1
                             testRecord[2] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_R_3_No))
                     }.padding(-20)
@@ -123,7 +123,7 @@ struct Monofilament_test: View {
                             isSelected_L_1_No = false
                             score_lf += 1
                             testRecord[3] = "yes"
-
+                            
                             
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1))
@@ -132,7 +132,7 @@ struct Monofilament_test: View {
                             isSelected_L_1_No = true
                             answer.MonofilamentScore += 1
                             testRecord[3] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_1_No))
                     }.padding(-30)
@@ -145,7 +145,7 @@ struct Monofilament_test: View {
                             isSelected_L_2_No = false
                             score_lf += 1
                             testRecord[4] = "yes"
-
+                            
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2))
                         Button("No") {
@@ -153,7 +153,7 @@ struct Monofilament_test: View {
                             isSelected_L_2_No = true
                             answer.MonofilamentScore += 1
                             testRecord[4] = "yes"
-
+                            
                             
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_2_No))
@@ -167,7 +167,7 @@ struct Monofilament_test: View {
                             isSelected_L_3_No = false
                             score_lf += 1
                             testRecord[5] = "yes"
-
+                            
                             
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3))
@@ -176,7 +176,7 @@ struct Monofilament_test: View {
                             isSelected_L_3_No = true
                             answer.MonofilamentScore += 1
                             testRecord[5] = "yes"
-
+                            
                             
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected_L_3_No))
@@ -187,12 +187,11 @@ struct Monofilament_test: View {
                 .padding()
                 //save answer and link to next question
                 Spacer().padding(7)
-                NavigationLink(destination: RiskCalculator(), isActive: $nextQuestion){
-                                    Text("Save Answer").onTapGesture {
-                                        // check all of the answers has fully answered
-                                        checkQuestionCompletion()
-                                    }
-                                }
+                Text("Save Answer").onTapGesture {
+                    // check all of the answers has fully answered
+                    checkQuestionCompletion()
+                }
+                
                 .simultaneousGesture(TapGesture().onEnded {
                     // Record time, when assessment task is done
                     answer.answerRecord[17] = "Test has skipped"
@@ -206,15 +205,14 @@ struct Monofilament_test: View {
                 Spacer()
                     .padding(20)
             }
-            .offset(y:-40)
             
             .alert(isPresented: $showAlert, content: {
-                           Alert(
-                               title: Text("Incomplete Information"),
-                               message: Text("Please fill in all fields."),
-                               dismissButton: .default(Text("OK"))
-                           )
-                       })
+                Alert(
+                    title: Text("Incomplete Information"),
+                    message: Text("Please fill in all fields."),
+                    dismissButton: .default(Text("OK"))
+                )
+            })
             .navigationTitle("Monofilament Test")
             .toolbar {
                 
@@ -236,33 +234,33 @@ struct Monofilament_test: View {
             }
             
             .popover(isPresented: $showMedicalInfo) {
-                            VStack {
-                                Text(medicalInfoScript)
-                                    .padding()
-                                    .multilineTextAlignment(.center)
-                                Spacer()
-                            }
-                        }
-
+                VStack {
+                    Text(medicalInfoScript)
+                        .padding()
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+            }
+            
             
         }
         
     }
     func checkQuestionCompletion()
     {
-       if (testRecord[0] != "yes" ||
+        if (testRecord[0] != "yes" ||
             testRecord[1] != "yes" ||
             testRecord[2] != "yes" ||
             testRecord[3] != "yes" ||
             testRecord[4] != "yes" ||
             testRecord[5] != "yes")
         {
-           showAlert = true
-       }
+            showAlert = true
+        }
         else{
             nextQuestion = true
         }
     }
-
+    
     
 }

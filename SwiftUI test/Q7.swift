@@ -34,14 +34,13 @@ struct Q7: View {
                     .clipped()
                     Text("Does the patient have bunions?")
                     HStack {
-                        NavigationLink(destination: Q8()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -51,14 +50,13 @@ struct Q7: View {
                         }
                         )
                         
-                        NavigationLink(destination: Q8()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -72,7 +70,6 @@ struct Q7: View {
             }
             .padding()
             .navigationTitle("Bunions")
-            .offset(y:-60)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {

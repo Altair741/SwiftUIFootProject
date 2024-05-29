@@ -362,7 +362,7 @@
 //
 
 import SwiftUI
-let sections = ["Basic prompt", "examination",]//"Touch", "Result"
+let sections = ["Ask", "Skin", "Touch" ]//"Touch", "Result"
 // Change it to set globally.
 // 1. QuestionData Struct
 
@@ -448,18 +448,17 @@ struct Quizinerfaces: View {
         NavigationView {
             ZStack {
                 
-                if sections[currentSection] == "Basic prompt" {
+                if sections[currentSection] == "Ask" {
                     AskSectionView(questions: questions)
                 }
-                
                 // Mingu : Add connection to Skin condition
-                else if sections[currentSection] == "examination" {
-                    Q1()
+                else if sections[currentSection] == "Skin" {
+                    QListView()
                 }
-//                else if sections[currentSection] == "Touch" {
-//                    //TouchTestView(touchTest: $touchTest)
-//                    DP_test()
-//                }
+                else if sections[currentSection] == "Touch" {
+                    //TouchTestView(touchTest: $touchTest)
+                    DP_test()
+                }
                 // Mingu : Add connection to EndPage
 //                else if sections[currentSection] == "Result" {
 //                    EndPage()
@@ -629,13 +628,18 @@ struct AskSectionView: View{
                     .clipped()
                     // Mingu : navigate to skin condition question
                     NavigationLink(
-                        destination: Q1(),
+                        destination: QListView()
+                            .navigationBarBackButtonHidden(true)
+                            .navigationBarItems(leading: Button(action: {
+                                moveToSkinconditionCheck = false
+                            }) {
+                                Text("Back")
+                            }),
                         isActive: $moveToSkinconditionCheck,
                         label: {
                             EmptyView()
                         }
-                    )
-                }// end
+                    )                }
             }
         }
     }

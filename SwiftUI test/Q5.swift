@@ -25,14 +25,13 @@ struct Q5: View {
                     Text("Does the patient have thickened toenails?")
 
                     HStack {
-                        NavigationLink(destination: Q6()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -42,14 +41,13 @@ struct Q5: View {
                         }
                         )
                         
-                        NavigationLink(destination: Q6()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray) // Change color based on isSelected2 state
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -64,7 +62,6 @@ struct Q5: View {
             }
             .navigationTitle("Thickened toenails")
             .padding()
-            .offset(y:-60)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {

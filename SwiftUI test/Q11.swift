@@ -33,14 +33,13 @@ struct Q11: View {
                     Text("Does the patient have Charcot foot?")
 
                     HStack {
-                        NavigationLink(destination: Q12()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -50,14 +49,13 @@ struct Q11: View {
                         }
                         )
                         
-                        NavigationLink(destination: Q12()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -68,7 +66,6 @@ struct Q11: View {
                     }
                 }
                 .padding()
-                .offset(y:-60)
                 .navigationTitle("Charcot foot")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {

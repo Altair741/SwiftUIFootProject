@@ -18,7 +18,6 @@
 		F9368F002BFD8B94004D79D3 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368EFF2BFD8B94004D79D3 /* EmailSender.swift */; };
 		F9368F0C2BFE5FAA004D79D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F0B2BFE5FAA004D79D3 /* ViewController.swift */; };
 		F9368F102C00FC42004D79D3 /* Basic_assessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F0F2C00FC42004D79D3 /* Basic_assessment.swift */; };
-		F9368F122C012D01004D79D3 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F112C012D01004D79D3 /* Test.swift */; };
 		F9368F142C016FE2004D79D3 /* RiskCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F132C016FE2004D79D3 /* RiskCalculator.swift */; };
 		F9368F162C0396FB004D79D3 /* AlertPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F152C0396FB004D79D3 /* AlertPopup.swift */; };
 		F9368F182C04659B004D79D3 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9368F172C04659B004D79D3 /* SignInView.swift */; };
@@ -69,7 +68,6 @@
 		F9368EFF2BFD8B94004D79D3 /* EmailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
 		F9368F0B2BFE5FAA004D79D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F9368F0F2C00FC42004D79D3 /* Basic_assessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_assessment.swift; sourceTree = "<group>"; };
-		F9368F112C012D01004D79D3 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		F9368F132C016FE2004D79D3 /* RiskCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskCalculator.swift; sourceTree = "<group>"; };
 		F9368F152C0396FB004D79D3 /* AlertPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopup.swift; sourceTree = "<group>"; };
 		F9368F172C04659B004D79D3 /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				F9933C5F2BF3D06300A264B6 /* DP_test.mp4 */,
 				F9933C7C2BF3D08D00A264B6 /* PT_test.mp4 */,
 				F9933C652BF3D08000A264B6 /* MyModal.swift */,
-				F9368F112C012D01004D79D3 /* Test.swift */,
 				F9933CB82BFA3A8B00A264B6 /* IPSWICH_test.swift */,
 				F9933C642BF3D08000A264B6 /* Monofilament_test.swift */,
 				F9933C5E2BF3D06300A264B6 /* DP_test.swift */,
@@ -292,7 +289,6 @@
 				F9933C882BF3D08D00A264B6 /* Q12.swift in Sources */,
 				AAC029EE2BE79E0600DA9F3D /* SwiftUI_testApp.swift in Sources */,
 				F9933C7F2BF3D08D00A264B6 /* Q7.swift in Sources */,
-				F9368F122C012D01004D79D3 /* Test.swift in Sources */,
 				F9933C862BF3D08D00A264B6 /* Q9.swift in Sources */,
 				F9933C932BF3D0A300A264B6 /* WithPictorial.swift in Sources */,
 				F9933C802BF3D08D00A264B6 /* Q6.swift in Sources */,

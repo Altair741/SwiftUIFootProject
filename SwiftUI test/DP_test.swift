@@ -83,13 +83,6 @@ struct DP_test: View {
                             }
                             .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
                         }
-                        
-                        NavigationLink(destination: PT_test(), isActive: $allquestionAnswered) {
-                            Text("Save Anwser")
-                                .onTapGesture {
-                                checkQuestionCompletion()
-                            }
-                        }
                         .padding(.leading, 10)
                         .navigationTitle("DP Test")
                         .toolbar {
@@ -154,18 +147,18 @@ struct DP_test: View {
             
         
     }
-    func checkQuestionCompletion()
-    {
-        if answer.answerRecord[12] == "Not Answered" || answer.answerRecord[13] == "Not Answered"
-        {
-            showAlert = true
-        }
-        
-        if answer.answerRecord[12] != "Not Answered" || answer.answerRecord[13] != "Not Answered"
-        {
-            allquestionAnswered = true
-        }
-    }
+//    func checkQuestionCompletion()
+//    {
+//        if answer.answerRecord[12] == "Not Answered" || answer.answerRecord[13] == "Not Answered"
+//        {
+//            showAlert = true
+//        }
+//        
+//        if answer.answerRecord[12] != "Not Answered" || answer.answerRecord[13] != "Not Answered"
+//        {
+//            allquestionAnswered = true
+//        }
+//    }
 
 }
 

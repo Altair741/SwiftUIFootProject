@@ -24,14 +24,13 @@ struct Q3: View {
                     Text("Does the patient have tinea?")
                     
                     HStack {
-                        NavigationLink(destination: Q4()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -41,14 +40,13 @@ struct Q3: View {
                         }
                         )
                         
-                        NavigationLink(destination: Q4()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -60,7 +58,7 @@ struct Q3: View {
                 } // V
             } // Z
             .padding()
-            .offset(y:-60)
+//            .offset(y:-60)
             .navigationTitle("Tinea")
             .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {

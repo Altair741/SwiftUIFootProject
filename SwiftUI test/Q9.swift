@@ -32,14 +32,13 @@ struct Q9: View {
                     Text("Does the patient have flat feet?")
                     
                     HStack {
-                        NavigationLink(destination: Q10()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -48,14 +47,13 @@ struct Q9: View {
                             
                         }
                         )
-                        NavigationLink(destination: Q10()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -68,7 +66,6 @@ struct Q9: View {
                 
             }
             .padding()
-            .offset(y:-60)
             .navigationTitle("Flat feet")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

@@ -22,14 +22,13 @@ struct Q2: View {
                     Text("Does the patient have corns?")
                     
                     HStack {
-                        NavigationLink(destination: Q3()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -39,14 +38,13 @@ struct Q2: View {
                         }
                         )
                         
-                        NavigationLink(destination: Q3()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -58,7 +56,7 @@ struct Q2: View {
                 }// VStack
                 
             }// ZStack
-            .offset(y:-60)
+//            .offset(y:-60)
             .navigationTitle("Corns")
             .padding()
             .toolbar {

@@ -44,23 +44,8 @@ struct ContentView: View {
                         //Record time, when assessment task statr
                         answer.timeRecords.append(Date())
                     }.padding()
-                    
-                    
-                    NavigationLink(destination: QListView()) {
-                        Text("gggg")
-                            .font(.title)
-                            .padding()
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .bold()
-                            .cornerRadius(10)
-                            .frame(width: 200, height: 50)
-                    }
-                    .onTapGesture {
-                        //Record time, when assessment task statr
-                        answer.timeRecords.append(Date())
-                    }.padding()
-                    
+                        .navigationTitle("Ask section")
+ 
 //                    Button("Exit App")
 //                    
 //                    {

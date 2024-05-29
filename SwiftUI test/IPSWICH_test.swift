@@ -197,7 +197,6 @@ struct IPSWICH_test: View {
                 .padding()
                 //save answer and link to next question
                 Spacer().padding(7)
-                NavigationLink(destination: RiskCalculator(), isActive: $nextQuestion){
                     Text("Save Answer").onTapGesture {
                         // check all of the answers has fully answered
                         checkQuestionCompletion()
@@ -211,8 +210,7 @@ struct IPSWICH_test: View {
                     })
                     Spacer()
                         .padding(20)
-                }
-                .offset(y:-30)
+                
                 .navigationTitle("IPSWICH Test")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {

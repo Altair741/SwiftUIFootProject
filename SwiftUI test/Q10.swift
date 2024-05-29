@@ -32,14 +32,13 @@ struct Q10: View {
                     Text("Does the patient have high arched feet?")
                     
                     HStack {
-                        NavigationLink(destination: Q11()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -49,14 +48,13 @@ struct Q10: View {
                         }
                         )
                         
-                        NavigationLink(destination: Q11()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -69,7 +67,6 @@ struct Q10: View {
                 
             }
             .padding()
-            .offset(y:-60)
             .navigationTitle("High arched feet")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

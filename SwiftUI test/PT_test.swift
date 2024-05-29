@@ -50,7 +50,7 @@ struct PT_test: View {
                             isSelected = true
                             isSelected2 = false
                             answer.answerRecord[14] = "Yes"
-                            player.pause()
+                            print("answer is saved")
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected))
                         
@@ -84,12 +84,7 @@ struct PT_test: View {
                         }
                         .buttonStyle(SelectedButtonStyle(isSelected: isSelected4))
                     }
-                    NavigationLink(destination: MyModal(), isActive: $allquestionAnswered) {
-                        Text("Save Anwser")
-                            .onTapGesture {
-                            checkQuestionCompletion()
-                        }
-                    }
+                     
                     .padding(.leading, 10)
                     .navigationTitle("PT Test")
                     .toolbar {
@@ -141,18 +136,18 @@ struct PT_test: View {
                 
             }
         }
-        func checkQuestionCompletion()
-        {
-            if answer.answerRecord[14] == "Not Answered" || answer.answerRecord[15] == "Not Answered"
-            {
-                showAlert = true
-            }
-            
-            if answer.answerRecord[14] != "Not Answered" || answer.answerRecord[15] != "Not Answered"
-            {
-                allquestionAnswered = true
-            }
-    }
+//        func checkQuestionCompletion()
+//        {
+//            if answer.answerRecord[14] == "Not Answered" || answer.answerRecord[15] == "Not Answered"
+//            {
+//                showAlert = true
+//            }
+//            
+//            if answer.answerRecord[14] != "Not Answered" || answer.answerRecord[15] != "Not Answered"
+//            {
+//                allquestionAnswered = true
+//            }
+//    }
         
     }
 

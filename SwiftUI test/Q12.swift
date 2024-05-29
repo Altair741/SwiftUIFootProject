@@ -33,14 +33,13 @@ struct Q12: View {
                     Text("Has the patient had any amputations?")
                     
                     HStack {
-                        NavigationLink(destination: DP_test()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -49,14 +48,13 @@ struct Q12: View {
                             
                         }
                         )
-                        NavigationLink(destination: DP_test()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -67,7 +65,6 @@ struct Q12: View {
                     }
                 }
                 .padding()
-                .offset(y:-60)
                 .navigationTitle("Amputations")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {

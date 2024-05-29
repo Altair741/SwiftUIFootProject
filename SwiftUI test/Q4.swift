@@ -32,14 +32,13 @@ struct Q4: View {
                     Text("Has the patient had a previous or current ulcer?")
 
                     HStack {
-                        NavigationLink(destination: Q5()) {
                             Text("Yes")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected ? Color.green : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = true
                             isSelected2 = false
@@ -49,14 +48,13 @@ struct Q4: View {
                         }
                         )
                         
-                        NavigationLink(destination: Q5()) {
                             Text("No")
                                 .padding()
                                 .frame(width: 120, height: 50)
                                 .background(isSelected2 ? Color.red : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(25)
-                        }
+                        
                         .simultaneousGesture(TapGesture().onEnded {
                             isSelected = false
                             isSelected2 = true
@@ -69,7 +67,7 @@ struct Q4: View {
                 
             }
             .padding()
-            .offset(y:30)
+            
             .navigationTitle("Ulcer")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -80,7 +78,6 @@ struct Q4: View {
                         }
                     }
             }
-            .offset(y:-60)
 
             .popover(isPresented: $showMedicalInfo) {
                 VStack {
