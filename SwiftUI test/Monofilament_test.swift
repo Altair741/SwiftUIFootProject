@@ -32,10 +32,10 @@ struct Monofilament_test: View {
     // 16 user answer.
     
     var body: some View {
-        VStack{
             ScrollView {
                 VStack(spacing: 20) {
-                    
+                    ProgressBar2(progess: 27)
+
                     Image("Monofilament_test_spot")
                         .resizable()
                         .scaledToFill()
@@ -44,7 +44,6 @@ struct Monofilament_test: View {
                     
                     Text("press the monofilament against the points indicated in the picture ")
                     
-                    ProgressBar2(progess: 27)
                     
                     Text("Right foot").padding(10).font(.title)
                     Text("Spot 1: Big Toe").padding(.leading, -140).padding(-30).padding()
@@ -242,7 +241,7 @@ struct Monofilament_test: View {
             }
 
             
-        }
+        
         
     }
     func checkQuestionCompletion()

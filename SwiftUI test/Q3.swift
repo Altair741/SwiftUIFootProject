@@ -14,13 +14,14 @@ struct Q3: View {
         VStack{
             ZStack {
                 VStack(spacing : 30) {
+                    ProgressBar2(progess: 15)
+
                     Image("tinea")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 240, height: 200)
                         .clipped()
                     Text("Does the patient have tinea?")
-                    ProgressBar2(progess: 15)
                     
                     HStack {
                         NavigationLink(destination: Q4()) {

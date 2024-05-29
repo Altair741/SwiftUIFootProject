@@ -22,13 +22,14 @@ struct Q10: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
+                    ProgressBar2(progess: 22)
+
                 Image("higharched_feet")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 240, height: 200)
                     .clipped()
                     Text("Does the patient have high arched feet?")
-                    ProgressBar2(progess: 22)
                     
                     HStack {
                         NavigationLink(destination: Q11()) {

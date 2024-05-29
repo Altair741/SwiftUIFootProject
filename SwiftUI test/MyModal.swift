@@ -9,7 +9,7 @@ struct MyModal: View {
     
     var body: some View {
         ZStack {
-            Color.yellow.ignoresSafeArea()
+            Color.yellow
             VStack {
                 Image(systemName: "exclamationmark.triangle")
                     .foregroundColor(.red)

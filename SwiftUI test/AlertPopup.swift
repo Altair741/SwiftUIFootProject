@@ -10,11 +10,10 @@ import SwiftUI
 struct AlertPopup: View {
     @State private var isSelected = false
     @Binding var allquestionAnswered : Bool
-    let title: String = "Complete all qeustions?"
-    let message : String = "There are questions not anwsered yet!"
+    @Binding var startAain: Bool
+    let title: String = "Completed all qeustions"
     let action: () -> ()
     @State private var offset : CGFloat = 1000
-    @Binding var startAain: Bool
 
     var body: some View {
         
@@ -31,10 +30,6 @@ struct AlertPopup: View {
                         .font(.title2)
                         .bold()
                         .padding()
-                    
-                    Text(message)
-                        .font(.body)
-                    
                     Button{
                         close()
                     }label: {

@@ -21,6 +21,8 @@ struct Q12: View {
         VStack {
             ZStack {
                 VStack(spacing: 30) {
+                    ProgressBar2(progess: 24)
+
                     
                     Image("ampuation")
                         .resizable()
@@ -29,7 +31,6 @@ struct Q12: View {
                         .clipped()
                     
                     Text("Has the patient had any amputations?")
-                    ProgressBar2(progess: 24)
                     
                     HStack {
                         NavigationLink(destination: DP_test()) {

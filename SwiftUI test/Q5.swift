@@ -15,13 +15,14 @@ struct Q5: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
+                    ProgressBar2(progess: 17)
+
                     Image("thickened_toenails")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 240, height: 200)
                         .clipped()
                     Text("Does the patient have thickened toenails?")
-                    ProgressBar2(progess: 17)
 
                     HStack {
                         NavigationLink(destination: Q6()) {
@@ -61,9 +62,9 @@ struct Q5: View {
                 }
                 
             }
+            .navigationTitle("Thickened toenails")
             .padding()
             .offset(y:-60)
-            .navigationTitle("Thickened toenails")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                         Button {

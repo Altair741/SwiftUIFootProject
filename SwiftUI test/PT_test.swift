@@ -33,7 +33,8 @@ struct PT_test: View {
             ScrollView{
 
                 VStack(spacing: 30) {
-                    
+                    ProgressBar2(progess: 26)
+
                     Image("PT_test_spot")
                         .resizable()
                         .scaledToFill()
@@ -41,7 +42,6 @@ struct PT_test: View {
                         .clipped()
                     
                     Text("Can you feel the pulse in the posterior tibial")
-                    ProgressBar2(progess: 26)
                     Text("Right Foot")
                     
                     HStack {

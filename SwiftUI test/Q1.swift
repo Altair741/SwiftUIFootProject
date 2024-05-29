@@ -36,20 +36,16 @@ struct Q1: View {
     
     
     var body: some View {
-        Spacer()
-            .navigationBarBackButtonHidden(true)
-        Spacer()
-        
-        NavigationView{
             ZStack{
                 VStack(spacing : 30) {
+                    ProgressBar2(progess: 13)
+
                     Image("callus")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 260, height: 200)
                         .clipped()
                     Text("Does the patient have callus?")
-                    ProgressBar2(progess: 13)
                     HStack {
                         NavigationLink(destination: Q2()) {
                             Text("Yes")
@@ -106,8 +102,7 @@ struct Q1: View {
         }
     }
     
-}
-    
+
     struct Q1_Previews: PreviewProvider {
         static var previews: some View{
             Q1()

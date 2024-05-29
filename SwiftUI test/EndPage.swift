@@ -19,7 +19,7 @@ struct EndPage: View {
     let workEmail: String
     let clinicWorkplace: String
     var currentDate : String {
-        getCurruentDate()
+        getCurrentDate()
     }
     
     var currentLocation: String {
@@ -40,7 +40,6 @@ struct EndPage: View {
     }
     
     var body: some View {
-        Spacer().navigationBarBackButtonHidden(true)
         
         VStack
         {
@@ -78,7 +77,6 @@ struct EndPage: View {
     // func to create PDF
     private func createPDF() -> Data{
         //get cuttent date
-        getCurruentDate()
 //        // Capture current date and time
 //        let dateFormatter = DateFormatter()
 //        //dateFormatter.dateFormat = "dd. M. yyyy HH:mm:ss"
@@ -193,16 +191,14 @@ struct EndPage: View {
         
         
     }
-    func getCurruentDate() -> String {
+    func getCurrentDate() -> String {
         let dateFormatter = DateFormatter()
-        //dateFormatter.dateFormat = "dd. M. yyyy HH:mm:ss"
         dateFormatter.dateFormat = "dd. M. yyyy"
         let currentTime = Date()
         let formattedDate = dateFormatter.string(from: currentTime)
         
         return formattedDate
     }
-
     
     func alignTexst(value :String, x: Int, y: Int, width: Int, height: Int, alignment: NSTextAlignment, textFont: UIFont)
     {

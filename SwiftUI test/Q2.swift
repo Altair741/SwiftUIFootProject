@@ -12,13 +12,14 @@ struct Q2: View {
     var body: some View {
             ZStack {
                 VStack(spacing : 30) {
+                    ProgressBar2(progess: 14)
+
                     Image("corns")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 240, height: 200)
                         .clipped()
                     Text("Does the patient have corns?")
-                    ProgressBar2(progess: 14)
                     
                     HStack {
                         NavigationLink(destination: Q3()) {

@@ -40,10 +40,10 @@ struct IPSWICH_test: View {
     
     var body: some View {
     
-        VStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    
+                    ProgressBar2(progess: 28)
+
                     Image("IPSWICH_touch_test_spot")
                         .resizable()
                         .scaledToFill()
@@ -52,7 +52,6 @@ struct IPSWICH_test: View {
                     
                     Text("press the monofilament against the points indicated in the picture ")
                     
-                    ProgressBar2(progess: 28)
                     
                     Text("Spot 1: Right first toe")
                         .padding(.leading, -140)
@@ -240,7 +239,7 @@ struct IPSWICH_test: View {
             }
 
             
-        }
+        
 
     }
     func checkQuestionCompletion()

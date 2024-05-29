@@ -29,13 +29,12 @@ struct DP_test: View {
     
     var body: some View {
         
-        VStack{
             ScrollView{
                 VStack {
                     
                     VStack(spacing: 30) {
-                        
-                        
+                        ProgressBar2(progess: 25)
+
                         Image("DP_test_spot")
                             .resizable()
                             .scaledToFill()
@@ -43,7 +42,6 @@ struct DP_test: View {
                             .clipped()
                         
                         Text("Can you feel the pulse in the dorsalis pedis")
-                        ProgressBar2(progess: 25)
                         Text("Right Foot")
                         
                         HStack {
@@ -153,7 +151,7 @@ struct DP_test: View {
                 }
             }
             
-        }
+        
     }
     func checkQuestionCompletion()
     {

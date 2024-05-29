@@ -51,6 +51,7 @@
 		F9933CA92BF7D58A00A264B6 /* launch_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = F9933CA82BF7D58A00A264B6 /* launch_screen.png */; };
 		F9933CAB2BF7D5A100A264B6 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CAA2BF7D5A100A264B6 /* LaunchScreen.swift */; };
 		F9933CB92BFA3A8B00A264B6 /* IPSWICH_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9933CB82BFA3A8B00A264B6 /* IPSWICH_test.swift */; };
+		F9BB35622C074FF3001B9A03 /* QListVeiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB35612C074FF3001B9A03 /* QListVeiw.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		F9933CA82BF7D58A00A264B6 /* launch_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_screen.png; sourceTree = "<group>"; };
 		F9933CAA2BF7D5A100A264B6 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		F9933CB82BFA3A8B00A264B6 /* IPSWICH_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPSWICH_test.swift; sourceTree = "<group>"; };
+		F9BB35612C074FF3001B9A03 /* QListVeiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QListVeiw.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				AAC029ED2BE79E0600DA9F3D /* SwiftUI_testApp.swift */,
 				AAC029EF2BE79E0600DA9F3D /* ContentView.swift */,
 				F9933C662BF3D08000A264B6 /* LocationManager2.swift */,
+				AAE8B7A82BEA026100DA6694 /* LocationManager.swift */,
 				F9368F172C04659B004D79D3 /* SignInView.swift */,
 				F9933C672BF3D08000A264B6 /* PDFdocument.swift */,
 				F9933C772BF3D08D00A264B6 /* ProgressBar2.swift */,
@@ -173,9 +176,9 @@
 				F9368F0F2C00FC42004D79D3 /* Basic_assessment.swift */,
 				AAE8B7A52BE9FFBC00DA6694 /* Quiz.swift */,
 				F9368F152C0396FB004D79D3 /* AlertPopup.swift */,
-				AAE8B7A82BEA026100DA6694 /* LocationManager.swift */,
 				F9933CAA2BF7D5A100A264B6 /* LaunchScreen.swift */,
 				AACE4B9A2BF3871000E6D1A3 /* QuizInterfaces.swift */,
+				F9BB35612C074FF3001B9A03 /* QListVeiw.swift */,
 				F9933C902BF3D0A300A264B6 /* UserAnswer.swift */,
 				AAC029F12BE79E0800DA9F3D /* Assets.xcassets */,
 				AAC029F32BE79E0800DA9F3D /* Preview Content */,
@@ -299,6 +302,7 @@
 				F9933C6B2BF3D08000A264B6 /* MyModal.swift in Sources */,
 				F9368F0C2BFE5FAA004D79D3 /* ViewController.swift in Sources */,
 				F9368F002BFD8B94004D79D3 /* EmailSender.swift in Sources */,
+				F9BB35622C074FF3001B9A03 /* QListVeiw.swift in Sources */,
 				F9933C892BF3D08D00A264B6 /* Q10.swift in Sources */,
 				F9368F102C00FC42004D79D3 /* Basic_assessment.swift in Sources */,
 				F9933C822BF3D08D00A264B6 /* Q4.swift in Sources */,
