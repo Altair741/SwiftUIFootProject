@@ -27,6 +27,7 @@ struct QListView: View {
         AnyView(Q12()),
         AnyView(DP_test()),
         AnyView(PT_test()),
+        AnyView(MyModal()),
         AnyView(Monofilament_test()),
         AnyView(IPSWICH_test())
     ]
@@ -46,6 +47,7 @@ struct QListView: View {
         QuestionItem(task: "Amputation", view: AnyView(Q12())),
         QuestionItem(task: "DP test", view: AnyView(DP_test())),
         QuestionItem(task: "PT test", view: AnyView(PT_test())),
+        QuestionItem(task: "MyModal", view: AnyView(MyModal())),
         QuestionItem(task: "Monofilament Test", view: AnyView(Monofilament_test())),
         QuestionItem(task: "IPSWICH touch test", view: AnyView(IPSWICH_test()))
     ]
@@ -79,8 +81,25 @@ struct QListView: View {
                                 checkQuestionCompletion_DP_test()
                                 
                             }
+                            else if taskList[currentViewOrder].task == "MyModal"
+                            {
+                                if(checkMedicalTool())
+                                {
+                                    currentViewOrder += 1
+                                    
+                                    if currentViewOrder >= taskView.count {
+                                        currentViewOrder = 0
+                                    }
+                                }
+                                else{
+                                    currentViewOrder += 2
+                                    
+                                    if currentViewOrder >= taskView.count {
+                                        currentViewOrder = 0
+                                    }
+                                }
+                            }
                             else {
-                                
                                 currentViewOrder += 1
                                 
                                 if currentViewOrder >= taskView.count {
@@ -121,6 +140,16 @@ struct QListView: View {
                     dismissButton: .default(Text("OK"))
                 )
             }
+        }
+    }
+    
+    func checkMedicalTool() -> Bool
+    {
+        if answer.haveMedicalTool == "yes" {
+            return true
+        }
+        else {
+            return false
         }
     }
     func checkQuestionCompletion_PT_test()

@@ -42,7 +42,8 @@ struct IPSWICH_test: View {
         VStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    
+                    ProgressBar2(progess: 27)
+
                     Image("IPSWICH_touch_test_spot")
                         .resizable()
                         .scaledToFill()
@@ -51,7 +52,6 @@ struct IPSWICH_test: View {
                     
                     Text("press the monofilament against the points indicated in the picture ")
                     
-                    ProgressBar2(progess: 16)
                     
                     Text("Spot 1: Right first toe")
                         .padding(.leading, -140)

@@ -33,9 +33,7 @@ struct Monofilament_test: View {
         VStack{
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("Monofilament Test").fontWeight(.semibold)
-                        .font(.title)
-                    
+ 
                     ProgressBar2(progess: 26)
                     
                     Image("Monofilament_test_spot")

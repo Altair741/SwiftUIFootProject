@@ -22,33 +22,38 @@ struct MyModal: View {
                     .font(.title2)
                 
                 HStack {
-                    NavigationLink(destination: Monofilament_test()) {
                         Text("Proceed")
                             .padding()
                             .frame(width: 120, height: 50)
                             .background(isSelected ? Color.green : Color.gray)
                             .foregroundColor(.white)
                             .cornerRadius(25)
-                    }
+                    
                     .navigationTitle("Medical tool")
                     .simultaneousGesture(TapGesture().onEnded {
                         isSelected = true
                         isSelected2 = false
+                        answer.haveMedicalTool = "yes"
+                        print(answer.haveMedicalTool)
                     })
                     
-                    NavigationLink(destination: IPSWICH_test())
-                    {
+                    
                         Text("SKIP")
                             .padding()
                             .frame(width: 120, height: 50)
                             .background(isSelected2 ? Color.green : Color.gray)
                             .foregroundColor(.white)
                             .cornerRadius(25)
-                    }
+                    
                     .simultaneousGesture(TapGesture().onEnded {
                         isSelected = false
                         isSelected2 = true
+                        answer.haveMedicalTool = "no"
                         answer.answerRecord[16] = "Test has skipped"
+                        print(answer.haveMedicalTool)
+                        print(answer.answerRecord[16])
+
+
                     })
                 }.navigationTitle("Medical tool")
             }

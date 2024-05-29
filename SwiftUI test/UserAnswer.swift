@@ -28,6 +28,8 @@ class UserAnswer : ObservableObject
     //stratTime.timeIntervalSince(endTime)
     @Published var currentDate : String?
     @Published var emailTosend : [String]?
+    @Published var haveMedicalTool : String = "no"
+
     
     func updateAnswerRecord(at index: Int, with value: String) {
             guard index >= 0 && index < answerRecord.count else {
