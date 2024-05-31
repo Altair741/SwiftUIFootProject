@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct QuestionItem: Identifiable {
@@ -12,6 +13,7 @@ struct QListView: View {
     @EnvironmentObject var answer : UserAnswer
     @State private var showAlert = false
     @State private var isAnswered = false
+
     let taskView: [AnyView] = [
         AnyView(Q1()),
         AnyView(Q2()),
@@ -116,15 +118,40 @@ struct QListView: View {
                 }
                 .padding()
                 
+
                 DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
                     List(taskList) { question in
                         Button(action: {
                             if let index = taskList.firstIndex(where: { $0.id == question.id }) {
-                                currentViewOrder = index
-                                isQuestionListExpanded = false
+                                if answer.answerRecord.count > index && answer.answerRecord[index] != "Not Answered" {
+                                    currentViewOrder = index
+                                    isQuestionListExpanded = false
+                                } else if index <= currentViewOrder {  // Allow going back
+                                    currentViewOrder = index
+                                    isQuestionListExpanded = false
+                                } else {
+                                    showAlert = true // Show alert if trying to skip ahead
+                                }
                             }
                         }) {
-                            Text(question.task)
+                            HStack {
+                                Text("\(taskList.firstIndex(where: { $0.id == question.id })! + 1)")
+                                    .frame(minWidth: 20, alignment: .leading)
+                                    .foregroundColor(taskList.firstIndex(where: { $0.id == question.id }) == currentViewOrder ? Color.blue : Color.primary)
+
+                                Spacer()
+
+                                Text(question.task)
+                                    .font(.caption)
+
+                                Spacer()
+
+                                // Tick Mark (Dynamic)
+                                if answer.answerRecord.count > taskList.firstIndex(where: { $0.id == question.id })! && answer.answerRecord[taskList.firstIndex(where: { $0.id == question.id })!] != "Not Answered" {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(.green)
+                                }
+                            }
                         }
                     }
                     .frame(height: isQuestionListExpanded ? 200 : 0)
