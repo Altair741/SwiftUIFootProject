@@ -12,7 +12,8 @@ import MessageUI
 struct EndPage: View {
     @EnvironmentObject var answer: UserAnswer
     @State private var sendMail = false
-    
+//    @EnvironmentObject var clinicData: ClinicData // Access the data model
+
     let clinicName: String = "Not given"
     let workEmail: String = "Not given"
     let clinicWorkplace: String = "Not given"

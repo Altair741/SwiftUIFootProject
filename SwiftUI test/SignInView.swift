@@ -38,7 +38,6 @@ struct SignInView: View {
     @State private var selectedClinic: Clinic?
     @State private var showRegisterAlert = false
     @State private var showSignInView = false
-    @EnvironmentObject var answer : UserAnswer
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: -34.8071, longitude: 138.6353), // Default: Mawson Lakes
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
@@ -161,20 +160,13 @@ let clinics: [Clinic] = [ // Sample clinic data
                             
                             
                             .fullScreenCover(isPresented: $navigateToEndPage) {
-                                EndPage(
-                                    clinicName: self.clinicName,
-                                    workEmail: self.workEmail,
-                                    clinicWorkplace: self.selectedClinic?.name ?? ""
-                            )
+                                EndPage()
             }
         }.onAppear {
             self.showRegisterAlert = true
-            
         }
         .onDisappear(){
             self.showRegisterAlert = false
-            let workMailAdress = [workEmail]
-            answer.emailTosend = workMailAdress
         }
     }
 }
