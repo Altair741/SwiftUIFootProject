@@ -27,6 +27,9 @@ struct Monofilament_test: View {
     @State private var testRecord: [String] = Array(repeating: "Not Answered", count: 6)
     @State private var notCompleted = false
     
+    
+    @State private var buttonColor = Color.yellow
+
     // 16 user answer.
     
     var body: some View {
@@ -184,16 +187,16 @@ struct Monofilament_test: View {
                         Button(action: {
                             // First action: Check question completion
                             checkQuestionCompletion()
+                            buttonColor = Color.green
                         }) {
                             Text("Save Answer")
                                 .frame(width: 120, height: 50)
-                                .background(Color.yellow)
+                                .background(buttonColor)
                                 .foregroundColor(.black)
                                 .cornerRadius(25)
                         }
                         .simultaneousGesture(TapGesture().onEnded {
                             // Second action: Record time and update answer
-                            background(Color.yellow)
                             answer.answerRecord[17] = "Test has skipped"
                             answer.answerRecord[16] = """
                             Final Score:
