@@ -34,7 +34,8 @@ struct IPSWICH_test: View {
     @State private var score_lf: Int = 0
     @State private var testRecord: [String] = Array(repeating: "Not Answered", count: 6)
     @State private var showAlert = false
-    
+    @State private var buttonColor = Color.yellow
+
     // 16 user answer.
     
     var body: some View {
@@ -202,10 +203,11 @@ struct IPSWICH_test: View {
                     Button(action: {
                         // check all of the answers has fully answered
                         checkQuestionCompletion()
+                        buttonColor = Color.green
                     }) {
                         Text("Save Answer")
                             .frame(width: 120, height: 50)
-                            .background(Color.yellow)
+                            .background(buttonColor)
                             .foregroundColor(.black)
                             .cornerRadius(25)
                     }
