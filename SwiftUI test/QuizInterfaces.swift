@@ -89,6 +89,13 @@ struct Quizinerfaces: View {
                 if sections[currentSection] == "Ask" {
                     AskSectionView(questions: questions)
                 }
+<<<<<<< Updated upstream
+=======
+                // Mingu : Add connection to Skin condition
+                else if sections[currentSection] == "Skin" {
+                    IPSWICH_test()
+                }
+>>>>>>> Stashed changes
                 else if sections[currentSection] == "Touch" {
                     TouchTestView(touchTest: $touchTest)
                 }
