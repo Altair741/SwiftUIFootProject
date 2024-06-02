@@ -19,15 +19,13 @@ struct RiskCalculator: View {
     @State private var isSelected2 = false
     @State private var isSelected3 = false
     @State private var finishTest = true
-    @State private var allquestionAnswered = false
+    @State private var showAlert = false
     @State private var startAgain = false
     
     var body: some View {
         ZStack{
-//            if !checkQuestionCompletion(){
-//                AlertPopup(allquestionAnswered : $allquestionAnswered, action : {}, startAain : $startAgain).zIndex(1)
-//                // zIndex to screen layout index
-//            }
+           
+            
             VStack {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
@@ -70,7 +68,7 @@ struct RiskCalculator: View {
                     .padding(.top, 10)
                 
                 VStack {
-                    NavigationLink(destination: SignInView()) {
+                    NavigationLink(destination: SignInView().navigationBarBackButtonHidden()) {
                         Text("Very Low")
                             .padding()
                             .frame(width: 200, height: 50)
@@ -86,7 +84,7 @@ struct RiskCalculator: View {
                         
                     })
                     
-                    NavigationLink(destination: SignInView()) {
+                    NavigationLink(destination: SignInView().navigationBarBackButtonHidden()) {
                         Text("Low")
                             .padding()
                             .frame(width: 200, height: 50)
@@ -100,7 +98,7 @@ struct RiskCalculator: View {
                         isSelected3 = false
                         answer.user_s_risk = "Low"
                     })
-                    NavigationLink(destination: SignInView()) {
+                    NavigationLink(destination: SignInView().navigationBarBackButtonHidden()) {
                         Text("Modearate or High")
                             .padding()
                             .frame(width: 200, height: 50)
@@ -129,9 +127,17 @@ struct RiskCalculator: View {
             riskCalculate()
             getRisk()
             getAssessmentTime()
-//            checkQuestionCompletion()
+            checkAlert()
         }
         .navigationTitle("Risk Assessment")
+        .alert(isPresented: $showAlert)
+        {
+            Alert(
+                title: Text("Not completed"),
+                message: Text("remained task detected!").font(.title3),
+                dismissButton: .default(Text("Ok"))
+            )
+        }
     }
     
     
@@ -304,30 +310,12 @@ struct RiskCalculator: View {
             answer.assessmentTime = assessmentTime
         }
     }
-    func checkQuestionCompletion() -> Bool
+    func checkAlert()
     {
-        for answer in answer.answerRecord {
-            if answer == "Not Answered"
-            {
-                print("not fully answerd")
-                
-            }
+        if (!answer.checkCompletion()){
+            showAlert.toggle()
         }
-        
-        for answer in answer.assessmentRecord {
-            if answer == "Not Answered"
-            {
-                print("not fully answerd")
-            }
-        }
-        
-        if !allquestionAnswered
-        {
-            return false
-        }
-        else {
-            return true
-        }
+        print(showAlert)
     }
 }
 
