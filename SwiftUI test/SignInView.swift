@@ -128,14 +128,20 @@ let clinics: [Clinic] = [ // Sample clinic data
                                     showRegisterAlert = false
                                 }
                                 Button("No", role: .cancel) {
-                                    navigateToEndPage = true // Trigger navigation to EndPage
+                                        showRegisterAlert = false // Alert 닫기
+                                        navigateToEndPage = true // EndPage로 이동
+                                    }
+                                } message: {
+                                    Text("Do you want to register?")
                                 }
-                            } message: {
-                                Text("Do you want to register?")
-                            }
-                            .fullScreenCover(isPresented: $showSignInView) { // Use fullScreenCover for SignInView
-                                SignInView()
-                            }
+                                .background(
+                                    NavigationLink(destination: EndPage(), isActive: $navigateToEndPage) {
+                                        EmptyView()
+                                    }
+                                )
+//                            .fullScreenCover(isPresented: $showSignInView) { // Use fullScreenCover for SignInView
+//                                SignInView()
+//                            }
             
             
                             .navigationDestination(for: Bool.self) { destination in
@@ -158,15 +164,16 @@ let clinics: [Clinic] = [ // Sample clinic data
 //                                }
 //
                             
-                            
-                            .fullScreenCover(isPresented: $navigateToEndPage) {
-                                EndPage()
-            }
+//                            
+//                            .popover(isPresented: $navigateToEndPage) {
+//                                EndPage()
+//                            }
         }.onAppear {
             self.showRegisterAlert = true
         }
         .onDisappear(){
             self.showRegisterAlert = false
+            
         }
     }
 }
