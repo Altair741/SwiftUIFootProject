@@ -6,7 +6,12 @@
 //
 
 import SwiftUI
+<<<<<<< Updated upstream
 let sections = ["Ask", "Touch", "Observation"]
+=======
+let sections = ["Section 1 : Ask", "Section 2 : Skin"]//"Touch", "Result"
+// Change it to set globally.
+>>>>>>> Stashed changes
 // 1. QuestionData Struct
 struct QuestionData: Identifiable { // Make QuestionData Identifiable for use in List
     let id = UUID()
@@ -83,21 +88,38 @@ struct Quizinerfaces: View {
     @State private var progress = 0.0
 
     var body: some View {
+<<<<<<< Updated upstream
+=======
+        // Mingu default navigationBarBackButtonHidden to manage Navigation View after wards
+        Spacer()
+            .navigationBarBackButtonHidden(true)
+        Spacer()
+>>>>>>> Stashed changes
         NavigationView {
             VStack {
                 
-                if sections[currentSection] == "Ask" {
+                if sections[currentSection] == "Section 1 : Ask" {
                     AskSectionView(questions: questions)
                 }
 <<<<<<< Updated upstream
 =======
                 // Mingu : Add connection to Skin condition
+<<<<<<< Updated upstream
                 else if sections[currentSection] == "Skin" {
                     IPSWICH_test()
                 }
 >>>>>>> Stashed changes
                 else if sections[currentSection] == "Touch" {
                     TouchTestView(touchTest: $touchTest)
+=======
+                if sections[currentSection] == "Section 2 : Skin" {
+                    QListView()
+                }
+                
+                if sections[currentSection] == "Touch" {
+                    //TouchTestView(touchTest: $touchTest)
+                    DP_test()
+>>>>>>> Stashed changes
                 }
             }
             .toolbar { // Add the toolbar
@@ -127,9 +149,9 @@ struct AskSectionView: View{
     // Mingu : it has to be global scale variable to record this value.
     @State private var selectedAnswers: [String] = [] // Store selected answers
     // Mingu : Add global variable to store answers in selectedAnswers
-    @EnvironmentObject var answer : UserAnswer
-    // Mingu : var moveToSkinconditionCheck is to navigate skin condition assessment part
+
     @State private var moveToSkinconditionCheck = false
+<<<<<<< Updated upstream
     
        let questions: [QuestionData]
 
@@ -141,6 +163,28 @@ struct AskSectionView: View{
                // Progress Bar
                ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
                    .padding()
+=======
+    @State private var isQuestionListExpanded = false
+    @State private var showAlert = false
+    let questions: [QuestionData]
+    let defaults = UserDefaults.standard // Access UserDefaults
+    @EnvironmentObject var answer: UserAnswer
+
+
+    func saveStateToUserDefaults() {
+        defaults.set(currentQuestionIndex, forKey: "savedQuestionIndex")
+        defaults.set(selectedAnswers, forKey: "savedAnswers")
+    }
+
+    func restoreStateFromUserDefaults() {
+        currentQuestionIndex = defaults.integer(forKey: "savedQuestionIndex")
+        selectedAnswers = defaults.stringArray(forKey: "savedAnswers") ?? []
+    }
+    func nextQuestion() {
+        answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
+        // Mingu : Test to see value in console.
+        //           print(answer.assessmentRecord[currentQuestionIndex])
+>>>>>>> Stashed changes
 
                // Question Area
                Group {
@@ -221,6 +265,157 @@ struct AskSectionView: View{
                answer.assessmentRecord.append(e)
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    func previousQuestion() {
+        if currentQuestionIndex > 0 {
+            currentQuestionIndex -= 1
+        }
+    }
+    // Mingu : method to capture the answer and store them to global scale variable
+    func updateAnswer(_ answer: UserAnswer) {
+        for e in selectedAnswers {
+            answer.assessmentRecord.append(e)
+        }
+    }
+
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                // Mingu: Test if selectedAnswers can capture the answer.
+                //Text(selectedAnswers.indices.contains(1) ? selectedAnswers[1] : "")
+                
+                
+                // Progress Bar
+                ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
+                    .padding()
+                
+                // Question Area
+                Group {
+                    if let imageName = questions[currentQuestionIndex].imageName {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    
+                    Text(questions[currentQuestionIndex].question)
+                        .font(.headline)
+                        .padding()
+                }
+                
+                
+                // Answer Buttons (Enhanced)
+                ForEach(questions[currentQuestionIndex].buttonLabels, id: \.self) { label in
+                    Button(action: {
+                        if selectedAnswers.count > currentQuestionIndex {
+                            selectedAnswers[currentQuestionIndex] = label
+                        } else {
+                            selectedAnswers.append(label)
+                        }
+                        answer.assessmentRecord = selectedAnswers // Update global model
+                    }) {
+                        Text(label)
+                            .padding()
+                            .background(
+                                selectedAnswers.count > currentQuestionIndex &&
+                                selectedAnswers[currentQuestionIndex] == label ?
+                                Color.green : Color.blue
+                            ) // Highlight if selected
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                }
+                
+                // Navigation Buttons
+                HStack {
+                    Button("Back") {
+                        previousQuestion()
+                    }
+                    .disabled(currentQuestionIndex == 0) // Disable if at the beginning
+                    
+                    Spacer() // Push buttons to sides
+                    Button("Next") {
+                    saveStateToUserDefaults() // Save state before navigating
+                    
+                    if currentQuestionIndex == questions.count - 1 {
+                        moveToSkinconditionCheck = true
+                    } else {
+                        nextQuestion()
+                    }
+                }
+                                    
+
+                }
+                .padding()
+                
+                DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
+                    List {
+                        ForEach(0..<questions.count, id: \.self) { index in
+                            Button(action: {
+                                if index > currentQuestionIndex {
+                                    showAlert = true // Show alert if trying to skip ahead
+                                } else {
+                                    currentQuestionIndex = index // Allow jumping back
+                                }
+                            })
+                            {
+                                HStack {
+                                    Text("\(index + 1)")
+                                        .frame(minWidth: 20, alignment: .leading) // Align question numbers
+                                        .foregroundColor(index == currentQuestionIndex ? Color.blue : Color.primary)
+                                    
+                                    Spacer() // Push tick to the right
+                                    
+                                    Text(questions[index].question) // Question text on the same line
+                                        .font(.caption) // Adjust font size as needed
+                                    
+                                    Spacer() // Push tick to the right
+                                    
+                                    // Tick Mark (Conditional)
+                                    if index < selectedAnswers.count {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.green)
+                                    }
+                                } // End of HStack
+                            }
+                        }
+                    }
+                    .frame(height: isQuestionListExpanded ? 200 : 0)
+                    .clipped()
+                    
+                    NavigationLink(
+                        destination: QListView()
+                            .navigationBarBackButtonHidden(true)
+                            .navigationBarItems(leading: Button(action: {
+                                moveToSkinconditionCheck = false
+                            }) {
+                                Text("Back")
+                            }),
+                        isActive: $moveToSkinconditionCheck,
+                        label: {
+                            EmptyView()
+                        }
+                    )                }
+                .navigationDestination(for: Bool.self) { _ in
+                                QListView()
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarItems(leading: Button(action: {
+                                        moveToSkinconditionCheck = false
+                                    }) {
+                                        Text("Back")
+                                    })
+                            }
+                            .onAppear {
+                                restoreStateFromUserDefaults() // Restore state on appear
+                                // ... (Check if navigating back from QListView) ...
+                            }
+            }
+        }
+    }
+    
+>>>>>>> Stashed changes
 }
 
 struct TouchTestView: View{
@@ -318,3 +513,10 @@ struct TouchTestView: View{
         }
     }
 }
+<<<<<<< Updated upstream
+=======
+
+
+
+
+>>>>>>> Stashed changes

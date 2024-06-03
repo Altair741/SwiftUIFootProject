@@ -22,7 +22,13 @@ struct PT_test: View {
     @State private var nextQuesion = false
     @EnvironmentObject var answer : UserAnswer
     @State private var player = AVPlayer()
+<<<<<<< Updated upstream
     
+=======
+    @State private var showAlert = false
+    @State private var allquestionAnswered = false
+
+>>>>>>> Stashed changes
     
     var body: some View {
         Spacer()

@@ -69,7 +69,33 @@ struct QListView: View {
             
             VStack {
                 taskView[currentViewOrder]
-                
+
+                DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
+                    List {
+                        ForEach(taskList) { question in
+                            Button(action: {
+                                if let index = taskList.firstIndex(where: { $0.id == question.id }) {
+                                    currentViewOrder = index
+                                    isQuestionListExpanded = false
+                                }
+                            }) {
+                                HStack { // Wrap with HStack for better layout
+                                    Text(question.task)
+                                    
+                                    // Add the tick icon conditionally
+                                    Spacer()
+                                    if answer.answerRecord.indices.contains(currentViewOrder) { // Check if answer exists
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.green)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .frame(height: isQuestionListExpanded ? 200 : 0)
+                    .clipped()
+                }
+                .padding()
                 HStack {
                     Button(action: {
                         withAnimation {
@@ -86,7 +112,8 @@ struct QListView: View {
                             .padding()
                     }
                     Spacer()
-                    
+                   
+
                     Button(action: {
                         withAnimation {
                             
@@ -146,22 +173,7 @@ struct QListView: View {
                     
                 }
                 .padding()
-                DisclosureGroup("Jump to Question", isExpanded: $isQuestionListExpanded) {
-                    List(taskList) { question in
-                        Button(action: {
-                            if let index = taskList.firstIndex(where: { $0.id == question.id }) {
-                                currentViewOrder = index
-                                isQuestionListExpanded = false
                             }
-                        }) {
-                            Text(question.task)
-                        }
-                    }
-                    .frame(height: isQuestionListExpanded ? 200 : 0)
-                    .clipped()
-                }
-                .padding()
-            }
             // when Vstak shows
             .navigationBarTitle("Examination", displayMode: .inline)
                   .alert(isPresented: $showAlert) {
