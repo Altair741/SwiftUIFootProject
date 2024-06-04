@@ -9,7 +9,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
         button.setTitle("Send Mail", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
+        button.addTarget(ViewController.self, action: #selector(sendEmail), for: .touchUpInside)
         return button
     }()
     
@@ -49,7 +49,6 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
 }
-
 
 struct MyViewControllerRepresentable: UIViewControllerRepresentable {
     

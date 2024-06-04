@@ -15,7 +15,7 @@ struct Q5: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 17)
+                    ProgressBar2(progess: 5)
 
                     Image("thickened_toenails")
                         .resizable()

@@ -13,7 +13,7 @@ struct Q12: View {
     @State private var medicalInfoScript = "Most amputations occur due to infections that start in the skin and move into the bone and worsens with bad circulation. Patients that have had an amputation would have further risk factors and would need to check their feet and legs daily."
     @State private var showMedicalInfo = false
     @State private var nq = false
-    private var task = "Q12"
+    private var task = "Ampuation"
     @EnvironmentObject var answer : UserAnswer
 
     
@@ -21,7 +21,7 @@ struct Q12: View {
         VStack {
             ZStack {
                 VStack(spacing: 30) {
-                    ProgressBar2(progess: 24)
+                    ProgressBar2(progess: 12)
 
                     
                     Image("ampuation")

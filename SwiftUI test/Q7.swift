@@ -13,7 +13,7 @@ struct Q7: View {
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "When a patient with bunions tries to wear smaller sized shoes, this causes pressure and rubbing leading to infections."
     @State private var showMedicalInfo = false
-    private var task = "Q7"
+    private var task = "Bunions"
     @EnvironmentObject var answer : UserAnswer
     @State private var nextQuesion = false
 
@@ -25,7 +25,7 @@ struct Q7: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 19)
+                    ProgressBar2(progess: 7)
 
                 Image("bunions")
                     .resizable()

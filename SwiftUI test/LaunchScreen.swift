@@ -11,6 +11,7 @@ struct LaunchScreen: View {
     @State private var isActive = false
     @State private var opacity = 0.0
     
+    
     var body: some View {
         if isActive
         {

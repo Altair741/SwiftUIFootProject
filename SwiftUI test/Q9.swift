@@ -13,7 +13,7 @@ struct Q9: View {
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "People with flat feet can take up more pressure through the foot and into the leg causing knee, hip or back pain. This causes strain on the muscles and joints."
     @State private var showMedicalInfo = false
-    private var task = "Q9"
+    private var task = "Flat feet"
     @EnvironmentObject var answer : UserAnswer
     @State private var nq = false
 
@@ -22,7 +22,7 @@ struct Q9: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 21)
+                    ProgressBar2(progess: 9)
 
                 Image("flat_feet")
                     .resizable()

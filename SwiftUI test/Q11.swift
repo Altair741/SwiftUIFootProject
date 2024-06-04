@@ -13,7 +13,7 @@ struct Q11: View {
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "This can happen when someone has diabetic neuropathy, where there is a loss of sensation, but circulation is still present. The structure of the foot can change permanently."
     @State private var showMedicalInfo = false
-    private var task = "Q11"
+    private var task = "Charcot Foot"
     @EnvironmentObject var answer : UserAnswer
     @State private var nq = false
 
@@ -23,7 +23,7 @@ struct Q11: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 23)
+                    ProgressBar2(progess: 11)
 
                 Image("Charcot_foot")
                     .resizable()

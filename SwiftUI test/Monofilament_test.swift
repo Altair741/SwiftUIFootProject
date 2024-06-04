@@ -16,7 +16,7 @@ struct Monofilament_test: View {
     @State private var isSelected_L_2_No = false
     @State private var isSelected_L_3_No = false
     @State private var medicalInfoScript = "Contact time should be approximately 2 seconds and if the answer is no, do not try again, If the patient can’t feel the monofilament at one or more of the sites, they would need further checks."
-    private var task = "Monofilament_test"
+    private var task = "Monofilament test"
     @State private var showMedicalInfo = false
     @State private var nextQuestion = false
     @State private var showAlert = false
@@ -37,7 +37,7 @@ struct Monofilament_test: View {
             ScrollView {
                 VStack(spacing: 20) {
  
-                    ProgressBar2(progess: 26)
+                    ProgressBar2(progess: 15)
                     
                     Image("Monofilament_test_spot")
                         .resizable()
@@ -239,12 +239,10 @@ struct Monofilament_test: View {
                 }
             }
             .popover(isPresented: $showMedicalInfo) {
-                VStack {
-                    Text(medicalInfoScript)
-                        .padding()
-                        .multilineTextAlignment(.center)
-                    Spacer()
+                VStack{
+                    MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
                 }
+                
             }
         }
     }

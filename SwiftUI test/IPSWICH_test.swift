@@ -25,7 +25,7 @@ struct IPSWICH_test: View {
     @State private var isSelected_L_2_No = false
     @State private var isSelected_L_3_No = false
     @State private var medicalInfoScript = "Lightly touch the indicated parts of the foot and hold for 1 to 2 seconds. Do not press, poke, tap, or stroke. If the response is no, do not try again or press harder. The toes must be touched in the following order."
-    private var task = "IPSWICH_touch_test"
+    private var task = "IPSWICH touch test"
     @State private var showMedicalInfo = false
     @State private var nextQuestion = false
     @EnvironmentObject var answer : UserAnswer
@@ -43,7 +43,7 @@ struct IPSWICH_test: View {
         VStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    ProgressBar2(progess: 27)
+                    ProgressBar2(progess: 15)
                     
                     Image("IPSWICH_touch_test_spot")
                         .resizable()
@@ -250,11 +250,8 @@ struct IPSWICH_test: View {
                         )
                     })
                     .popover(isPresented: $showMedicalInfo) {
-                        VStack {
-                            Text(medicalInfoScript)
-                                .padding()
-                                .multilineTextAlignment(.center)
-                            Spacer()
+                        VStack{
+                            MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
                         }
                     }
                 

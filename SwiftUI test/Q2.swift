@@ -12,7 +12,7 @@ struct Q2: View {
     var body: some View {
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 14)
+                    ProgressBar2(progess: 2)
 
                     Image("corns")
                         .resizable()
@@ -34,23 +34,23 @@ struct Q2: View {
                             isSelected2 = false
                             nextQuesion = true
                             answer.answerRecord[1] = "Yes"
-                            
                         }
                         )
                         
-                            Text("No")
-                                .padding()
-                                .frame(width: 120, height: 50)
-                                .background(isSelected2 ? Color.red : Color.gray)
-                                .foregroundColor(.white)
-                                .cornerRadius(25)
-                        
-                        .simultaneousGesture(TapGesture().onEnded {
-                            isSelected = false
-                            isSelected2 = true
-                            nextQuesion = true
-                            answer.answerRecord[1] = "No"
-                            
+                        Text("No")
+                            .padding()
+                            .frame(width: 120, height: 50)
+                            .background(isSelected2 ? Color.red : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(25)
+                        // simply means, simultaneousGesture : can defect many of tap gesture.
+                            .simultaneousGesture(TapGesture().onEnded {
+                                // onEnded means, the following will be appied when put off the finger.
+                                isSelected = false
+                                isSelected2 = true
+                                nextQuesion = true
+                                answer.answerRecord[1] = "No"
+                                
                         })
                     }// Hstack
                 }// VStack

@@ -22,7 +22,7 @@ struct Q6: View {
     var body: some View {
         VStack {
             ZStack {
-                VStack(spacing : 30) {
+                VStack(spacing : 6) {
                     ProgressBar2(progess: 18)
 
                     Image("ingrown_toenails")

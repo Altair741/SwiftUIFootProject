@@ -13,7 +13,7 @@ struct Q10: View {
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "Can be developed over time due to diabetes. As high arched feet aren’t flexible, there is less shock absorption, causing increased pressure on certain areas of the feet causing damage to skin layers."
     @State private var showMedicalInfo = false
-    private var task = "Q10"
+    private var task = "Higharched_feet"
     @EnvironmentObject var answer : UserAnswer
     @State private var nq = false
     
@@ -22,7 +22,7 @@ struct Q10: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 22)
+                    ProgressBar2(progess: 10)
 
                 Image("higharched_feet")
                     .resizable()

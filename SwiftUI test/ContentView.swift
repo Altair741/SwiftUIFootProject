@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var answer : UserAnswer
-    @Environment(\.dismiss) private var dismiss
     @State private var showExitAlert = false
     //    @State private var showExit
     
@@ -23,13 +22,28 @@ struct ContentView: View {
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.7)
                 VStack() {
-                    
-                    
                     Text("Foot Test")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding()
                     //Start ASk section and IPWich test
+                    
+                    NavigationLink(destination: SignInView()) {
+                        Text("Test")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .bold()
+                            .cornerRadius(10)
+                            .frame(width: 200, height: 50)
+                    }
+                    
+                    .onTapGesture {
+                        //Record time, when assessment task statr
+                        answer.timeRecords.append(Date())
+                    }.padding()
+                        
                     NavigationLink(destination: Quizinerfaces()) {
                         Text("Start")
                             .font(.title)
@@ -40,11 +54,13 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .frame(width: 200, height: 50)
                     }
+                    
                     .onTapGesture {
                         //Record time, when assessment task statr
                         answer.timeRecords.append(Date())
                     }.padding()
                         .navigationTitle("Ask section")
+                    
  
 //                    Button("Exit App")
 //                    

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-let sections = ["Ask", "Skin", "Touch" ]//"Touch", "Result"
+let sections = ["Section 1 : Ask", "Section 2 : Skin"]//"Touch", "Result"
 // Change it to set globally.
 // 1. QuestionData Struct
 
@@ -36,16 +36,16 @@ struct ProgressBar: View {
 }
 
 let questions: [QuestionData] = [
-    QuestionData(question: "What kind of shoes is the patient wearing today?", imageName: "Shoes.jpg", buttonLabels: ["Closed Shoe", "Open shoes"]),
+    QuestionData(question: "What kind of shoes is the patient wearing today?", imageName: "Shoes", buttonLabels: ["Closed Shoe", "Open shoes"]),
     QuestionData(question: "Does the patient have pain in their legs when walking?", imageName: nil, buttonLabels: ["Yes", "No", "sometime"]),
-    QuestionData(question: "Does the patient have pain in their legs when lying down?", imageName: nil, buttonLabels: ["Yes", "No", "Maybe"]),
-    QuestionData(question: "Does the patient have pain get pings and needles?", imageName: nil, buttonLabels: ["Yes", "No", "Maybe"]),
+    QuestionData(question: "Does the patient have pain in their legs when lying down?", imageName: "pain lying", buttonLabels: ["Yes", "No", "Maybe"]),
+    QuestionData(question: "Does the patient have pain get pings and needles?", imageName: "pain walk", buttonLabels: ["Yes", "No", "Maybe"]),
     QuestionData(question: "Does the patient feel sharp pain?", imageName: nil, buttonLabels: ["Yes", "No", "Maybe"]),
     QuestionData(question: "Does the patient feet get numb?", imageName: nil, buttonLabels: ["Yes", "No", "Maybe"]),
     QuestionData(question: "Does the patient toes get numb?", imageName: nil, buttonLabels: ["Yes", "No", "Maybe"]),
     QuestionData(question: "Does the patient make regular podiatrist visit?", imageName: nil, buttonLabels: ["Yes", "No"]),
     QuestionData(question: "Does the patient smoke?", imageName: nil, buttonLabels: ["Yes", "No", "Maybe"]),
-    QuestionData(question: "What is the condition of the skin?", imageName: nil, buttonLabels: ["Dry","Normal","Sweaty","Shiney"]),
+    QuestionData(question: "What is the condition of the skin?", imageName: "Dry", buttonLabels: ["Dry","Normal","Sweaty","Shiney"]),
     QuestionData(question: "what is the temperature of the foot?", imageName: nil, buttonLabels:["Cold","Warm","Hot"]),
     QuestionData(question: "Is there any swelling aroud the feet and ankle?", imageName: nil, buttonLabels: ["Yes", "No"])
 ]
@@ -65,7 +65,7 @@ struct Quizinerfaces: View {
     @State private var showAlert = false
     @State private var selectedButtonIndex: Int? = nil
     @State private var answers: [[String]]
-    @State private var touchTest = IpswichTouchTest()
+//    @State private var touchTest = IpswichTouchTest()
 
     
     init(answers: [[String]] = []) {
@@ -87,22 +87,17 @@ struct Quizinerfaces: View {
         Spacer()
             .navigationBarBackButtonHidden(true)
         Spacer()
-        
-        
         NavigationView {
             ZStack {
                 
-                if sections[currentSection] == "Ask" {
+                if sections[currentSection] == "Section 1 : Ask" {
                     AskSectionView(questions: questions)
                 }
                 // Mingu : Add connection to Skin condition
-                else if sections[currentSection] == "Skin" {
+                if sections[currentSection] == "Section 2 : Skin" {
                     QListView()
                 }
-                else if sections[currentSection] == "Touch" {
-                    //TouchTestView(touchTest: $touchTest)
-                    DP_test()
-                }
+            
                 // Mingu : Add connection to EndPage
 //                else if sections[currentSection] == "Result" {
 //                    EndPage()
@@ -110,6 +105,9 @@ struct Quizinerfaces: View {
 //                }
                 
             }
+            .onAppear(){
+               reset()
+                        }
             // Mingu : edit toolbar items to switch each of sections.
             .toolbar {
                 
@@ -128,6 +126,15 @@ struct Quizinerfaces: View {
             }
         }.alert("Please provide an answer", isPresented: $showAlert) { }
     }
+    // Mingu : Add function to reset setting.
+    func reset() {
+            currentSection = 0
+            currentQuestion = 0
+            showAlert = false
+            selectedButtonIndex = nil
+            answers = []
+            print("Quiz interface reset() is called")
+        }
 }
 
 
@@ -142,7 +149,8 @@ struct AskSectionView: View{
     @State private var isQuestionListExpanded = false
     @State private var showAlert = false
     let questions: [QuestionData]
-    
+    // To use reset function
+    let defaults = UserDefaults.standard // Access UserDefaults
 
     func nextQuestion() {
         answer.assessmentRecord[currentQuestionIndex] = selectedAnswers[currentQuestionIndex]
@@ -164,13 +172,14 @@ struct AskSectionView: View{
             currentQuestionIndex -= 1
         }
     }
-    // Mingu : method to capture the answer and store them to global scale variable
-    func updateAnswer(_ answer: UserAnswer) {
-        for e in selectedAnswers {
-            answer.assessmentRecord.append(e)
-        }
+    func reset()
+    {
+        currentQuestionIndex = 0
+        selectedAnswers = []
+        print("Assessment View reset() called")
+        
     }
-
+    
 
     var body: some View {
         NavigationView {
@@ -179,10 +188,16 @@ struct AskSectionView: View{
                 //Text(selectedAnswers.indices.contains(1) ? selectedAnswers[1] : "")
                 
                 
+                HStack {
+                    Text("Question \(currentQuestionIndex + 1) of \(questions.count)")
+                        .font(.headline)
+                    Spacer()
+                }
+                .padding()
+                
                 // Progress Bar
                 ProgressView(value: Double(currentQuestionIndex + 1), total: Double(questions.count))
                     .padding()
-                
                 // Question Area
                 Group {
                     if let imageName = questions[currentQuestionIndex].imageName {
@@ -195,7 +210,7 @@ struct AskSectionView: View{
                         .font(.headline)
                         .padding()
                 }
-                
+            
                 
                 // Answer Buttons (Enhanced)
                 ForEach(questions[currentQuestionIndex].buttonLabels, id: \.self) { label in
@@ -205,7 +220,7 @@ struct AskSectionView: View{
                         } else {
                             selectedAnswers.append(label)
                         }
-                        answer.assessmentRecord = selectedAnswers // Update global model
+                        answer.updateAssessmentRecord(at: currentQuestionIndex, with: label)  // Update global model
                     }) {
                         Text(label)
                             .padding()
@@ -219,20 +234,24 @@ struct AskSectionView: View{
                     }
                 }
                 
+           
                 // Navigation Buttons
                 HStack {
                     Button("Back") {
                         previousQuestion()
                     }
-                    .disabled(currentQuestionIndex == 0) // Disable if at the beginning
-                    
-                    Spacer() // Push buttons to sides
-                    
+                    .disabled(currentQuestionIndex == 0)
+
+                    Spacer()
+
                     Button("Next") {
-                        nextQuestion()
+                        // Check if an answer has been selected
+                        if selectedAnswers.count <= currentQuestionIndex {
+                            showAlert = true // Show alert if no answer
+                        } else {
+                            nextQuestion()
+                        }
                     }
-//                    .disabled(currentQuestionIndex == questions.count - 1 || selectedAnswers.count <= currentQuestionIndex) // Disable at the end or if no answer is selected
-                    
                 }
                 .padding()
                 
@@ -277,7 +296,7 @@ struct AskSectionView: View{
                             .navigationBarItems(leading: Button(action: {
                                 moveToSkinconditionCheck = false
                             }) {
-                                Text("Back")
+                                Text("Go to Ask section")
                             }),
                         isActive: $moveToSkinconditionCheck,
                         label: {
@@ -285,6 +304,16 @@ struct AskSectionView: View{
                         }
                     )                }
             }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Please select an answer."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
+            .onAppear(){
+                reset()
+                        }
+            
         }
     }
     

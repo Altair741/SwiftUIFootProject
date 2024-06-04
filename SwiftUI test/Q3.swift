@@ -14,7 +14,7 @@ struct Q3: View {
         VStack{
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 15)
+                    ProgressBar2(progess: 3)
 
                     Image("tinea")
                         .resizable()

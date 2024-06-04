@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct SwiftUI_testApp: App {
-    @StateObject var locationManager = LocationManager2()
     @StateObject var answer = UserAnswer()
 
     
@@ -17,7 +16,6 @@ struct SwiftUI_testApp: App {
         WindowGroup {
                 LaunchScreen()
                     .environmentObject(answer)
-                    .environmentObject(locationManager)
             
         }
     }

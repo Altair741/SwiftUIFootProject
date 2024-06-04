@@ -28,13 +28,47 @@ class UserAnswer : ObservableObject
     //stratTime.timeIntervalSince(endTime)
     @Published var currentDate : String?
     @Published var emailTosend : [String]?
-    @Published var haveMedicalTool : String = "no"
-
+    @Published var haveMedicalTool : String = "Not Answered"
     
+    func checkCompletion() -> Bool {
+        for answer in answerRecord {
+            if answer == "Not Answered" {
+                print("Not completed")
+                return false
+            }
+        }
+        for answer in assessmentRecord {
+            if answer == "Not Answered" {
+                print("Not completed")
+                return false
+                
+            }
+        }
+        return true
+    }
+    func reset() {
+            answerRecord = Array(repeating: "Not Answered", count: 18)
+            assessmentRecord = Array(repeating: "Not Answered", count: 12)
+            pdf_url = nil
+            assessmentTime = 0
+            system_g_risk = ""
+            user_s_risk = ""
+            emailTosend = []
+            print("answer reset called")
+        
+        }
     func updateAnswerRecord(at index: Int, with value: String) {
             guard index >= 0 && index < answerRecord.count else {
                 return
             }
             answerRecord[index] = value
         }
+    
+    func updateAssessmentRecord(at index: Int, with value: String) {
+            guard index >= 0 && index < assessmentRecord.count else{
+                return
+            }
+            assessmentRecord[index] = value
+        }
+    
 }

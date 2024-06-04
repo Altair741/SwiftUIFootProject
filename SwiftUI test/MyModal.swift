@@ -4,8 +4,6 @@ struct MyModal: View {
     @EnvironmentObject var answer : UserAnswer
     @State private var isSelected = false
     @State private var isSelected2 = false
-    @State private var moveToTouchTest : Bool = false
-    @State private var moveToMonoTest = false
     
     var body: some View {
         ZStack {
@@ -30,12 +28,13 @@ struct MyModal: View {
                             .cornerRadius(25)
                     
                     .navigationTitle("Medical tool")
-                    .simultaneousGesture(TapGesture().onEnded {
+                    .onTapGesture()
+                    {
                         isSelected = true
                         isSelected2 = false
                         answer.haveMedicalTool = "yes"
                         print(answer.haveMedicalTool)
-                    })
+                    }
                     
                     
                         Text("SKIP")
@@ -45,16 +44,15 @@ struct MyModal: View {
                             .foregroundColor(.white)
                             .cornerRadius(25)
                     
-                    .simultaneousGesture(TapGesture().onEnded {
+                    .onTapGesture()
+                    {
                         isSelected = false
                         isSelected2 = true
                         answer.haveMedicalTool = "no"
                         answer.answerRecord[16] = "Test has skipped"
                         print(answer.haveMedicalTool)
                         print(answer.answerRecord[16])
-
-
-                    })
+                    }
                 }.navigationTitle("Medical tool")
             }
         }

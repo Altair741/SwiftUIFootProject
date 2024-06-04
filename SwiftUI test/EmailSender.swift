@@ -1,4 +1,11 @@
 
+//
+//  EmailSender.swift
+//  SwiftUI test
+//
+//  Created by Ethan Li on 19/5/2024.
+// ref : https://www.youtube.com/watch?v=aJ0Fz4rCZbw&t=471s
+//
 import Combine
 import Foundation
 import MessageUI

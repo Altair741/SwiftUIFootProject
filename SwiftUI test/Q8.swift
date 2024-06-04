@@ -13,7 +13,7 @@ struct Q8: View {
     @State private var isSelected2 = false
     @State private var medicalInfoScript = "The part that meets the ground or top of shoes can cause a build-up of callus or corns."
     @State private var showMedicalInfo = false
-    private var task = "Q8"
+    private var task = "Clawed toes"
     @EnvironmentObject var answer : UserAnswer
     @State private var nq = false
     
@@ -23,7 +23,7 @@ struct Q8: View {
         VStack {
             ZStack {
                 VStack(spacing : 30) {
-                    ProgressBar2(progess: 20)
+                    ProgressBar2(progess: 8)
 
                 Image("clawed_toes")
                     .resizable()

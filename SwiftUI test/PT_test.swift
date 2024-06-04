@@ -16,7 +16,7 @@ struct PT_test: View {
     @State private var isSelected4 = false
     @State private var medicalInfoScript = "For the following check you may not be able to find the pulse if there is a lot of swelling around the ankle and if the arteries are deep, if you cannot feel a pulse and you think the patient may have circulation problems refer them to the local doctor. Check right foot first. "
     
-    private var task = "PT_test"
+    private var task = "PT test"
     @State private var showMedicalInfo = false
     @State private var showPictorialResources = false
     @EnvironmentObject var answer : UserAnswer
@@ -24,16 +24,13 @@ struct PT_test: View {
     @State private var showAlert = false
     @State private var allquestionAnswered = false
 
-    init() {
-        print("PT_test initialized")
-    }
     
     var body: some View {
 
             ScrollView{
 
                 VStack(spacing: 30) {
-                    ProgressBar2(progess: 26)
+                    ProgressBar2(progess: 14)
 
                     Image("PT_test_spot")
                         .resizable()
@@ -114,28 +111,21 @@ struct PT_test: View {
                 })
                 .popover(isPresented: $showMedicalInfo) {
                     VStack {
-                       MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
+                        MedicalInfoPopUp(medicalInfoString: medicalInfoScript, task: task)
                     }
-
+                    
                 }
-
-                .fullScreenCover(isPresented: $showPictorialResources)
+                .popover(isPresented: $showPictorialResources)
                 {
+                    // can store view
                     ZStack {
                         WithPictorial(videoName: "PT_test")
-                            .navigationBarItems(leading: Button(action: {
-                                showPictorialResources = false
-                            })
-                                                {
-                                Image(systemName: "chevron.left")
-                                Text("Back")
-                            }
-                            )
                     }
                 }
                 
             }
         }
+}
 //        func checkQuestionCompletion()
 //        {
 //            if answer.answerRecord[14] == "Not Answered" || answer.answerRecord[15] == "Not Answered"
@@ -149,5 +139,5 @@ struct PT_test: View {
 //            }
 //    }
         
-    }
+  
 

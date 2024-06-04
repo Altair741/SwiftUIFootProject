@@ -4,15 +4,17 @@
 //
 //  Created by 강민구 on 27/5/2024.
 //
+// Ref : 
+//
+//
+//
 
 import SwiftUI
 
 struct AlertPopup: View {
     @State private var isSelected = false
-    @Binding var allquestionAnswered : Bool
-    @Binding var startAain: Bool
-    let title: String = "Completed all qeustions"
-    let action: () -> ()
+    @State var allquestionAnswered : Bool
+    let title: String = "Please, Completed all qeustions"
     @State private var offset : CGFloat = 1000
 
     var body: some View {
@@ -36,7 +38,7 @@ struct AlertPopup: View {
                         ZStack{
                             RoundedRectangle(cornerRadius: 20)
                                 .foregroundColor(.blue)
-                            Text("Do Again")
+                            Text("Close")
                                 .font(.system(size: 16))
                                 .bold()
                                 .foregroundColor(.white)
@@ -63,9 +65,7 @@ struct AlertPopup: View {
         withAnimation(.spring()){
             allquestionAnswered = true
             offset = 1000
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            startAain = true
-                        }
+            
         }
     }
 }
