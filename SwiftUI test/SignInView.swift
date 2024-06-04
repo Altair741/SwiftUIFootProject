@@ -43,23 +43,23 @@ struct SignInView: View {
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     )
 let clinics: [Clinic] = [ // Sample clinic data
-    Clinic(name: "Pika Wiya Health Service", coordinate: CLLocationCoordinate2D(latitude: -32.4952351, longitude: 137.7771713)),
-    Clinic(name: "Moorundi Aboriginal Health", coordinate: CLLocationCoordinate2D(latitude: -35.1166301, longitude: 139.2794858)),
-    Clinic(name: "Amata Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.1514499, longitude: 126.6642173)),
-    Clinic(name: "Fregon Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.7634704, longitude: 132.0276193)),
-    Clinic(name: "Iwantja Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.9650009, longitude: 132.1561362)),
-    Clinic(name: "Mimili Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -32.0576, longitude: 138.5965)),
-    Clinic(name: "Nyapari Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -32.0576, longitude: 138.5965)),
-    Clinic(name: "Pipalyatjara Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.9996753, longitude: 132.6748486)),
+    Clinic(name: "Pika Wiya Health Service", coordinate: CLLocationCoordinate2D(latitude: -32.4941398, longitude: 137.7723842)),
+    Clinic(name: "Moorundi Aboriginal Health", coordinate: CLLocationCoordinate2D(latitude: -35.1121866, longitude: 139.2486634)),
+    Clinic(name: "Amata Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.1568559, longitude: 131.0997907)),
+    Clinic(name: "Fregon Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.6889759, longitude: 131.759718)),
+    Clinic(name: "Iwantja Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.9410862, longitude: 132.8279683)),
+    Clinic(name: "Mimili Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -27.0067527, longitude: 132.7067153)),
+    Clinic(name: "Nyapari Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.1743746, longitude: 127.7821497)),
+    Clinic(name: "Pipalyatjara Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.1619052, longitude: 129.1688651)),
     Clinic(name: "Pukatja Clinic Nganampa Health Council", coordinate: CLLocationCoordinate2D(latitude: -26.6444829, longitude:132.0092038 )),
-    Clinic(name: "Port Lincoln Aboriginal Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -34.726876, longitude: 135.8495284)),
-    Clinic(name: "Nunkuwarrin Yunti of South Australia Inc", coordinate: CLLocationCoordinate2D(latitude: -34.918145, longitude: 5906645)),
-    Clinic(name: "Nunyara Aboriginal Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -34.9259765, longitude: 138.563812)),
-    Clinic(name: "Yalata Clinic Tullawon Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -31.4821191, longitude: 131.8360786)),
+    Clinic(name: "Port Lincoln Aboriginal Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -34.7435208, longitude: 135.8364323)),
+    Clinic(name: "Nunkuwarrin Yunti of South Australia Inc", coordinate: CLLocationCoordinate2D(latitude: -34.926406, longitude: 138.5939996)),
+    Clinic(name: "Nunyara Aboriginal Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -34.9236693, longitude: 138.5581879)),
+    Clinic(name: "Yalata Clinic Tullawon Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -31.4957322, longitude: 131.804345)),
     Clinic(name: "Oak Valley Clinic Tullawon Health Service Inc", coordinate: CLLocationCoordinate2D(latitude: -31.4803521, longitude: 131.875089)),
-    Clinic(name: "Umoona Tjutagku Health Service Aboriginal Corporations", coordinate: CLLocationCoordinate2D(latitude: -29.0034228, longitude: 134.7612495)),
-    Clinic(name: "Pangula Mannamurna Aboriginal Corporation", coordinate: CLLocationCoordinate2D(latitude: -37.8239957, longitude: 140.7496647)),
-    Clinic(name: "Yadu Health Aboriginal Corporation", coordinate: CLLocationCoordinate2D(latitude: -32.125908, longitude: 133.670129)),
+    Clinic(name: "Umoona Tjutagku Health Service Aboriginal Corporations", coordinate: CLLocationCoordinate2D(latitude: -29.0133192, longitude: 134.7509542)),
+    Clinic(name: "Pangula Mannamurna Aboriginal Corporation", coordinate: CLLocationCoordinate2D(latitude: -37.8212466, longitude: 140.7636669)),
+    Clinic(name: "Yadu Health Aboriginal Corporation", coordinate: CLLocationCoordinate2D(latitude: -32.0728348, longitude: 133.5490698)),
 ]
     @State private var isWorkplaceListExpanded = false
     @State private var showAlert = false
@@ -75,16 +75,24 @@ let clinics: [Clinic] = [ // Sample clinic data
                         .keyboardType(.emailAddress)
                 }
 
+
                 DisclosureGroup(
-                    isExpanded: $isWorkplaceListExpanded, // Controls expansion
+                    isExpanded: $isWorkplaceListExpanded,// Controls expansion
                     content: {
                         List {
                             ForEach(clinics, id: \.self) { clinic in
                                 Button(action: {
-                                    selectedClinic = clinic
-                                    region.center = clinic.coordinate // Update map
+                                    selectedClinic = selectedClinic == clinic ? nil : clinic
+                                    region.center = selectedClinic?.coordinate ?? region.center// Update map
                                 }) {
-                                    Text(clinic.name)
+                                    HStack {
+                                        Text(clinic.name)
+                                        Spacer()
+                                        if selectedClinic == clinic {
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .foregroundColor(.green)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -139,35 +147,12 @@ let clinics: [Clinic] = [ // Sample clinic data
                                         EmptyView()
                                     }
                                 )
-//                            .fullScreenCover(isPresented: $showSignInView) { // Use fullScreenCover for SignInView
-//                                SignInView()
-//                            }
+
             
             
-                            .navigationDestination(for: Bool.self) { destination in
-//                                if navigateToEndPage {
-//                                    EndPage(clinicName: String, workEmail: String, clinicWorkplace: String)
-//                                } else {
-//                                    // No destination if not navigating
-//                                    EmptyView()
-//                                }
-                               
-                            }
-            
-//                                NavigationLink( destination: EndPage(
-//                                    clinicName: self.clinicName,
-//                                    workEmail: self.workEmail,
-//                                    clinicWorkplace: self.selectedClinic?.name ?? ""
-//                                ), isActive: $navigateToEndPage)
-//                                {
-//                                    EmptyView()
-//                                }
-//
-                            
-//                            
-//                            .popover(isPresented: $navigateToEndPage) {
-//                                EndPage()
-//                            }
+                                .navigationDestination(for: Bool.self) { destination in
+                                }
+
         }.onAppear {
             self.showRegisterAlert = true
         }
