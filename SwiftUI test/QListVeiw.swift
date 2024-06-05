@@ -88,15 +88,7 @@ struct QListView: View {
                                                        answer.answerRecord[index] != "Not Answered"{
                                                        Image(systemName: "checkmark.circle.fill")
                                                            .foregroundColor(.green)
-                                                        // green tick to myModal
-//                                                        if index == 14
-//                                                        {
-//                                                            if answer.haveMedicalTool != "Not Answered"
-//                                                            {
-//                                                                Image(systemName: "checkmark.circle.fill")
-//                                                                    .foregroundColor(.green)
-//                                                            }
-//                                                        }
+                                                     
                                                     }
                                                    
                                                         

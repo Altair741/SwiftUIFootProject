@@ -97,6 +97,7 @@ struct Quizinerfaces: View {
                 if sections[currentSection] == "Section 2 : Skin" {
                     QListView()
                 }
+        
             
                 // Mingu : Add connection to EndPage
 //                else if sections[currentSection] == "Result" {
@@ -216,7 +217,7 @@ struct AskSectionView: View{
                 ForEach(questions[currentQuestionIndex].buttonLabels, id: \.self) { label in
                     Button(action: {
                         if selectedAnswers.count > currentQuestionIndex {
-                            selectedAnswers[currentQuestionIndex] = label
+                            selectedAnswers[currentQuestionIndex] = label//update lable
                         } else {
                             selectedAnswers.append(label)
                         }

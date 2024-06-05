@@ -23,7 +23,7 @@ struct Clinic: Hashable, Identifiable, Equatable {
         hasher.combine(coordinate.latitude)
         hasher.combine(coordinate.longitude)
     }
-    static func == (lhs: Clinic, rhs: Clinic) -> Bool {
+    static func == (lhs: Clinic, rhs: Clinic) -> Bool {//eft-hand side.
         return lhs.id == rhs.id &&
                lhs.name == rhs.name &&
                lhs.coordinate.latitude == rhs.coordinate.latitude &&

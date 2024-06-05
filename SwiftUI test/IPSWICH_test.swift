@@ -1,10 +1,9 @@
 //
-//  IPSWICH_test.swift
+//  QuizInterfaces.swift
 //  FootTest
 //
-//  Created by 강민구 on 19/5/2024.
+//  Created by Ethan Li on 14/5/2024.
 //
-
 import SwiftUI
 
 struct IPSWICH_test: View {
